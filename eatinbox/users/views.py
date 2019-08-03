@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 # Create your views here.
+# This is a test comment
 
 
 def index(request):
