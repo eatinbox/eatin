@@ -1,14 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
-from users.models import Person
+
 
 # Create your models here.
 
 
 class Vendor(models.Model):
-    user = models.OneToOneField(Person, on_delete=models.CASCADE)
+    user = models.OneToOneField('users.person', on_delete=models.CASCADE)
     description = models.TextField()
-    rating = models.IntegerField(max_length=1, null=True)
+    rating = models.IntegerField(null=True)
 
 
 class Menu(models.Model):
@@ -33,6 +33,6 @@ class Item(models.Model):
 
 class VendorItem(Item):
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
-    quatity = models.IntegerField(max_length=2, default=1)
+    quatity = models.IntegerField(default=1)
 
 
