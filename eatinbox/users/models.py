@@ -29,14 +29,12 @@ class Customer(models.Model):
 
 
 class Orders(models.Model):
-    user_info = models.ForeignKey(Person, on_delete=models.CASCADE)
-    vendor_info = models.ForeignKey('vendors.vendor', on_delete=models.CASCADE)
+    user_info = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    vendor_info = models.ForeignKey('vendors.menu', on_delete=models.CASCADE)
     datetime = models.DateTimeField(auto_created=True, auto_now=True)
     total_credits = models.IntegerField()
 
 
-class CustomerItem(Item):       # Items related to customer
-    user_info = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    menu_info = models.ForeignKey('vendors.menu', on_delete=models.CASCADE)
+class OrderItem(Item):       # Items related to customer
     current_order = models.ForeignKey(Orders, on_delete=models.CASCADE)
     custom_quantity = models.IntegerField(default=1)
