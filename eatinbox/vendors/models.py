@@ -1,12 +1,14 @@
 from django.db import models
-from users.models import Person
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 
 
 class Vendor(models.Model):
-    user = models.OneToOneField(Person, on_delete=models.CASCADE)
+    user = models.OneToOneField('users.person', on_delete=models.CASCADE)
     description = models.TextField()
+    rating = models.IntegerField(null=True)
 
 
 class Menu(models.Model):
@@ -20,9 +22,17 @@ class Menu(models.Model):
     type = models.CharField(max_length=1, choices=MENU_TYPE)
 
 
+# Base class for items
 class Item(models.Model):
-    menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
     item_name = models.CharField(max_length=50)
     quatity = models.IntegerField(default=1)
-    # same menu to be used for customizable option, only quatity is to be changed hence quantity_custom
-    quatity_custom = models.IntegerField(default=1)
+
+    class Meta:
+        abstract = True
+
+
+class VendorItem(Item):
+    menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
+    quatity = models.IntegerField(default=1)
+
+

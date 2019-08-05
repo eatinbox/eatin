@@ -1,8 +1,7 @@
 from django.contrib import admin
-from . import models
+from .import models
 
 # Register your models here.
-
 admin.site.register(models.Vendor)
 admin.site.register(models.Menu)
-admin.site.register(models.Item)
+admin.site.register(models.VendorItem)

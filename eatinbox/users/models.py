@@ -1,6 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User, AbstractBaseUser
-
+from django.contrib.auth.models import User
+from vendors.models import Item
 # Create your models here.
 
 
@@ -13,15 +13,30 @@ class Person(models.Model):     # baseModel
 
 class Address(models.Model):
     ADDRESS_TYPE = [
-        ('1', 'HOME'),
-        ('2', 'OFFICE'),
+            ('1', 'HOME'),
+            ('2', 'OFFICE'),
     ]
-    user_profile = models.ForeignKey(Person, on_delete=models.CASCADE)
-    type = models.CharField(max_length=1, choices=ADDRESS_TYPE)
+    user_info = models.ForeignKey(Person, on_delete=models.CASCADE)
+    type = models.CharField(max_length=1, choices=ADDRESS_TYPE,
+                            )
     flat_no = models.IntegerField()
     address = models.CharField(max_length=100)
 
 
 class Customer(models.Model):
-    user = models.OneToOneField(Person, on_delete=models.CASCADE)
+    user_info = models.OneToOneField(Person, on_delete=models.CASCADE)
     favorites = models.CharField(max_length=10)
+
+
+class Orders(models.Model):
+    user_info = models.ForeignKey(Person, on_delete=models.CASCADE)
+    vendor_info = models.ForeignKey('vendors.vendor', on_delete=models.CASCADE)
+    datetime = models.DateTimeField(auto_created=True, auto_now=True)
+    total_credits = models.IntegerField()
+
+
+class CustomerItem(Item):       # Items related to customer
+    user_info = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    menu_info = models.ForeignKey('vendors.menu', on_delete=models.CASCADE)
+    current_order = models.ForeignKey(Orders, on_delete=models.CASCADE)
+    custom_quantity = models.IntegerField(default=1)
