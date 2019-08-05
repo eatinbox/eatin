@@ -3,4 +3,6 @@ from . import models
 
 # Register your models here.
 
-admin.site.register(models.Vendor, models.Menu, models.Item)
+admin.site.register(models.Vendor)
+admin.site.register(models.Menu)
+admin.site.register(models.Item)
