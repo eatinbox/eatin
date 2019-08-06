@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from vendors.models import Item
+
 # Create your models here.
 
 
@@ -15,6 +16,7 @@ class Address(models.Model):
     ADDRESS_TYPE = [
             ('1', 'HOME'),
             ('2', 'OFFICE'),
+            ('3', 'OTHER'),
     ]
     user_info = models.ForeignKey(Person, on_delete=models.CASCADE)
     type = models.CharField(max_length=1, choices=ADDRESS_TYPE,
@@ -37,4 +39,3 @@ class Orders(models.Model):
 
 class OrderItem(Item):       # Items related to customer
     current_order = models.ForeignKey(Orders, on_delete=models.CASCADE)
-    custom_quantity = models.IntegerField(default=1)

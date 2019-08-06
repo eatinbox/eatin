@@ -31,6 +31,4 @@ class Item(models.Model):
 
 class VendorItem(Item):
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
-    quatity = models.IntegerField(default=1)
-
 
