@@ -6,6 +6,12 @@ const initialState = {
 
 const reducer = (state=initialState, action) => {
     switch(action.type) {
+        case actionTypes.SET_MENU_LIST:
+            return {
+                ...state,
+                menuList: [...action.menuList]
+            }
+            
         default:
             return state
     }

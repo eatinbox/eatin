@@ -10,8 +10,8 @@ from users.serializers import UserSerializer
 # Create your views here.
 
 
-#@api_view(['GET'])
-#def index(request):
+# @api_view(['GET'])
+# def index(request):
 #    return Response(data={
 #        'test': 'successful'
 #    }, status=status.HTTP_200_OK)
