@@ -20,6 +20,13 @@ class Menu(models.Model):
     type = models.CharField(max_length=1, choices=MENU_TYPE)
 
 
-class VendorItem(Item):
+class MenuItem(models.Model):                             # for setting default quantities for items of menu
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    # vendor will get name of all the items .Now vendor will select some items and set its quantity
+    # now we will fetch the item name and its quantity and create Menu item object
+    # now we will create menu object by retrieving all the menu items by set_all
+    # now menu can be associated by a particular vendor and displayed on customer_app front page
+
+
 

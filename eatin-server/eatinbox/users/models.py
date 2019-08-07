@@ -31,3 +31,5 @@ class Orders(models.Model):
 
 class OrderItem(Item):       # Items related to customer
     current_order = models.ForeignKey(Orders, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    # custom quantity after adding to cart can be changed by customer

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 
 # Base class for items
@@ -8,10 +9,7 @@ from django.contrib.auth.models import User
 
 class Item(models.Model):
     item_name = models.CharField(max_length=50)
-    quatity = models.IntegerField(default=1)
-
-    class Meta:
-        abstract = True
+    vendor = models.ManyToManyField("vendors.vendor")  # Displays all the existing items
 
 
 class Person(models.Model):     # baseModel

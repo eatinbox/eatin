@@ -4,4 +4,4 @@ from . import models
 # Register your models here.
 admin.site.register(models.Vendor)
 admin.site.register(models.Menu)
-admin.site.register(models.VendorItem)
+admin.site.register(models.MenuItem)
