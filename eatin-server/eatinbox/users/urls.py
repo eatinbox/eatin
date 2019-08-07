@@ -2,5 +2,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-        path('', views.UserListApiView.as_view(), name="userapilistview"),
+        path('get-user-list/', views.UserListApiView.as_view(), name="userapilistview"),
 ]
