@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux'
+import {createStore, applyMiddleware} from 'redux'
+import thunk from 'redux-thunk';
 import {createAppContainer, createStackNavigator} from 'react-navigation'
-//import { fromRight } from 'react-navigation-transitions';
-// import WelcomeScreen from './src/screens/Welcome/WelcomeScreen'
-import contentReducer from './src/store/reducers/content';                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+import menuList from './src/store/reducers/menuList';                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
 import IntroductionScreen from './src/screens/Introduction/IntroductionScreen'
 import VenderInfoScreen from './src/screens/VenderInfo/VenderInfoScreen';
 import FoodScreen from './src/screens/Food/FoodScreen';
 
-const store = createStore(contentReducer)
+const store = createStore(menuList, applyMiddleware(thunk))
 
 
 export default class App extends Component {
