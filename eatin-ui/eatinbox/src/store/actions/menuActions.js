@@ -10,7 +10,7 @@ export const setMenuList = (menuList) => {
 }
 
 export const getMenuList = () => {
-    const url = 'http://192.168.0.110:8000/get-user-list/'
+    const url = 'http://192.168.0.110:8000/get-menu-list/'
 
     return async dispatch => {
         try {
