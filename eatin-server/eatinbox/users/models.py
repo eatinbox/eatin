@@ -22,12 +22,13 @@ class Customer(models.Model):
 
 
 class Orders(models.Model):
-    user_info = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    customer_info = models.ForeignKey(Customer, on_delete=models.CASCADE)
     menu_info = models.ForeignKey('vendors.menu', on_delete=models.CASCADE)
     datetime = models.DateTimeField(auto_created=True, auto_now=True)
     total_credits = models.IntegerField()
-    favorite = models.BooleanField(default=False)
 
 
 class OrderItem(Item):       # Items related to customer
     current_order = models.ForeignKey(Orders, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    # custom quantity after adding to cart can be changed by customer

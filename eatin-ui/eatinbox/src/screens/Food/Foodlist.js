@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import {View, StyleSheet, FlatList } from 'react-native';
 import FoodCard from './FoodCard/FoodCard';
+import * as actionCreators from '../../store/actions/menuActions'  
 
 
 class Foodlist extends Component {
@@ -16,6 +18,11 @@ class Foodlist extends Component {
     _renderItem = () => (
         <FoodCard/>
     )
+
+    componentDidMount() {
+        this.props.dispatch(actionCreators.getMenuList())
+    }
+    
 
     render() {
         return (
@@ -38,4 +45,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Foodlist;
+export default connect()(Foodlist);
