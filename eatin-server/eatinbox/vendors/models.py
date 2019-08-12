@@ -23,7 +23,7 @@ class Menu(models.Model):
     ]
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
     menu_name = models.CharField(max_length=100)
-    menu_date = models.DateField()
+    menu_date = models.DateField(auto_created=True, auto_now_add=True)
     type = models.CharField(max_length=1, choices=MENU_TYPE)
 
 

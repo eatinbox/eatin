@@ -9,7 +9,6 @@ from .models import Orders
 from vendors.models import Menu, Vendor
 
 
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Person
@@ -21,7 +20,6 @@ class CustomerSerializer(ModelSerializer):
     class Meta:
         model = Customer
         fields = ('favorites', 'user_info')
-
 
 
 class PastOrdersSerializer(serializers.ModelSerializer):
