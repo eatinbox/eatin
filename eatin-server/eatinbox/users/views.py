@@ -20,3 +20,8 @@ from users.serializers import UserSerializer
 class UserListApiView(ListAPIView):
     queryset = Person.objects.all()
     serializer_class = UserSerializer
+
+
+class CustomerListApiView(ListAPIView):
+    queryset = Person.objects.all()
+    serializer_class = UserSerializer

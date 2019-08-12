@@ -12,13 +12,13 @@ class Address(models.Model):
     ]
     user_info = models.ForeignKey(Person, on_delete=models.CASCADE)
     type = models.CharField(max_length=1, choices=ADDRESS_TYPE)
-    flat_no = models.IntegerField()
+    flat_no = models.IntegerField(null=True)
     address = models.CharField(max_length=100)
 
 
 class Customer(models.Model):
     user_info = models.OneToOneField(Person, on_delete=models.CASCADE)
-    favorites = models.CharField(max_length=10)
+    favorites = models.CharField(max_length=10)  # field will be used for user experience
 
 
 class Orders(models.Model):
