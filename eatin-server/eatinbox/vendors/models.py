@@ -4,12 +4,19 @@ from base.models import Item, Person
 
 
 class Vendor(models.Model):
-    user = models.OneToOneField(Person, on_delete=models.CASCADE)
+    objects = models.Manager()
+
+    person_info = models.OneToOneField(Person, on_delete=models.CASCADE)
     description = models.TextField()
     rating = models.IntegerField(null=True)
 
+    def get_vendor_name(self):
+        return self.person_info.getPersonName()
+
 
 class Menu(models.Model):
+    objects = models.Manager()
+
     MENU_TYPE = [
         ('1', 'full'),
         ('2', 'half'),
