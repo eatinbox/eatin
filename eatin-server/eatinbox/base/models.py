@@ -1,6 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
 
 # Create your models here.
 
@@ -18,5 +19,10 @@ class Person(models.Model):     # baseModel
     longitude = models.DecimalField(max_digits=8, decimal_places=6, null=True)
     contact = models.CharField(max_length=10, null=True, blank=True)
 
+    objects = models.Manager()
+
     def __str__(self):
-        return self.user.username
+        return self.getPersonName()
+
+    def getPersonName(self):
+        return self.user.first_name
