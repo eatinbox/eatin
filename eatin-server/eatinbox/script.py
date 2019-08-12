@@ -24,11 +24,11 @@ python = "python"
 
 cmd1 = " manage.py makemigrations base users vendors"
 cmd2 = " manage.py migrate"
-cmd3 = ' manage.py shell < string.txt'
+cmd3 = ' manage.py shell < tempfile.txt'
 
 if platform.system() == "Linux":
-    python = python + 3
-    cmd3 = ' shell <<< "ïmport addData"'
+    python = "python3"
+    cmd3 = ' manage.py shell < tempfile.txt'
 
 os.system(python + cmd1)
 os.system(python + cmd2)
