@@ -1,8 +1,8 @@
-<<<<<<< HEAD
+
 from rest_framework.serializers import ModelSerializer
 from base.models import (Person)
 from users.models import (Customer)
-=======
+
 from rest_framework import serializers
 from base.models import Person
 from .models import Orders

@@ -36,6 +36,9 @@ class Orders(models.Model):
     order_time = models.DateTimeField(auto_created=True, auto_now=True)
     total_credits = models.IntegerField()
 
+    class Meta:
+        verbose_name_plural = "Orders"
+
     def __str__(self):
         return "Order No:- {}".format(self.pk)
 

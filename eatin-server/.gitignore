@@ -3,3 +3,5 @@ __pycache__/
 myenv/
 .idea/
 migrations/
+eatinbox/string.txt
+eatinbox/db.sqlite3
