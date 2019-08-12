@@ -2,7 +2,7 @@ import os, platform
 import shutil
 
 str1 = 'base/migrations/'
-str2= 'users/migrations/'
+str2 = 'users/migrations/'
 str3 = 'vendors/migrations/'
 
 apps = ["base", "users", "vendors"]
