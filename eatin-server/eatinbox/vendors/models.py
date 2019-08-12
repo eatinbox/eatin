@@ -31,6 +31,9 @@ class MenuItem(models.Model):                             # for setting default 
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
     item_name = models.ForeignKey(Item, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
+
+    def __str__(self):
+        return "{} - {}".format(self.item_name.item_name, self.quantity)
     # vendor will get name of all the items .Now vendor will select some items and set its quantity
     # now we will fetch the item name and its quantity and create Menu item object
     # now we will create menu object by retrieving all the menu items by set_all

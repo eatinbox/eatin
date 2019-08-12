@@ -20,7 +20,7 @@ class VendorCustomSerializer(serializers.ModelSerializer):
 
 
 class MenuItemCustomSerializer(serializers.ModelSerializer):
-    item_name = serializers.SlugRelatedField(read_only=True, slug_field="item_name")
+    item_name = serializers.SlugRelatedField(read_only=True, slug_field='item_name')
 
     class Meta:
         model = MenuItem
