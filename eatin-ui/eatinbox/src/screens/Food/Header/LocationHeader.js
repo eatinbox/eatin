@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     },
 
     inputContainer: {
+        width: '80%',
         height: 40, 
         borderColor: 'gray', 
         
@@ -73,6 +74,7 @@ const styles = StyleSheet.create({
         height:20,
         alignItems: 'center',
         justifyContent: 'center',
+        // borderWidth: 1,
         borderRightWidth:1,
         borderColor: '#aa9',
         marginLeft: 8,

@@ -7,7 +7,7 @@ from vendors.models import Vendor, MenuItem, Menu
 User.objects.create_superuser(username="saumi", email="", password="1")
 
 for i in range(5):
-        user = User(username="Csaumi{}".format(str(i)), password="123")
+        user = User(username="Csaumi{}".format(str(i)), password="123", first_name="Csaumi{}".format(str(i)))
         user.save()
         person = Person(user=user, latitude=0, longitude=0, contact="1234567890")
         person.save()
@@ -15,7 +15,7 @@ for i in range(5):
         cust.save()
 
 for i in range(5):
-        user = User(username="Vsaumi{}".format(str(i)), password="123")
+        user = User(username="Vsaumi{}".format(str(i)), password="123", first_name="Vsaumi{}".format(str(i)))
         user.save()
         person = Person(user=user, latitude=0, longitude=0, contact="1234567890")
         person.save()
