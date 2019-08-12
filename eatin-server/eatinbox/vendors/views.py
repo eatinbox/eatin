@@ -21,3 +21,4 @@ class VendorListApiView(ListCreateAPIView):
     serializer_class = VendorSerializer
     filter_backends = [filters.OrderingFilter]
     ordering_fields = ['rating']
+
