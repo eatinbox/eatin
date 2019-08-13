@@ -53,8 +53,8 @@ class Orders(models.Model):
     objects = models.Manager()
 
     customer_info = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    '''Removed the following attribute since , Menu should contain Orders id and not the converse
-    (Menu will have Many To Many realtion with Orders and that menu will be OrderMenu'''
+    '''Removed the following attribute since , and the Orders should be related with OrderMenu and not vendor 
+    menu and it will be related as ManyToMany since one order will have multiple menus'''
     # menu_infos = models.ForeignKey('vendors.menu', on_delete=models.CASCADE)
     menus = models.ManyToManyField(OrderMenu)
     order_time = models.DateTimeField(auto_created=True, auto_now=True)
