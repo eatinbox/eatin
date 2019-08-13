@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework import generics
 from base.models import Person
 from .models import Orders
-from .serializers import UserSerializer, PastOrdersSerializer
+from .serializers import UserSerializer, OrdersSerializer
 
 
 class UserListApiView(generics.ListAPIView):
@@ -13,5 +13,5 @@ class UserListApiView(generics.ListAPIView):
 
 class PastOrdersListApiView(generics.ListAPIView):
     queryset = Orders.objects.all()
-    serializer_class = PastOrdersSerializer
+    serializer_class = OrdersSerializer
 

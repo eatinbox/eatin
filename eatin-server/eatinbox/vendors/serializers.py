@@ -33,7 +33,7 @@ class MenuSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Menu
-        fields = ["pk", "vendor", "menu_name", "menu_date", "type", 'menu_items']
+        fields = ["pk", "vendor", "menu_name", "time_stamp", "type", 'menu_items']
 
     def get_menu_items(self, obj):
         qs = obj.menuitem_set.all()

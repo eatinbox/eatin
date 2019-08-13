@@ -2,6 +2,8 @@ from django.db import models
 from base.models import Item, Person
 # Create your models here.
 
+# DESCRIPTION -> models related to the Vendors
+
 
 class Vendor(models.Model):
     objects = models.Manager()
@@ -14,6 +16,7 @@ class Vendor(models.Model):
         return self.person_info.getPersonName()
 
 
+# DESCRIPTION -> Menu for a particular time added by the vendor
 class Menu(models.Model):
     objects = models.Manager()
 
@@ -23,21 +26,23 @@ class Menu(models.Model):
     ]
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
     menu_name = models.CharField(max_length=100)
-    menu_date = models.DateField(auto_created=True, auto_now_add=True)
+    time_stamp = models.DateField(auto_created=True, auto_now_add=True)
     type = models.CharField(max_length=1, choices=MENU_TYPE)
 
 
-class MenuItem(models.Model):                             # for setting default quantities for items of menu
+'''
+DESCRIPTION -> Related to base Item class so we can fetch name of that base Item, also relates to Menu which will
+contain items added by vendor
+
+FUTURE CHANGES -> Both menuItem and OrderMenuItem only differ in quatity, so shouldnt have different models for both
+but rather have a single model with will have related_to_what field. 
+'''
+
+
+class MenuItem(models.Model):
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
     item_name = models.ForeignKey(Item, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
 
     def __str__(self):
         return "{} - {}".format(self.item_name.item_name, self.quantity)
-    # vendor will get name of all the items .Now vendor will select some items and set its quantity
-    # now we will fetch the item name and its quantity and create Menu item object
-    # now we will create menu object by retrieving all the menu items by set_all
-    # now menu can be associated by a particular vendor and displayed on customer_app front page
-
-
-
