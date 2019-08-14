@@ -34,8 +34,8 @@ class Menu(models.Model):
 DESCRIPTION -> Related to base Item class so we can fetch name of that base Item, also relates to Menu which will
 contain items added by vendor
 
-FUTURE CHANGES -> Both menuItem and OrderMenuItem only differ in quatity, so shouldnt have different models for both
-but rather have a single model with will have related_to_what field. 
+
+
 '''
 
 
