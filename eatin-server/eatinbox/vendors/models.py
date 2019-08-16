@@ -33,9 +33,6 @@ class Menu(models.Model):
 '''
 DESCRIPTION -> Related to base Item class so we can fetch name of that base Item, also relates to Menu which will
 contain items added by vendor
-
-
-
 '''
 
 
