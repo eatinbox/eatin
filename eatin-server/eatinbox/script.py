@@ -8,14 +8,14 @@ str3 = 'vendors/migrations/'
 apps = ["base", "users", "vendors"]
 
 
-if os.path.exists(str1):
-    shutil.rmtree('base/migrations/')
-
-if os.path.exists(str2):
-    shutil.rmtree('users/migrations/')
-
-if os.path.exists(str3):
-    shutil.rmtree('vendors/migrations/')
+# if os.path.exists(str1):
+#     shutil.rmtree('base/migrations/')
+#
+# if os.path.exists(str2):
+#     shutil.rmtree('users/migrations/')
+#
+# if os.path.exists(str3):
+#     shutil.rmtree('vendors/migrations/')
 
 if os.path.exists("db.sqlite3"):
     os.remove("db.sqlite3")
