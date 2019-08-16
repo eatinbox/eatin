@@ -2,5 +2,4 @@ __pycache__/
 *.py[cod]
 myenv/
 .idea/
-migrations/
 eatinbox/db.sqlite3
