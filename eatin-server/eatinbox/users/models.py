@@ -39,7 +39,7 @@ so we can fetch its info, and it will relate to orders with Many To Many field s
 multiple menus and same menus can be present on multiple orders. We need different menu which is associated with
 the the customer orders hence this model.
 
-PROBLEMS -> Remove the id of the OrderMenu, no need for it.
+PROBLEMS -> Remove the id of the OrderMenu(primary key default), no need for it.
 '''
 
 
