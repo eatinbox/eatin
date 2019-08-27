@@ -5,11 +5,10 @@ import {
     StyleSheet,
 } from 'react-native';
 
-const Dish = () => (
+const Dish = (props) => (
     <View style={styles.textBox}>
         <Text style={styles.foodName}>
-            Chiken Do Pyazza, Roasted Arbi
-            Masala with Rotis and Rice
+            {props.menuName}
         </Text>
         <Text style={styles.etaText}>
             25 min

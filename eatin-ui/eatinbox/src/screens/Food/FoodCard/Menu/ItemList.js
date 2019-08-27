@@ -7,12 +7,13 @@ class ItemList extends Component {
     constructor(props) {
         super(props);
 
-        this.data = [<ItemIcon />, <ItemIcon />, <ItemIcon />,
-        <ItemIcon />]
     }
 
-    _renderItem = () => (
-        <ItemIcon />
+    _renderItem = ({item}) => (
+        <ItemIcon 
+            itemName={item.item_name}
+            quantity={item.quantity}
+        />
     )
 
     render() {
@@ -21,7 +22,7 @@ class ItemList extends Component {
                 style={styles.flatlist}
                 contentContainerStyle={styles.listCont}
                 renderItem={this._renderItem}
-                data={this.data}
+                data={this.props.menuItems}
                 numColumns={5}
             />
 

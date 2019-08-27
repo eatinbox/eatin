@@ -6,9 +6,11 @@ StyleSheet
 import ItemList from '../Menu/ItemList'
 import Vendor from './VendorIcon';
 
-const Menu = () => (
+const Menu = (props) => (
     <View style={styles.menuBox}>
-        <ItemList/>
+        <ItemList
+            menuItems={props.menuItems}
+        />
         <Vendor/>
     </View>
 );

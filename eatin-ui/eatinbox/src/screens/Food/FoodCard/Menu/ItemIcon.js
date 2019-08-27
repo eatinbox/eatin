@@ -11,7 +11,7 @@ const ItemIcon = (props) => (
         <Image source={require('../../../../assets/pizza.jpg')}
             style={styles.icon}
         />
-        <Text style={styles.itemName}>Curry</Text>
+        <Text style={styles.itemName}>{props.itemName}</Text>
     </View>
 
 );

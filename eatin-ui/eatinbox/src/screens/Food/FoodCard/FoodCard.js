@@ -18,8 +18,12 @@ class FoodCard extends Component {
                         style={styles.foodImg}>
                     </ImageBackground>
                 </View>
-                <Dish/>
-                <Menu/>
+                <Dish
+                    menuName={this.props.menuName}
+                />
+                <Menu
+                    menuItems={this.props.menuItems}
+                />
             </View>
         )
     }

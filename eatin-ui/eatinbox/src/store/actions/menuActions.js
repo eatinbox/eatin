@@ -10,18 +10,18 @@ export const setMenuList = (menuList) => {
 }
 
 export const getMenuList = () => {
-    const url = 'http://192.168.0.110:8000/get-menu-list/'
+    const url = 'http://192.168.0.107:8000/vendors/menulist/'
 
     return async dispatch => {
         try {
             let response = await axios.get(url)
-            console.log("this is ", response)
+            // console.log("this is ", response)
             dispatch(setMenuList(response.data))
             
         }
 
         catch(err) {
-            console.log(err)
+            // console.log(err)
         }
     } 
 }
