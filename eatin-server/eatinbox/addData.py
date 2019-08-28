@@ -14,7 +14,7 @@ for i in range(5):
         cust = Customer(person_info=person)
         cust.save()
 
-for i in range(5):
+for i in range(10):
         user = User(username="Vsaumi{}".format(str(i)), password="123", first_name="Vsaumi{}".format(str(i)))
         user.save()
         person = Person(user=user, latitude=0, longitude=0, contact="1234567890")
@@ -23,12 +23,28 @@ for i in range(5):
         vendor.save()
         menu = Menu(vendor=vendor, menu_name="Chiken{}".format(str(i)), type='1')
         menu.save()
-        item = Item(item_name="roti{}".format(str(i)))
-        item.save()
-        item.vendor.add(vendor)
-        item.save()
-        menu_item = MenuItem(menu=menu, item_name=item)
-        menu_item.save()
+        item1 = Item(item_name="Roti")
+        item2 = Item(item_name="Rice")
+        item3 = Item(item_name="Daal")
+        item4 = Item(item_name="Sabji")
+        item1.save()
+        item2.save()
+        item3.save()
+        item4.save()
+        item1.vendor.add(vendor)
+        item2.vendor.add(vendor)
+        item3.vendor.add(vendor)
+        item4.vendor.add(vendor)
+
+        menu_item1 = MenuItem(menu=menu, item_name=item1)
+        menu_item2 = MenuItem(menu=menu, item_name=item2)
+        menu_item3 = MenuItem(menu=menu, item_name=item3)
+        menu_item4 = MenuItem(menu=menu, item_name=item4)
+
+        menu_item1.save()
+        menu_item2.save()
+        menu_item3.save()
+        menu_item4.save()
 
 saumi = Customer.objects.get(id=1)
 order = Orders.objects.create(customer_info=saumi, total_credits=50)
