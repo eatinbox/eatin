@@ -8,7 +8,6 @@ Dimensions,
 import LocationHeader from './Header/LocationHeader';
 import BrowseHeader from './Header/BrowseHeader';
 import Foodlist from './Foodlist';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const width = Dimensions.get('window').width
 
