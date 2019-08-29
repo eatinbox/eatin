@@ -1,4 +1,5 @@
 import axios from 'axios'
+import * as urls from '../../../apiUrl'
 
 export const SET_MENU_LIST = 'SET_MENU_LIST'
 
@@ -10,7 +11,7 @@ export const setMenuList = (menuList) => {
 }
 
 export const getMenuList = () => {
-    const url = 'http://192.168.0.107:8000/vendors/menulist/'
+    const url = urls.api + 'vendors/menulist/'
 
     return async dispatch => {
         try {
