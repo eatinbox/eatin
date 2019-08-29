@@ -14,9 +14,6 @@ class LocationHeader extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.sidebarBox}>
-                    <Image source={require('../../../assets/sidebar.png')} style={styles.sidebarIcon}/>
-                </View>
                 <View style={styles.inputBox}>
                     <View style={styles.mapBox}>
                         <Image source={require('../../../assets/mapicon.png')} style={styles.mapIcon}/>
@@ -28,9 +25,6 @@ class LocationHeader extends Component {
                         placeholder="Enter your location"
                     />
                 </View>
-                <View style={styles.cartBox}>
-                    <Image source={require('../../../assets/cart.png')} style={styles.cartIcon}/>
-                </View>
             </View>
         )
     }
@@ -39,60 +33,52 @@ class LocationHeader extends Component {
 
 const styles = StyleSheet.create({
     container:{
-        width: '100%',
+        width: '95%',
         flexDirection: 'row',
-        // borderWidth:1,
-        backgroundColor: '#ddd',
+        height: '6%',
+        justifyContent: 'center',
+        // marginBottom: 3,
+        // marginTop: 3
     },
 
     inputBox:{
-        width: '80%',
-        borderWidth: 0,
+        width: '100%',
         flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-        marginTop:10,
-        marginBottom: 10,
-        // justifyContent: 'center', 
-    },
-
-    inputContainer: {
-        width: '80%',
-        height: 40, 
-        borderColor: 'gray', 
-        
-    },
-
-    sidebarBox:{
-        width: '10%',
         borderWidth: 0,
         alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: '#DCDCDC',
+        // height: 30
     },
 
-    mapBox:{
-        height:20,
-        alignItems: 'center',
-        justifyContent: 'center',
-        // borderWidth: 1,
-        borderRightWidth:1,
-        borderColor: '#aa9',
-        marginLeft: 8,
-        marginRight: 6,
+    inputContainer:{
+        width: '80%',
+        // height: 40,
+        borderColor: "gray",
+        marginLeft: 10
     },
 
-    mapIcon:{
+    mapIcon: {
+        borderRadius: 20,
         width: 20,
         height: 20,
-        borderRadius: 20,
-        marginRight: 6,
+        // marginRight: 4,
+    },
+
+    mapBox: {
+        width: '10%',
+        justifyContent: 'center',
+        alignContent: 'center',
+        borderColor: '#aa9',
+         borderRightWidth: 1,
     },
 
     cartBox:{
         width: '10%',
-        borderWidth: 0,
         alignItems: 'center',
-        justifyContent: 'center',
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        paddingLeft: 10,
+        paddingRight:5
     },
 
     sidebarIcon:{
@@ -102,10 +88,10 @@ const styles = StyleSheet.create({
     },
 
     cartIcon:{
+        borderRadius: 25,
         width: 25,
         height: 25,
-        borderRadius: 25,
-    }
+    },
 });
 
 export default LocationHeader;
