@@ -5,13 +5,18 @@ Image,
 StyleSheet,
 Text,
 } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import { withNavigation, HeaderBackButton } from 'react-navigation';
 
 
 const Vendor = (props) => {
     return(
         <View style={styles.container}>
-        <Text>Rating</Text>
+        {/* <Text>Rating</Text> */}
+        <View style= {styles.rating}>
+            <Text style= {styles.textRating}>
+                4.5
+            </Text>
+        </View>
             <Image source={require('../../../../assets/profile.jpeg')} style={styles.profileImg}/>
             <Text onPress={() => props.navigation.navigate('Vendor')} style={styles.iconText}>Homely</Text>
         </View>
@@ -27,6 +32,21 @@ const styles = StyleSheet.create({
         borderWidth: 0,
     },
 
+    textRating: {
+        color: '#fff',
+        fontSize: 12
+    },  
+
+    rating: {
+        width: 40,
+        height: 17,
+        backgroundColor: '#000',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 20
+    },
+
     profileImg:{
         width:50,
         height:50,
@@ -37,7 +57,7 @@ const styles = StyleSheet.create({
     iconText:{
         includeFontPadding:false,
         fontWeight: 'bold',
-        color:'#2d2d2d',
+        color:'#000',
     },
 });
 
