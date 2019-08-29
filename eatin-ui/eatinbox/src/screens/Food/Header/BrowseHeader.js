@@ -5,64 +5,76 @@ Text,
 Image,
 StyleSheet
  } from 'react-native';
+ import ToggleButton from './VegNonVeg';
 
  const BrowseHeader = () => (
-     <View style={styles.container}>
-        <Text style={styles.browseText}> Browse </Text>
-        <View style={styles.filterBox}>
-            <Image source={require('../../../assets/filter.png')} style={styles.filterIcon} />
-        </View>
-        <View style={styles.vegBox}>
-            <View style={styles.vegIcon}>
-            
-            </View>
-        </View>
-     </View>
+    <View style= {styles.container}>
+    
+    <Text style= {styles.browseText}> SORT </Text>
+    
+    <Text style= {styles.browseText1}> FILTER </Text>
+    
+    <View style= { styles.vegBox }>
+            <ToggleButton />
+    </View>
+    </View>
  );
  
 const styles = StyleSheet.create({
     container:{
         width: '100%',
+        height: 45,
         flexDirection: 'row',
+        backgroundColor: '#fff',
+        // paddingBottom: 5,
+        // paddingTop: 5,
         borderWidth: 0,
-        backgroundColor: '#ddd',
-        marginTop:16,
+        justifyContent: 'center',
+        alignItems: 'center',
+        elevation: 1
     },
 
     browseText:{
-        fontWeight: 'bold',
-        fontSize: 28,
-        letterSpacing: 0.2,
-        borderWidth:0,
-        color:'#2d2d2d',
-        margin:6,
+        width: '33%',
+        fontSize: 16,
+        fontWeight: '500',
+        color: '#000',
+        // marginRight: 5,
+        // marginLeft: 15,
+        padding: 5
     },
 
-    filterBox:{
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderWidth:0,
-        marginLeft: 'auto',
+    browseText1:{
+        width: '33%',
+        fontSize: 16,
+        fontWeight: '500',
+        color: '#000',
+        // marginRight: 5,
+        // marginLeft: 15,
+        padding: 5
     },
 
     filterIcon:{
         width: 25,
-        height:25,
+        height: 25
     },
 
-    vegBox:{
+    filterBox: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 0,
+        marginLeft: 8,
+        marginRight: 8
+    },
+    
+
+    vegBox: {
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         marginLeft: 8,
         marginRight: 8,
     },
-
-    vegIcon:{
-        width: 40,
-        height: 25,
-        borderRadius: 12,
-        backgroundColor: '#2efb26',
-    },
-});
+})
 
  export default BrowseHeader;
