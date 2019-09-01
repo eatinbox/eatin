@@ -1,0 +1,16 @@
+--CREATE DATABASE eatinbox;
+--GRANT ALL PRIVILEGES ON *.* TO 'eatinbox'@'localhost' IDENTIFIED BY 'password';
+
+--sudo nano /etc/mysql/my.cnf
+--
+--[client]
+--database = eatinbox
+--user = eatinbox
+--password = eatinbox@98
+--default-character-set = utf8
+--
+
+-- bash commands
+
+--systemctl daemon-reload
+--systemctl restart mysql
