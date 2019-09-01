@@ -1,6 +1,5 @@
 from django.db import models
 from django.conf import settings
-from django.contrib.auth.models import PermissionsMixin
 # from django.contrib.auth import get_user_model
 from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager
@@ -12,7 +11,6 @@ from django.contrib.auth.models import (
 
 '''DESCRIPTION - This model is for storing the Base Classes which will be either related or Inherited in
 other classes'''
-
 
 '''
 PURPOSE -> Store all the items that will be added by all the different vendors
@@ -55,56 +53,56 @@ class Person(models.Model):
         return self.user.first_name
 
 
-
 class UserManager(BaseUserManager):
-    def create_user(self, email, password=None,is_superuser=False,is_staff=True, first_name=None, is_active=True, is_vendor=False, is_customer=True):
+    def create_user(self, email, password=None, is_superuser=False, is_staff=True, first_name=None, is_active=True,
+                    is_vendor=False, is_customer=True):
         if not email:
             raise ValueError("User must provide Email")
         if not password:
             raise ValueError("User must provide a password")
-        
+
         user_obj = self.model(
             email=self.normalize_email(email),
             first_name=first_name,
         )
 
         user_obj.set_password(password)
-        user_obj.vendor     = is_vendor
-        user_obj.active     = is_active
-        user_obj.staff      = is_staff
-        user_obj.customer   = is_customer
-        user_obj.admin      = is_superuser
+        user_obj.vendor = is_vendor
+        user_obj.active = is_active
+        user_obj.staff = is_staff
+        user_obj.customer = is_customer
+        user_obj.admin = is_superuser
         user_obj.save(using=self._db)
         return user_obj
 
-    def create_superuser(self,email, password=None):
-        user =self.create_user(
-            email, 
+    def create_superuser(self, email, password=None):
+        user = self.create_user(
+            email,
             is_superuser=True,
             is_staff=True,
-            password=password, 
-            is_active=True, 
-            is_vendor=True, 
+            password=password,
+            is_active=True,
+            is_vendor=True,
             is_customer=False)
 
         return user
 
-    def create_vendor(self,email, password=None):
-        user =self.create_user(
-            email, 
-            password=password, 
-            is_active=True, 
-            is_vendor=True, 
+    def create_vendor(self, email, password=None):
+        user = self.create_user(
+            email,
+            password=password,
+            is_active=True,
+            is_vendor=True,
             is_customer=False)
 
         return user
 
-    def create_customer(self,email, password=None):
-        user =self.create(
-             email, 
-            password=password, 
-            is_active=True, 
-            is_vendor=False, 
+    def create_customer(self, email, password=None):
+        user = self.create(
+            email,
+            password=password,
+            is_active=True,
+            is_vendor=False,
             is_customer=True
 
         )
@@ -113,28 +111,26 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    
-    email       = models.EmailField(max_length=100,unique=True)
-    vendor      = models.BooleanField(default=False)
-    customer    = models.BooleanField(default=True)
-    first_name  = models.CharField(max_length=255, null=True)
-    active   = models.BooleanField(default=True)
-    admin       = models.BooleanField(default=True)
-    staff       = models.BooleanField(default=True)
+    email = models.EmailField(max_length=100, unique=True)
+    vendor = models.BooleanField(default=False)
+    customer = models.BooleanField(default=True)
+    first_name = models.CharField(max_length=255, null=True)
+    active = models.BooleanField(default=True)
+    admin = models.BooleanField(default=True)
+    staff = models.BooleanField(default=True)
 
-
-    USERNAME_FIELD  = 'email'
+    USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
-    objects =UserManager()
+    objects = UserManager()
 
     def __str__(self):
         return self.email
 
-    def has_perm(self,perm,obj=None):
+    def has_perm(self, perm, obj=None):
         return True
-    
-    def has_module_perms(self,perm,obj=None):
+
+    def has_module_perms(self, perm, obj=None):
         return True
 
     @property
@@ -148,7 +144,6 @@ class User(AbstractBaseUser):
     @property
     def is_admin(self):
         return self.admin
-
 
     @property
     def is_vendor(self):
