@@ -1,4 +1,4 @@
-import React, { Component } from './react';
+import React, { Component } from 'react';
 import {
     View, 
     TextInput, 
@@ -20,16 +20,16 @@ class Promo extends Component {
     render () {
         return (
             <View style= { styles.container }>
+            <TextInput
+                style={styles.inputContainer}
+                onChangeText={(Code) => this.setState({Code})}
+                value={this.state.Code}
+                placeholder="Enter Promo Code"
+            />
                 <BlackButton
                 buttonText= {styles.buttonText}
                 buttonContainer= { styles.buttonContainer}
                 text= 'Apply'
-                />
-                <TextInput
-                    style= { styles.inputContainer}
-                    onChangeText= {(Code) => this.setState(Code)}
-                    value= { this.state.Code}
-                    placeholder= "Enter Promo Code"
                 />
             </View>
         )
@@ -38,14 +38,15 @@ class Promo extends Component {
 
 const styles= StyleSheet.create ({
     container: {
-        width: '%95',
-        height: '15%',
+        width: '90%',
+        height: 40,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        borderColor: '#000',
+        borderColor: '#DCDCDC',
         borderWidth: 1,
-        marginTop: 15
+        // elevation: 7,
+        marginTop: 25
     },
 
     buttonText: {
@@ -55,14 +56,18 @@ const styles= StyleSheet.create ({
     },
 
     buttonContainer: {
-        padding: 5
+        padding: 5,
+        marginLeft: 10,
+        width: '100%',
+        height: 35
     },
 
     inputContainer: {
-        width: '80%',
-        // height: 40,
-        borderColor: "gray",
-        marginLeft: 10
+        width: '70%',
+        height: 30,
+        backgroundColor: "#F8F8FF",
+        fontSize: 12
+        // marginLeft: 10
     }
 })
 
