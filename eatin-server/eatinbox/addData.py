@@ -1,22 +1,24 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from base.models import *
 from users.models import *
 from vendors.models import *
 
-User.objects.create_superuser(username="saumi", email="", password="1")
+User = get_user_model()
+
+User.objects.create_superuser(email="saumitra@gmail.com", password="1")
 
 
 for i in range(5):
-        user = User(username="Csaumi{}".format(str(i)), password="123", first_name="Csaumi{}".format(str(i)))
-        user.save()
+        user = User.objects.create_user(email="Csaumi{}@gmail.com".format(str(i)), password="123", first_name="Csaumi{}".format(str(i)))
+        
         person = Person(user=user, latitude=0, longitude=0, contact="1234567890")
         person.save()
         cust = Customer(person_info=person)
         cust.save()
 
 for i in range(10):
-        user = User(username="Vsaumi{}".format(str(i)), password="123", first_name="Vsaumi{}".format(str(i)))
-        user.save()
+        user = User.objects.create_user(email="Vsaumi{}@gmail.com".format(str(i)), password="123", first_name="Vsaumi{}".format(str(i)))
+        
         person = Person(user=user, latitude=0, longitude=0, contact="1234567890")
         person.save()
         vendor = Vendor(person_info=person, description="x", rating=str(i))
