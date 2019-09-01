@@ -8,6 +8,10 @@ import IntroductionScreen from './src/screens/Introduction/IntroductionScreen'
 import VenderInfoScreen from './src/screens/VenderInfo/VenderInfoScreen';
 import FoodScreen from './src/screens/Food/FoodScreen';
 
+// =====================
+import CartScreen from './src/screens/Cart/CartScreen1';
+//======================
+
 const store = createStore(menuList, applyMiddleware(thunk))
 
 
@@ -26,7 +30,7 @@ const rootStack = createStackNavigator(
   {
     Introduction: IntroductionScreen,
     Vendor: VenderInfoScreen,
-    Food: FoodScreen
+    Food: CartScreen
   },
 
   {
