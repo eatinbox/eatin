@@ -4,16 +4,15 @@ import {
     StyleSheet,
     ScrollView
 } from 'react-native';
-import CHeader from './CHeader';
-import Circles from './CheckOutSteps';
-// import ItemScreen from './ItemScreen';
-import ItemList from './ItemList';
+import CHeader from './Header/CHeader';
+import Circles from './Header/CheckOutSteps';
+import ItemList from './CartItems/ItemList';
 import Promo from './PromoCode/ApplyPromoCode';
 import CartTotal from './FinalTotal/total';
 
 const CartScreen = () => {
     return (
-        // <ScrollView>
+        <ScrollView>
         <View style= { styles.container }>
             <CHeader />
             <Circles />
@@ -21,14 +20,14 @@ const CartScreen = () => {
             <Promo />
             <CartTotal />
         </View>
-        // </ScrollView>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         // flex: 1,
-        marginTop: 60,
+        // marginTop: 10,
         width: '100%',
         height: '100%',
         alignItems: 'center',

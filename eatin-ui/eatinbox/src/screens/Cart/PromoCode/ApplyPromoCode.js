@@ -5,7 +5,7 @@ import {
     Image,
     StyleSheet,
 } from 'react-native';
-import BlackButton from '../../../reusables/BlackButton';
+import BlackButton from '../../../reusables/BlackButton'
 
 class Promo extends Component {
     constructor (props)

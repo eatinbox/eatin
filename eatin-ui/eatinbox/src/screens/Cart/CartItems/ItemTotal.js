@@ -9,7 +9,7 @@ import {
 const ItemTotal = () => {
     return (
         <View style= { styles.container }>
-            <Image source= { require('../../assets/pizza.jpg')} style= { styles.ImageStyle} />
+            <Image source= { require('../../../assets/pizza.jpg')} style= { styles.ImageStyle} />
             <View style= { styles.TextBox}>
                 <Text style= { styles.TextStyle}>
                     Quantity :                 3

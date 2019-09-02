@@ -18,7 +18,7 @@ export default class CHeader extends Component{
             <View style= {styles.container}>
                 <View style={ styles.ImageContainer}>
                     <TouchableOpacity >
-                        <Image source= {require('../../assets/filter.png')} style= {styles.backButton} />
+                        <Image source= {require('../../../assets/filter.png')} style= {styles.backButton} />
                     </TouchableOpacity>
                 </View>
     
@@ -28,7 +28,7 @@ export default class CHeader extends Component{
     
                  <View style={ styles.ImageContainer1}>
                     <TouchableOpacity >
-                        <Image source= {require('../../assets/filter.png')} style= {styles.backButton} />
+                        <Image source= {require('../../../assets/cart.png')} style= {styles.backButton} />
                     </TouchableOpacity>
                  </View>
     
