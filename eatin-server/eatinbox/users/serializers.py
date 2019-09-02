@@ -1,5 +1,3 @@
-
-from rest_framework.serializers import ModelSerializer
 from users.models import (Customer)
 from rest_framework import serializers
 from base.models import Person
@@ -12,14 +10,14 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('user', 'latitude', 'longitude', 'contact')
 
 
-class CustomerSerializer(ModelSerializer):
+class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
-        fields = ('favorites', 'user_info')
+        fields = ('person_info',)
 
 
 # change the fields and populate data with ids
-class OrderMenuSerializer(ModelSerializer):
+class OrderMenuSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderMenu
         fields = '__all__'
