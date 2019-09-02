@@ -22,7 +22,7 @@ export default class IntroductionScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <StatusBar backgroundColor="black" barStyle="light-content" />
+                {/* <StatusBar backgroundColor="black" barStyle="light-content" /> */}
                 <Header/>
                 <FoodList/>
                 <Details/>
