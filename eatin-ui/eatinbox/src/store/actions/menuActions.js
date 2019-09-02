@@ -11,7 +11,7 @@ export const setMenuList = (menuList) => {
 }
 
 export const getMenuList = () => {
-    const url = urls.api + 'vendors/menulist/'
+    const url = urls.local + 'vendors/menulist/'
 
     return async dispatch => {
         try {

@@ -22,3 +22,6 @@ class VendorListApiView(ListCreateAPIView):
     filter_backends = [filters.OrderingFilter]
     ordering_fields = ['rating']
 
+
+
+
