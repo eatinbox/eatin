@@ -8,6 +8,11 @@ import IntroductionScreen from './src/screens/Introduction/IntroductionScreen'
 import VenderInfoScreen from './src/screens/VenderInfo/VenderInfoScreen';
 import FoodScreen from './src/screens/Food/FoodScreen';
 
+// =====================
+import CartScreen from './src/screens/Cart/CartScreen';
+import CurrentOrderScreen from './src/screens/Orders/Current/CurrentOrderScreen';
+//======================
+
 const store = createStore(menuList, applyMiddleware(thunk))
 
 
@@ -26,11 +31,12 @@ const rootStack = createStackNavigator(
   {
     Introduction: IntroductionScreen,
     Vendor: VenderInfoScreen,
-    Food: FoodScreen
+    Food: CartScreen,
+    CurrentOrderSceen: CurrentOrderScreen
   },
 
   {
-    initialRouteName: 'Introduction',
+    initialRouteName: 'CurrentOrderSceen',
     defaultNavigationOptions: {
       // transitionConfig: () => fromRight(),
       header: null,
