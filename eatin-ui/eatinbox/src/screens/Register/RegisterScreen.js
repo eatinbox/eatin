@@ -13,7 +13,7 @@ const width = Dimensions.get('window').width
 const RegisterScreen = (props) => (
     <View style={styles.container}>
         <Image
-            source={require('../../assets/pizza.jpg')}
+            source={require('../../assets/signup.jpeg')}
             style={styles.img}
         />
         <RegisterCard />

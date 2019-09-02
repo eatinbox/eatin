@@ -19,6 +19,7 @@ class InputText extends React.Component {
                     onChangeText={(attribute) => this.setState({attribute})}
                     value={this.state.attribute}
                     placeholder={this.props.placeholder}
+                    autoCorrect={false}
                 />
             </View>
         );
@@ -30,15 +31,22 @@ const styles = StyleSheet.create({
         width: '100%',
         borderWidth:0,
         borderColor: 'green',
-        marginTop: 8,
-        paddingTop: 10,
+        backgroundColor: '#fdfdfd',
+        marginTop: 20,
+        paddingTop: 2,
+        paddingBottom: 2,
+        elevation:3,
     },
 
     inputContainer:{
         // borderWidth: 1,
         width: '100%',
         height: 40,
-        borderBottomWidth: 0.5,
+        borderBottomWidth: 0,
+        padding: 10,
+        // paddingTop:20,
+        // paddingBottom:20,
+        
     }
 })
 

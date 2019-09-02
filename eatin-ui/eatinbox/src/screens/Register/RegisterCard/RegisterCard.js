@@ -6,8 +6,15 @@ StyleSheet,
 } from 'react-native';
 import InputText from './InputText';
 
+import BlackButton from '../../../reusables/BlackButton'
+
 const RegisterCard = () => (
     <View style={styles.container}>
+        <BlackButton
+            buttonContainer={styles.signupButton}
+            buttonText={styles.signupButtonText}
+            text="SIGN UP"
+        />
         <View style={styles.ipCont}>
             <InputText
                 placeholder="Full Name"
@@ -32,15 +39,29 @@ const styles = StyleSheet.create({
         elevation:4,
     },
 
+    signupButton:{
+        position: 'absolute',
+        width: '40%',
+        borderRadius: 20,
+        alignSelf: 'center',
+        bottom: -12
+    },
+
+    signupButtonText:{
+        fontSize: 12,
+        fontWeight: 'bold',
+    },
+
     ipCont:{
         width: '90%',
-        marginTop: 30,
+        marginTop: 10,
         marginBottom: 10,
         borderWidth: 0,
         borderColor: 'red',
         marginLeft: 10,
         alignItems: 'center',
         justifyContent: 'space-between',
+        // elevation:1,
     },
 
     termsCond:{
