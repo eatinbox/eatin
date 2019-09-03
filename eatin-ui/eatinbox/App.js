@@ -43,7 +43,7 @@ const rootStack = createStackNavigator(
   },
 
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'LoginScreen',
     defaultNavigationOptions: {
       // transitionConfig: () => fromRight(),
       header: null,

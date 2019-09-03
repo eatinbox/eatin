@@ -31,7 +31,7 @@ class FoodCard extends Component {
 
 const styles = StyleSheet.create({
     container:{
-        marginTop: 24,
+        marginBottom: 24,
         width:'100%',
         borderWidth: 0,
         borderRadius: 4,

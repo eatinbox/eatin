@@ -11,10 +11,6 @@ class Foodlist extends Component {
         super(props);
     }
 
-    state = {
-        visible: true,
-    }
-
     _renderItem = ({item}) => {
         // console.log(item)
 
@@ -34,14 +30,7 @@ class Foodlist extends Component {
     componentDidUpdate() {
 
     }
-
-    hideOverlay = () => {
-        this.setState({
-            visible: false,
-        })
-    }
     
-
     render() {
         return (
             <View style={styles.container}>
@@ -64,6 +53,7 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         width:'94%',
+        // borderWidth:1,
     }
 });
 

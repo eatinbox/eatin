@@ -6,7 +6,7 @@ const BlackButton = (props) => {
     return (
         <TouchableOpacity onPress={props.handleOnpress}>
             <View style={[styles.button, props.buttonContainer]}>
-                <Text style={[styles.buttontext, props.buttonText]}> {props.text} </Text>
+                <Text style={[styles.buttontext, props.buttonText]}>{props.text}</Text>
             </View>
         </TouchableOpacity>
     );
