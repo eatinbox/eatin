@@ -9,7 +9,7 @@ class Vendor(models.Model):
     objects = models.Manager()
 
     person_info = models.OneToOneField(Person, on_delete=models.CASCADE)
-    description = models.TextField()
+    description = models.TextField(null=True)
     rating = models.IntegerField(null=True)
 
     def get_vendor_name(self):

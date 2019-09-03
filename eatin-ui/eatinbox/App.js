@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { StatusBar } from 'react-native';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk';
@@ -8,12 +9,15 @@ import IntroductionScreen from './src/screens/Introduction/IntroductionScreen'
 import VenderInfoScreen from './src/screens/VenderInfo/VenderInfoScreen';
 import FoodScreen from './src/screens/Food/FoodScreen';
 
-// =====================
 import CartScreen from './src/screens/Cart/CartScreen';
 import CurrentOrderScreen from './src/screens/Orders/Current/CurrentOrderScreen';
+<<<<<<< HEAD
 import PastOrderScreen from './src/screens/Orders/Past/PastOrderScreen'
 import FilterScreen from './src/screens/Filter/FilterScreen';
 //======================
+=======
+import RegisterScreen from './src/screens/Register/RegisterScreen';
+>>>>>>> eb41b6876fab1ecb21554c031d6c1a075a3ff7cd
 
 const store = createStore(menuList, applyMiddleware(thunk))
 
@@ -22,6 +26,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
+        <StatusBar backgroundColor="black" barStyle="light-content" />
         <AppContainer/>
       </Provider>
     );
@@ -34,11 +39,17 @@ const rootStack = createStackNavigator(
     Introduction: IntroductionScreen,
     Vendor: VenderInfoScreen,
     Food: CartScreen,
+    CurrentOrderScreen: CurrentOrderScreen,
+    Register: RegisterScreen,
     FilterScreen: FilterScreen
   },
 
   {
     initialRouteName: 'FilterScreen',
+  },
+
+  {
+    // initialRouteName: 'Register',
     defaultNavigationOptions: {
       // transitionConfig: () => fromRight(),
       header: null,
