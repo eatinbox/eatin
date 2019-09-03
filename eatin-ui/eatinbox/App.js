@@ -11,6 +11,8 @@ import FoodScreen from './src/screens/Food/FoodScreen';
 
 import CartScreen from './src/screens/Cart/CartScreen';
 import CurrentOrderScreen from './src/screens/Orders/Current/CurrentOrderScreen';
+// import PastOrderScreen from './src/screens/Orders/Past/PastOrderScreen'
+import FilterScreen from './src/screens/Filter/FilterScreen';
 import RegisterScreen from './src/screens/Register/RegisterScreen';
 import Playground from './src/screens/Playground/Playground';
 
@@ -38,6 +40,7 @@ const rootStack = createStackNavigator(
     Register: RegisterScreen,
     Menu: FoodScreen,
     Play: Playground,
+    FilterScreen: FilterScreen
   },
 
   {
