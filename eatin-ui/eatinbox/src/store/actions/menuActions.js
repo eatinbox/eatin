@@ -11,7 +11,7 @@ export const setMenuList = (menuList) => {
 }
 
 export const getMenuList = () => {
-    const url = urls.local + 'vendors/menulist/'
+    const url = urls.address + 'vendors/menulist/'
 
     return async dispatch => {
         try {
@@ -22,7 +22,7 @@ export const getMenuList = () => {
         }
 
         catch(err) {
-            // console.log(err)
+            // console.log('\n\nThis is the error\n\n', err)
         }
     } 
 }
