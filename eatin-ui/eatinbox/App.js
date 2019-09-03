@@ -7,13 +7,14 @@ import {createAppContainer, createStackNavigator} from 'react-navigation'
 import menuList from './src/store/reducers/menuList';                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
 import IntroductionScreen from './src/screens/Introduction/IntroductionScreen'
 import VenderInfoScreen from './src/screens/VenderInfo/VenderInfoScreen';
-import FoodScreen from './src/screens/Food/FoodScreen';
+// import FoodScreen from './src/screens/Food/FoodScreen';
 
 import CartScreen from './src/screens/Cart/CartScreen';
 import CurrentOrderScreen from './src/screens/Orders/Current/CurrentOrderScreen';
 // import PastOrderScreen from './src/screens/Orders/Past/PastOrderScreen'
 import FilterScreen from './src/screens/Filter/FilterScreen';
 import RegisterScreen from './src/screens/Register/RegisterScreen';
+import LoginScreen from './src/screens/Login/LoginScreen';
 
 const store = createStore(menuList, applyMiddleware(thunk))
 
@@ -37,11 +38,12 @@ const rootStack = createStackNavigator(
     Food: CartScreen,
     CurrentOrderScreen: CurrentOrderScreen,
     Register: RegisterScreen,
-    FilterScreen: FilterScreen
+    FilterScreen: FilterScreen,
+    Login: LoginScreen
   },
 
   {
-    initialRouteName: 'Register',
+    initialRouteName: 'Login',
     defaultNavigationOptions: {
       // transitionConfig: () => fromRight(),
       header: null,
