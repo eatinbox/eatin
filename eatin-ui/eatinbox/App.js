@@ -14,8 +14,15 @@ import CurrentOrderScreen from './src/screens/Orders/Current/CurrentOrderScreen'
 // import PastOrderScreen from './src/screens/Orders/Past/PastOrderScreen'
 import FilterScreen from './src/screens/Filter/FilterScreen';
 import RegisterScreen from './src/screens/Register/RegisterScreen';
+<<<<<<< HEAD
 import LoginScreen from './src/screens/Login/LoginScreen';
+<<<<<<< HEAD
 import FoodScreen from './src/screens/Food/FoodScreen';
+=======
+=======
+import SearchScreen from './src/screens/Search/SearchScreen';
+>>>>>>> shivang
+>>>>>>> a1f7a1a1afa238e7c56b9848ff220cbf8e39abb7
 
 const store = createStore(menuList, applyMiddleware(thunk))
 
@@ -40,11 +47,12 @@ const rootStack = createStackNavigator(
     CurrentOrderScreen: CurrentOrderScreen,
     Register: RegisterScreen,
     FilterScreen: FilterScreen,
-    Login: LoginScreen
+    Login: LoginScreen,
+    Search  :SearchScreen
   },
 
   {
-    initialRouteName: 'Register',
+    initialRouteName: 'Search',
     defaultNavigationOptions: {
       // transitionConfig: () => fromRight(),
       header: null,
