@@ -7,17 +7,13 @@ StyleSheet,
 } from 'react-native';
 
 class InputText extends React.Component {
-    state = {
-        attribute: '',
-    }
-    
     render() {
         return (
             <View style={styles.container}>
                 <TextInput
                     style={styles.inputContainer}
-                    onChangeText={(attribute) => this.setState({attribute})}
-                    value={this.state.attribute}
+                    onChangeText={(value) => this.props.onChange(value)}
+                    value={this.props.value}
                     placeholder={this.props.placeholder}
                     autoCorrect={false}
                 />
