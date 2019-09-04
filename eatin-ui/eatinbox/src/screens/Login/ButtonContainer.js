@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
     View,
     StyleSheet,
@@ -7,18 +7,29 @@ import {
     TouchableOpacity
 } from 'react-native';
 
-const LoginButton = () => {
-    return (
-        <View style = { styles.container }>
-            <TouchableOpacity
-            style = {styles.buttonStyle}
-            >
-                <Text style = { styles.textStyle}>
-                    NEW TO EAT IN BOX? SIGN UP
-                </Text>
-            </TouchableOpacity>
-        </View>
-    )
+export default class LoginButton extends Component {
+    // constructor(props) {
+    //     super(props);
+    // }
+
+    navigateToSignUp = () => {
+        this.props.navigation.navigate('Register')
+    }
+
+    render () {
+        return (
+            <View style = { styles.container }>
+                <TouchableOpacity
+                style = {styles.buttonStyle}
+                onPress = {this.navigateToSignUp}
+                >
+                    <Text style = { styles.textStyle}>
+                        NEW TO EAT IN BOX? SIGN UP
+                    </Text>
+                </TouchableOpacity>
+            </View>
+        )
+    }   
 }
 
 const styles = StyleSheet.create ({
@@ -46,5 +57,3 @@ const styles = StyleSheet.create ({
         color: '#fff'
     }
 })
-
-export default LoginButton;
