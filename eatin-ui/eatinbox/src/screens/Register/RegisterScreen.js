@@ -10,16 +10,24 @@ import RegisterCard from './RegisterCard/RegisterCard';
 
 const width = Dimensions.get('window').width
 
-const RegisterScreen = (props) => (
-    <View style={styles.container}>
-        <Image
-            source={require('../../assets/signup.jpeg')}
-            style={styles.img}
-        />
-        <RegisterCard />
-        <ButtonContainer/>
-    </View>
-);
+class RegisterScreen extends React.Component {
+    handlePress = () => {
+        this.props.navigation.navigate('MenuScreen')
+    }
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <Image
+                    source={require('../../assets/signup.jpeg')}
+                    style={styles.img}
+                />
+                <RegisterCard />
+                <ButtonContainer handlePress={this.handlePress}/>
+            </View>
+        )
+    }
+}
 
 const styles = StyleSheet.create({
     container: {

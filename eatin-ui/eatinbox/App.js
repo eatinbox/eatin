@@ -10,15 +10,14 @@ import userReducer from './src/store/reducers/userReducer'
 
 import IntroductionScreen from './src/screens/Introduction/IntroductionScreen'
 import VenderInfoScreen from './src/screens/VenderInfo/VenderInfoScreen';
-import FoodScreen from './src/screens/Food/FoodScreen';
+import MenuScreen from './src/screens/Food/MenuScreen';
 import CartScreen from './src/screens/Cart/CartScreen';
 import CurrentOrderScreen from './src/screens/Orders/Current/CurrentOrderScreen';
-// import PastOrderScreen from './src/screens/Orders/Past/PastOrderScreen'
 import FilterScreen from './src/screens/Filter/FilterScreen';
 import RegisterScreen from './src/screens/Register/RegisterScreen';
 import LoginScreen from './src/screens/Login/LoginScreen';
+import SearchScreen from './src/screens/Search/SearchScreen';
 
-// import Playground from './src/screens/Playground/Playground'
 
 const rootReducer = combineReducers({
   register : userReducer,
@@ -42,21 +41,20 @@ export default class App extends Component {
 
 const rootStack = createStackNavigator(
   {
-    Introduction: IntroductionScreen,
-    Vendor: VenderInfoScreen,
-    Cart: CartScreen,
-    CurrentOrderScreen: CurrentOrderScreen,
-    Register: RegisterScreen,
-    FilterScreen: FilterScreen,
-    Login: LoginScreen,
-    Menu: FoodScreen,
-    // Play: Playground,
+    IntroductionScreen,
+    VenderInfoScreen,
+    CartScreen,
+    CurrentOrderScreen,
+    RegisterScreen,
+    FilterScreen,
+    LoginScreen,
+    MenuScreen,
+    SearchScreen,
   },
 
   {
-    initialRouteName: 'Menu',
+    initialRouteName: 'IntroductionScreen',
     defaultNavigationOptions: {
-      // transitionConfig: () => fromRight(),
       header: null,
     }
   }

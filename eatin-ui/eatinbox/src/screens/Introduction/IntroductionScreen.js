@@ -16,13 +16,12 @@ const height = Dimensions.get('window').height
 
 export default class IntroductionScreen extends Component {
     navigateToVendor = () => {
-        this.props.navigation.navigate('Food')
+        this.props.navigation.navigate('RegisterScreen')
     }
 
     render() {
         return (
             <View style={styles.container}>
-                {/* <StatusBar backgroundColor="black" barStyle="light-content" /> */}
                 <Header/>
                 <FoodList/>
                 <Details/>

@@ -6,17 +6,13 @@ StyleSheet,
 } from 'react-native';
 import {connect} from 'react-redux'
 import InputText from './InputText';
+import {withNavigation} from 'react-navigation'
 
 import * as actionTypes from '../../../store/actions/userActions'
 
 import BlackButton from '../../../reusables/BlackButton'
 
 class RegisterCard extends React.Component {
-
-
-    handlePress = () => {
-
-    }
 
     render(){
         const {dispatch} = this.props 
@@ -26,7 +22,6 @@ class RegisterCard extends React.Component {
                 <BlackButton
                     buttonContainer={styles.signupButton}
                     buttonText={styles.signupButtonText}
-                    handlePress={this.handlePress}
                     text="SIGN UP"
                 />
                 <View style={styles.ipCont}>
@@ -104,4 +99,4 @@ mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(RegisterCard);
+export default withNavigation(connect(mapStateToProps)(RegisterCard));

@@ -1,41 +1,44 @@
 import React from 'react'
-import { 
-View,
-Image,
-StyleSheet,
-Text,
+import {
+    View,
+    Image,
+    StyleSheet,
+    Text,
+    TouchableOpacity
 } from 'react-native';
-import { withNavigation, HeaderBackButton } from 'react-navigation';
+import { withNavigation} from 'react-navigation';
 
 
 const Vendor = (props) => {
-    return(
+    return (
         <View style={styles.container}>
-        {/* <Text>Rating</Text> */}
-        <View style= {styles.rating}>
-            <Text style= {styles.textRating}>
-                4.5
-            </Text>
-        </View>
-            <Image source={require('../../../../assets/profile.jpeg')} style={styles.profileImg}/>
-            <Text onPress={() => props.navigation.navigate('Vendor')} style={styles.iconText}>Homely</Text>
+            <View style={styles.rating}>
+                <Text style={styles.textRating}>
+                    4.5
+                    </Text>
+            </View>
+            <TouchableOpacity onPress={() => props.navigation.navigate('VenderInfoScreen')}>
+                <Image source={require('../../../../assets/profile.jpeg')} style={styles.profileImg} />
+                <Text style={styles.iconText}>Homely</Text>
+            </TouchableOpacity>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    
-    container:{
+
+    container: {
         width: '25%',
-        alignItems: 'center',
+        alignItems: 'flex-end',
         justifyContent: 'center',
+        paddingRight:8,
         borderWidth: 0,
     },
 
     textRating: {
         color: '#fff',
         fontSize: 12
-    },  
+    },
 
     rating: {
         width: 40,
@@ -47,17 +50,17 @@ const styles = StyleSheet.create({
         borderRadius: 20
     },
 
-    profileImg:{
-        width:50,
-        height:50,
+    profileImg: {
+        width: 50,
+        height: 50,
         borderRadius: 50,
-        marginTop:4,
+        marginTop: 4,
     },
 
-    iconText:{
-        includeFontPadding:false,
+    iconText: {
+        includeFontPadding: false,
         fontWeight: 'bold',
-        color:'#000',
+        color: '#000',
     },
 });
 
