@@ -88,7 +88,7 @@ BackButton:{
     top:0,
     left:0,
     marginTop:13,
-    marginLeft:5
+    marginLeft:10
 
 
 },
