@@ -8,7 +8,7 @@ StyleSheet
 
 const ItemIcon = (props) => (
     <View style={styles.iconBox}>
-        <Image source={require('../../../../assets/pizza.jpg')}
+        <Image source={require('../../../../assets/itemicon.jpg')}
             style={styles.icon}
         />
         <Text style={styles.itemName}>{props.itemName}</Text>

@@ -6,9 +6,9 @@ import {
     StyleSheet,
 } from 'react-native';
 
-const ButtonContainer = () => (
+const ButtonContainer = (props) => (
     <View style={styles.buttonCont}>
-        <TouchableOpacity style={styles.blueButton}>
+        <TouchableOpacity style={styles.blueButton} onPress={props.handlePress}>
             <Text style={styles.buttonText}>CONTINUE</Text>
         </TouchableOpacity>
     </View>

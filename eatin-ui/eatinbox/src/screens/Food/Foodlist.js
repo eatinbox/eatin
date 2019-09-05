@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
     return {
-        menuList : state.menuList,
-        visible: state.overlayVisible,   
+        menuList : state.menuList.menuList,
+        visible: state.menuList.overlayVisible,   
     }
 }
 

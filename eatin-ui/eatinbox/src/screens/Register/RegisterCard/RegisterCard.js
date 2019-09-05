@@ -4,29 +4,49 @@ Text,
 View,
 StyleSheet,    
 } from 'react-native';
+import {connect} from 'react-redux'
 import InputText from './InputText';
+import {withNavigation} from 'react-navigation'
+
+import * as actionTypes from '../../../store/actions/userActions'
 
 import BlackButton from '../../../reusables/BlackButton'
 
-const RegisterCard = () => (
-    <View style={styles.container}>
-        <BlackButton
-            buttonContainer={styles.signupButton}
-            buttonText={styles.signupButtonText}
-            text="SIGN UP"
-        />
-        <View style={styles.ipCont}>
-            <InputText
-                placeholder="Full Name"
-            />
-            <InputText
-                placeholder="Email"
-            />
-        </View>
-        <Text style={styles.termsCond}>I agree to EatinBox's Tems of service,
+class RegisterCard extends React.Component {
+
+    render(){
+        const {dispatch} = this.props 
+        
+        return(
+            <View style={styles.container}>
+                <BlackButton
+                    buttonContainer={styles.signupButton}
+                    buttonText={styles.signupButtonText}
+                    text="SIGN UP"
+                />
+                <View style={styles.ipCont}>
+                        <InputText
+                            placeholder="Full Name"
+                            onChange={(fullname) => dispatch(actionTypes.setFullName(fullname))}
+                            value={this.props.fullname}
+                        />
+                        <InputText
+                            placeholder="Email"
+                            onChange={(email) => dispatch(actionTypes.setEmail(email))}
+                            value={this.props.email}
+                        />
+                        <InputText
+                            placeholder="Password"
+                            onChange={(password) => dispatch(actionTypes.setPassword(password))}
+                            value={this.props.password}
+                        />
+                </View>
+                <Text style={styles.termsCond}>I agree to EatinBox's Tems of service,
                                      Privacy Policy and Content Policy</Text>
-    </View>
-);
+            </View>
+        )
+    }
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -71,4 +91,12 @@ const styles = StyleSheet.create({
     },
 });
 
-export default RegisterCard;
+mapStateToProps = (state) => {
+    return {
+        email: state.register.user.email,
+        fullname: state.register.user.fullname,
+        password: state.register.user.password,
+    }
+}
+
+export default withNavigation(connect(mapStateToProps)(RegisterCard));
