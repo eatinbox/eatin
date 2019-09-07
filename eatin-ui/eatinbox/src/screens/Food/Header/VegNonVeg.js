@@ -4,12 +4,11 @@ import {
     View,
     StyleSheet,
     Text,
-    TouchableOpacity,
     TouchableWithoutFeedback,
     Animated
 } from 'react-native';
 
-export default class ToggleButton extends Component {
+export default class VegNonVeg extends Component {
     constructor(props) {
         super(props)
     }
@@ -61,13 +60,13 @@ export default class ToggleButton extends Component {
             <View style={styles.container}>
                 <Text style={styles.vegText}>{this.state.txtValue}</Text>
                 <View style={styles.buttonCont}>
-                    <View style={[styles.vegButton, vegButtonAni.buttonBgColor]}>
-                        <TouchableWithoutFeedback onPress={this.startAnimation}>
+                    <TouchableWithoutFeedback onPress={this.startAnimation}>
+                        <View style={[styles.vegButton, vegButtonAni.buttonBgColor]}>
                             <Animated.View style={[styles.toggleButtonCont, vegButtonAni.toggleAni]}>
 
                             </Animated.View>
-                        </TouchableWithoutFeedback>
-                    </View>
+                        </View>
+                    </TouchableWithoutFeedback>
                 </View>
             </View>
         );
