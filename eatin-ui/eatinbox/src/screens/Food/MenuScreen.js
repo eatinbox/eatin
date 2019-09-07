@@ -10,7 +10,6 @@ import BrowseHeader from './Header/BrowseHeader';
 import Foodlist from './Foodlist';
 import EIBHeader from './Header/EIBHeader';
 import MealType from './Header/TypeMeal';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const width = Dimensions.get('window').width
 

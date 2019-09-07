@@ -13,9 +13,10 @@ const Vendor = (props) => {
     return (
         <View style={styles.container}>
             <View style={styles.rating}>
+                <Image source={require('../../../../assets/star.png')} style={styles.starImg}/>
                 <Text style={styles.textRating}>
                     4.5
-                    </Text>
+                </Text>
             </View>
             <TouchableOpacity onPress={() => props.navigation.navigate('VenderInfoScreen')}>
                 <Image source={require('../../../../assets/profile.jpeg')} style={styles.profileImg} />
@@ -37,17 +38,25 @@ const styles = StyleSheet.create({
 
     textRating: {
         color: '#fff',
-        fontSize: 12
+        fontSize: 12,
+        marginRight: 4,
+    },
+
+    starImg: {
+        width: 20,
+        height: 20,
     },
 
     rating: {
-        width: 40,
-        height: 17,
         backgroundColor: '#000',
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 20
+        borderRadius: 10,
+        padding: 0,
+        paddingLeft: 4,
+        paddingRight: 4,
+        marginBottom: 4,
     },
 
     profileImg: {

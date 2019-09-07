@@ -34,9 +34,9 @@ class Foodlist extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <OverlayLoading
+                {/* <OverlayLoading
                     visible={this.props.visible}
-                />
+                /> */}
                 <FlatList
                     // contentContainerStyle={styles.container}
                     // keyExtractor={(item) => toString(item.pk)}

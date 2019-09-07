@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     textBox:{
         marginTop: 16,
         flexDirection: 'row',
+        borderWidth:0,
     },
 
     foodName:{

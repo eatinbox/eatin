@@ -35,24 +35,29 @@ const styles = StyleSheet.create({
     container:{
         width: '95%',
         flexDirection: 'row',
-        height: 40,
+        borderWidth: 0,
         justifyContent: 'center',
-        // marginBottom: 3,
-        // marginTop: 3
     },
 
     inputBox:{
+        marginTop: 10,
         width: '100%',
         flexDirection: 'row',
         borderWidth: 0,
         alignItems: 'center',
-        backgroundColor: '#DCDCDC',
-        // height: 30
+        backgroundColor: '#f8f8f8',
     },
 
     inputContainer:{
         width: '80%',
-        // height: 40,
+        borderWidth:0,
+        height: 25,
+        fontSize: 12,
+        letterSpacing: 0.3,
+        fontWeight: 'bold',
+        textAlignVertical: 'center',
+        padding: 0,
+        paddingLeft: 8,
         borderColor: "gray",
         marginLeft: 10
     },
@@ -69,7 +74,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignContent: 'center',
         borderColor: '#aa9',
-         borderRightWidth: 1,
+        borderRightWidth: 1,
     },
 
     cartBox:{
