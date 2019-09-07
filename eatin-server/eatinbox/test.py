@@ -7,8 +7,9 @@ RETRIEVE_ENDPOINT = "http://127.0.0.1:8000/auth/register/14"
 
 headers ={
     "Content-Type": "application/json",
-    "Authorization": "JWT " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMywidXNlcm5hbWUiOiJWc2F1bWk2QGdtYWlsLmNvbSIsImV4cCI6MTU2NzQyNTg3MiwiZW1haWwiOiJWc2F1bWk2QGdtYWlsLmNvbSJ9.JGkGWvrclvS3JD73P8r_r8opVSwbHjinFuRV0-ZDF4A"
+    "Authorization": "JWT " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNSwidXNlcm5hbWUiOiJzYXVAZ21haWwuY29tIiwiZXhwIjoxNTY3ODM0MjUyLCJlbWFpbCI6InNhdUBnbWFpbC5jb20ifQ.Ks9tIg5G1j3dDtK6SLcVeF5gQnSzE2CZKhY6cMUVsjQ"
 }
+
 data = {
     'username': 'saumitra@gmail.com',
     'password': '1'

@@ -14,15 +14,17 @@ from .serializers import RegisterSerializer
 
 User = get_user_model()
 
-
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 
 
+# Login view, which checks that token is valid or not(i.e expired or not)
+
 class AuthView(APIView):
     permission_classes = [permissions.IsAuthenticated]
-    permission_classes = [permissions.AllowAny]
-    #authentication_classes = []
+
+    # permission_classes = [permissions.AllowAny]
+    # authentication_classes = []
 
     def post(self, request, *args, **kwargs):
         print(request.user)
@@ -40,6 +42,8 @@ class AuthView(APIView):
         return Response(response)
 
 
+# Register View for any user. Here token will be generated for first time.
+
 class RegisterView(ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
@@ -52,12 +56,12 @@ class RegisterView(ListCreateAPIView):
 # Here token will be generated again.
 
 
-class RetrieveView(RetrieveUpdateDestroyAPIView):
-    queryset = User.objects.all()
-    serializer_class = RegisterSerializer
-    permission_classes = [permissions.IsAuthenticated]
-    # permission_classes = [permissions.AllowAny]
-    lookup_field = 'id'
-
-    def get_serializer_context(self):
-        return {'request': self.request}
+# class RetrieveView(RetrieveUpdateDestroyAPIView):
+#     queryset = User.objects.all()
+#     serializer_class = RegisterSerializer
+#     # permission_classes = [permissions.IsAuthenticated]
+#     permission_classes = [permissions.AllowAny]
+#     lookup_field = 'id'
+#
+#     def get_serializer_context(self):
+#         return {'request': self.request}
