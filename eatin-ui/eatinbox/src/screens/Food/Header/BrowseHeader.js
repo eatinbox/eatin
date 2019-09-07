@@ -9,8 +9,8 @@ StyleSheet
 
  const BrowseHeader = () => (
      <View style={styles.container}>
-         <Text style={styles.sortText}> SORT </Text>
-         <Text style={styles.filterText}> FILTER </Text>
+         <Text style={styles.sortText}>SORT</Text>
+         <Text style={styles.filterText}>FILTER</Text>
          <View style={styles.vegBox}>
              <VegNonVeg />
          </View>
