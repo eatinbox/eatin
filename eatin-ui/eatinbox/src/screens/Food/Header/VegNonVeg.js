@@ -16,20 +16,17 @@ export default class VegNonVeg extends Component {
     state= {
         toggle: false,
         animation: new Animated.Value(0),
-        txtValue: 'VEG',
         bgColor: '#96ff45',
     }
 
     startAnimation = () => {
         this.setState(
             (state) => { 
-                const bgColor = state.toggle ? '#96ff45' : 'red'
-                const txtValue = state.toggle ? 'VEG' : 'Both'
+                const bgColor = state.toggle ? '#96ff45' : '#a8a8a8'
 
                 return {  
                     toggle: !state.toggle,
                     bgColor,
-                    txtValue,
                 }
             }, 
         
@@ -58,7 +55,7 @@ export default class VegNonVeg extends Component {
 
         return (
             <View style={styles.container}>
-                <Text style={styles.vegText}>{this.state.txtValue}</Text>
+                <Text style={styles.vegText}>VEG</Text>
                 <View style={styles.buttonCont}>
                     <TouchableWithoutFeedback onPress={this.startAnimation}>
                         <View style={[styles.vegButton, vegButtonAni.buttonBgColor]}>
