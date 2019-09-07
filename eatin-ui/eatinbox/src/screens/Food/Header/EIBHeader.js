@@ -26,11 +26,11 @@ export default class EIBHeader extends Component{
       return ( 
       <View style= {styles.container}>
 
-        <View style = {styles.cartBox}>
+        <View style = {styles.backCont}>
             <TouchableOpacity
                 onPress = {this.backButton}
             >
-            <Image source={require('../../../assets/cart.png')} style={styles.cartIcon}/>
+            <Image source={require('../../../assets/back.png')} style={styles.cartIcon}/>
             </TouchableOpacity>
         </View>
 
@@ -38,7 +38,7 @@ export default class EIBHeader extends Component{
             EAT IN BOX
         </Text>
 
-        <View style = {styles.cartBox1}>
+        <View style = {styles.cartBox}>
             <Image source={require('../../../assets/cart.png')} style={styles.cartIcon}/>
         </View>
             
@@ -49,44 +49,32 @@ export default class EIBHeader extends Component{
 
 const styles= StyleSheet.create({
     container: {
-        height: 40,
-        width: '95%',
-        marginTop: 15,
+        width: '100%',
+        marginTop: 10,
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center',
         backgroundColor: '#fff',
-        // borderWidth: 1,
+        borderWidth: 0,
+    },
+
+    backCont:{
+        alignItems: 'center',
+        borderWidth:0,
+        marginLeft: 10,
     },
 
     textBox: {
-        width: '70%',
         fontSize: 21,
         color: '#000',
         fontWeight: 'bold',
         textAlign: 'center',
+        borderWidth:0,
     },
 
     cartBox:{
-        width: '15%',
-        alignItems: 'center',
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-        paddingLeft: 10,
-        paddingRight:5,
-        // backgroundColor: '#ddd',
-        marginRight: 8,
-    },
-
-    cartBox1:{
-        width: '15%',
-        alignItems: 'center',
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-        paddingLeft: 10,
-        paddingRight:5,
-        // backgroundColor: '#ddd',
-        marginLeft: 8
+        marginRight: 10,
+        borderWidth:0,
     },
 
     cartIcon:{
