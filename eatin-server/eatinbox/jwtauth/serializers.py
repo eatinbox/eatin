@@ -7,7 +7,7 @@ from vendors.models import Vendor
 from users.models import Customer
 
 
-jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+jwt_create_payload = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 
 
@@ -51,7 +51,6 @@ class RegisterSerializer(serializers.ModelSerializer):
                                               password=validated_data.get('password'),
                                               first_name=validated_data.get('first_name'),
                                               last_name=validated_data.get('last_name'),
-                                              customer=validated_data.get('customer'),
                                               )
             user.save()
             person = Person(user=user,
@@ -87,7 +86,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def get_token(self, obj):
         user = obj
-        payload = jwt_payload_handler(user)
+        payload = jwt_create_payload(user)
         token = jwt_encode_handler(payload)
         response = jwt_response_payload_handler(token=token,
                                                 user=user,
