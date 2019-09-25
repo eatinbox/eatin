@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
 View,
 StyleSheet,
+Image,
 } from 'react-native';
 
 import TypeButton from './TypeButton';
@@ -37,6 +38,12 @@ export default class MealType extends Component {
                     text="FULL MEAL"
                     k={1}
                />
+               <View style={styles.imgCont}>
+                    <Image
+                        source={require('../../../assets/filter.png')}
+                        style={styles.filterImg}
+                    />
+               </View>
             </View>
         );
     }
@@ -44,9 +51,23 @@ export default class MealType extends Component {
 
 const styles = StyleSheet.create({
     container: {
+        width: '100%',
         margin: 12,
         borderWidth: 0,
         flexDirection: 'row',
+        // justifyContent: 'center',
+    },
+
+    imgCont: {
+        marginLeft: 'auto',
+        marginRight: 10,
+        borderWidth:0,
         justifyContent: 'center',
-    }
+        alignItems: 'center',
+    },
+
+    filterImg: {
+        width: 24,
+        height: 24,
+    },
 })

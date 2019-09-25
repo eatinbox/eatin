@@ -7,11 +7,12 @@ const TypeButton = (props) => {
     
     if(!props.selected) {
         selStyle = {
-            backgroundColor: '#fff',
+
+            borderColor: '#fff',
         },
 
         selTextStyle = {
-            color: '#000',
+            color: '#adadad',
         }
     }
 
@@ -26,21 +27,26 @@ const TypeButton = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-        borderRadius: 3,
-        backgroundColor: '#2d2d2d',
-        elevation: 2,
+        borderWidth: 0,
+        borderBottomWidth: 3.5,
+        borderRadius: 0,
+        backgroundColor: '#fff',
+        elevation: 0,
+        flexDirection: 'column',
+        borderColor: '#2d2d2d',
+        marginLeft: 10,
     },
 
     textStyle:{
         padding: 4,
-        paddingLeft: 24,
-        paddingRight: 24,
+        paddingLeft: 6,
+        paddingRight: 6,
         paddingBottom: 6,
         fontSize: 10.5,
         fontWeight: 'bold',
         // letterSpacing: 0.2,
-        color: '#fff',
-    }
+        color: '#000',
+    },
 })
 
 export default TypeButton;

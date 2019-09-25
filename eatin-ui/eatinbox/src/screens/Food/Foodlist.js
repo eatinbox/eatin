@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {View, StyleSheet, FlatList } from 'react-native';
 import FoodCard from './FoodCard/FoodCard';
-import OverlayLoading from '../../reusables/OverlayLoading';
+// import OverlayLoading from '../../reusables/OverlayLoading'; 
 
 import * as actionCreators from '../../store/actions/menuActions'  
 
@@ -12,13 +12,9 @@ class Foodlist extends Component {
     }
 
     _renderItem = ({item}) => {
-        // console.log(item)
-
         return (
             <FoodCard
-                id={item.pk}
-                menuName={item.menu_name}
-                menuItems={item.menu_items}
+                item={item}
             />
         )
     }
@@ -28,7 +24,7 @@ class Foodlist extends Component {
     }
 
     componentDidUpdate() {
-
+        // console.log(this.props.menuList)
     }
     
     render() {
