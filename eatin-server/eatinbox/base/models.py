@@ -131,7 +131,7 @@ class User(AbstractBaseUser):
     vendor = models.BooleanField(default=False)
     customer = models.BooleanField(default=True)
     first_name = models.CharField(max_length=255, null=True)
-    last_name = models.CharField(max_length=255, null=True)
+    last_name = models.CharField(max_length=255, null=True, blank=True)
     active = models.BooleanField(default=True)
     admin = models.BooleanField(default=True)
     staff = models.BooleanField(default=True)
