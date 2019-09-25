@@ -2,6 +2,10 @@ import axios from 'axios'
 import * as urls from '../../../apiUrl'
 
 export const SET_MENU_LIST = 'SET_MENU_LIST'
+export const ADD_TO_CART = 'ADD_TO_CART'
+export const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
+
+const domain = urls.address
 
 export const setMenuList = (menuList) => {
     return {
@@ -11,7 +15,7 @@ export const setMenuList = (menuList) => {
 }
 
 export const getMenuList = () => {
-    const url = urls.address + 'vendors/menulist/'
+    const url = domain + 'vendors/menulist/'
 
     return async dispatch => {
         try {
@@ -25,4 +29,19 @@ export const getMenuList = () => {
             // console.log('\n\nThis is the error\n\n', err)
         }
     } 
+}
+
+export const addToCart = (item) => {
+    return {
+        type: ADD_TO_CART,
+        item,
+    }
+}
+
+export const removeFromCart = (pk) => {
+
+    return {
+        type: REMOVE_FROM_CART,
+        pk,
+    }
 }

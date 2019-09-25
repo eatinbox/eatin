@@ -17,6 +17,7 @@ import FilterScreen from './src/screens/Filter/FilterScreen';
 import RegisterScreen from './src/screens/Register/RegisterScreen';
 import LoginScreen from './src/screens/Login/LoginScreen';
 import SearchScreen from './src/screens/Search/SearchScreen';
+import FoodCartScreen from './src/screens/FoodCart/FoodCartScreen'
 
 
 const rootReducer = combineReducers({
@@ -44,6 +45,7 @@ const rootStack = createStackNavigator(
     IntroductionScreen,
     VenderInfoScreen,
     CartScreen,
+    FoodCartScreen,
     CurrentOrderScreen,
     RegisterScreen,
     FilterScreen,
@@ -53,7 +55,7 @@ const rootStack = createStackNavigator(
   },
 
   {
-    initialRouteName: 'IntroductionScreen',
+    initialRouteName: 'MenuScreen',
     defaultNavigationOptions: {
       header: null,
     }

@@ -4,7 +4,6 @@ Text,
 View,
 StyleSheet,    
 } from 'react-native';
-import {connect} from 'react-redux'
 import InputText from './InputText';
 import {withNavigation} from 'react-navigation'
 
@@ -13,9 +12,18 @@ import * as actionTypes from '../../../store/actions/userActions'
 import BlackButton from '../../../reusables/BlackButton'
 
 class RegisterCard extends React.Component {
+    // constructor(params) {
+    //     super(params)
+    //     console.log(params)
+    // }
+
+    // static getDerivedStateFromProps(props, state) {
+    //     console.log(props)
+    //     return state
+    // }
 
     render(){
-        const {dispatch} = this.props 
+        const {dispatch, user} = this.props 
         
         return(
             <View style={styles.container}>
@@ -28,17 +36,24 @@ class RegisterCard extends React.Component {
                         <InputText
                             placeholder="Full Name"
                             onChange={(fullname) => dispatch(actionTypes.setFullName(fullname))}
-                            value={this.props.fullname}
+                            value={user.first_name}
                         />
                         <InputText
                             placeholder="Email"
                             onChange={(email) => dispatch(actionTypes.setEmail(email))}
-                            value={this.props.email}
+                            value={user.email}
                         />
                         <InputText
-                            placeholder="Password"
+                            placeholder="Password1"
                             onChange={(password) => dispatch(actionTypes.setPassword(password))}
-                            value={this.props.password}
+                            value={user.password}
+                            hide={true}
+                        />
+                        <InputText
+                            placeholder="Password2"
+                            onChange={(password) => dispatch(actionTypes.setPassword1(password))}
+                            value={user.password2}
+                            hide={true}
                         />
                 </View>
                 <Text style={styles.termsCond}>I agree to EatinBox's Tems of service,
@@ -91,12 +106,5 @@ const styles = StyleSheet.create({
     },
 });
 
-mapStateToProps = (state) => {
-    return {
-        email: state.register.user.email,
-        fullname: state.register.user.fullname,
-        password: state.register.user.password,
-    }
-}
 
-export default withNavigation(connect(mapStateToProps)(RegisterCard));
+export default withNavigation(RegisterCard);

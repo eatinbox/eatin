@@ -4,16 +4,54 @@ TextInput,
 View,
 StyleSheet,
 Image,
+TouchableOpacity
 } from 'react-native';
+
+import {connect} from 'react-redux'
+import {withNavigation} from 'react-navigation'
+
+import EmptyCart from '../Modals/EmptyCart'
+
+const images = {
+    1: require('../../../assets/counters/1.png'),
+    2: require('../../../assets/counters/2.png'),
+    3: require('../../../assets/counters/3.png'),
+    4: require('../../../assets/counters/4.png'),
+    5: require('../../../assets/counters/5.png'),
+}
 
 class LocationHeader extends Component {
     state = { 
-        location: '' 
+        location: '',
+        isVisible: false,
     };
 
+    navigateCartScreen = () => {
+        if(this.props.cartList.length) {
+           return this.props.navigation.navigate('FoodCartScreen')
+        }
+
+        this.setState({isVisible: true})
+    }
+
+    onModalClose = () => {
+        this.setState({isVisible: false})
+    }
+
     render() {
+        const counter = this.props.cartList.length ?
+        (
+        <Image
+            source={images[this.props.cartList.length]}
+            style={styles.countImg}
+        />) : null
+
         return (
             <View style={styles.container}>
+                 <EmptyCart
+                    isVisible={this.state.isVisible}
+                    closeModal={this.onModalClose}
+                />
                 <View style={styles.inputBox}>
                     <View style={styles.mapBox}>
                         <Image source={require('../../../assets/mapicon.png')} style={styles.mapIcon}/>
@@ -25,6 +63,16 @@ class LocationHeader extends Component {
                         placeholder="Enter your location"
                     />
                 </View>
+                <TouchableOpacity 
+                    style={styles.cartCont}
+                    onPress={this.navigateCartScreen}>
+                    {counter}
+                    <Image
+                        source={require('../../../assets/cart.png')}
+                        style={styles.cartIcon}
+                    />    
+                </TouchableOpacity>
+                
             </View>
         )
     }
@@ -35,13 +83,12 @@ const styles = StyleSheet.create({
     container:{
         width: '95%',
         flexDirection: 'row',
-        borderWidth: 0,
-        justifyContent: 'center',
+        // borderWidth: 1,
     },
 
     inputBox:{
         marginTop: 10,
-        width: '100%',
+        width: '80%',
         flexDirection: 'row',
         borderWidth: 0,
         alignItems: 'center',
@@ -50,7 +97,7 @@ const styles = StyleSheet.create({
 
     inputContainer:{
         width: '80%',
-        borderWidth:0,
+        // borderWidth:1,
         height: 25,
         fontSize: 12,
         letterSpacing: 0.3,
@@ -66,7 +113,6 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         width: 20,
         height: 20,
-        // marginRight: 4,
     },
 
     mapBox: {
@@ -77,26 +123,35 @@ const styles = StyleSheet.create({
         borderRightWidth: 1,
     },
 
-    cartBox:{
-        width: '10%',
-        alignItems: 'center',
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-        paddingLeft: 10,
-        paddingRight:5
-    },
-
-    sidebarIcon:{
-        width: 25,
-        height: 25,
-        borderRadius: 25,
+    cartCont: {
+        // borderWidth:1,
+        position: 'relative',
+        alignSelf: 'flex-end',
+        marginLeft: 'auto',
     },
 
     cartIcon:{
         borderRadius: 25,
         width: 25,
         height: 25,
+        
     },
+
+    countImg:{
+        position:'absolute',
+        right:0,
+        zIndex:1,
+        borderRadius:12,
+        width:12,
+        height:12,
+
+    }
 });
 
-export default LocationHeader;
+const mapStateToProps = ({menuList}) => {
+    return {
+        cartList: menuList.cartList
+    }
+} 
+
+export default withNavigation(connect(mapStateToProps)(LocationHeader));
