@@ -2,13 +2,17 @@ import React from 'react'
 import { View, StyleSheet } from 'react-native';
 import MenuImg from './MenuImg';
 import Details from './Details';
+import MenuCounter from './MenuCounter';
 
 const Menu = (props) => {
     // console.log("This are props", props)
 
     return (
         <View style={styles.container}>
-            <MenuImg
+            {/* <MenuImg
+                pk={props.item.pk}
+            /> */}
+            <MenuCounter
                 pk={props.item.pk}
             />
             <Details

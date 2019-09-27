@@ -33,6 +33,7 @@ class FoodCart extends React.Component {
                     contentContainerStyle={styles.flatListcontainer}
                     renderItem={this._renderItem}
                     data={this.props.cartList}
+                    keyExtractor={(item) => item.pk.toString()}
                     showsVerticalScrollIndicator={true}
                 />
                 <Total

@@ -35,7 +35,7 @@ class Foodlist extends Component {
                 /> */}
                 <FlatList
                     // contentContainerStyle={styles.container}
-                    // keyExtractor={(item) => toString(item.pk)}
+                    keyExtractor={(item) => item.pk.toString()}
                     renderItem={this._renderItem}
                     data={this.props.menuList}
                     showsVerticalScrollIndicator={false}

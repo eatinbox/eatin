@@ -20,6 +20,7 @@ const Total = (props) => {
             <View style={styles.itemsCont}>
                 {props.items.map((item) => (
                     <SpaceBetweenColumns
+                    key={item.pk}
                     container={styles.itemCont}
                     left={item.menu_name}
                     right="$ 225"
