@@ -15,7 +15,7 @@ const width = Dimensions.get('window').width
 
 const FoodScreen = (props) => (
     <View style={styles.container}>
-        <EIBHeader />
+        {/* <EIBHeader /> */}
         <LocationHeader/>
         <BrowseHeader/>          
         <MealType />  
@@ -25,6 +25,7 @@ const FoodScreen = (props) => (
 
 const styles = StyleSheet.create({
     container: {
+        marginTop: 25,
         flex:1,
         width,
         alignItems: 'center',

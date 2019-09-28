@@ -17,6 +17,9 @@ import FilterScreen from './src/screens/Filter/FilterScreen';
 import RegisterScreen from './src/screens/Register/RegisterScreen';
 import LoginScreen from './src/screens/Login/LoginScreen';
 import SearchScreen from './src/screens/Search/SearchScreen';
+import PastOrderScreen from './src/screens/Orders/Past/PastOrderScreen';
+import Payment from './src/screens/Payment/paymentPage';
+import AddressPage from './src/screens/Address/AddressPage';
 
 
 const rootReducer = combineReducers({
@@ -50,10 +53,13 @@ const rootStack = createStackNavigator(
     LoginScreen,
     MenuScreen,
     SearchScreen,
+    PastOrderScreen,
+    Payment,
+    AddressPage
   },
 
   {
-    initialRouteName: 'IntroductionScreen',
+    initialRouteName: 'MenuScreen',
     defaultNavigationOptions: {
       header: null,
     }

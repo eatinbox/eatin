@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 
 import Header from './Header/Header';
+import Details from './Order/OrderDetails';
 
 const width= Dimensions.get('window').width;
 const height= Dimensions.get('window').height;
@@ -14,6 +15,8 @@ const PastOrderScreen = () => {
     return (
         <View style= { styles.container }>
             <Header />
+            <Details />
+            <Details />
         </View>
     )
 }

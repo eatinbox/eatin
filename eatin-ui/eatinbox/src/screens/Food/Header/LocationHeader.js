@@ -5,6 +5,7 @@ View,
 StyleSheet,
 Image,
 } from 'react-native';
+import BlackButton from "../../../reusables/BlackButton";
 
 class LocationHeader extends Component {
     state = { 
@@ -24,6 +25,14 @@ class LocationHeader extends Component {
                         value={this.state.location}
                         placeholder="Enter your location"
                     />
+                    <BlackButton
+                        buttonContainer={styles.asap}
+                        buttonText={styles.asapText}
+                        text="ASAP"
+                    />
+                </View>
+                <View style = {styles.cartBox}>
+                    <Image source={require('../../../assets/shopping.png')} style={styles.cartIcon}/>
                 </View>
             </View>
         )
@@ -35,17 +44,21 @@ const styles = StyleSheet.create({
     container:{
         width: '95%',
         flexDirection: 'row',
+        justifyContent: 'space-between',
+        borderColor: '#000',
         borderWidth: 0,
-        justifyContent: 'center',
     },
 
     inputBox:{
-        marginTop: 10,
-        width: '100%',
+        margin: 5,
+        marginLeft: 0,
+        marginRight: 0,
+        width: '75%',
+        height: '80%',
         flexDirection: 'row',
         borderWidth: 0,
         alignItems: 'center',
-        backgroundColor: '#f8f8f8',
+        backgroundColor: '#f8f8f8'
     },
 
     inputContainer:{
@@ -66,36 +79,41 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         width: 20,
         height: 20,
+        alignSelf: 'center'
         // marginRight: 4,
     },
 
     mapBox: {
-        width: '10%',
+        width: '15%',
         justifyContent: 'center',
         alignContent: 'center',
         borderColor: '#aa9',
         borderRightWidth: 1,
     },
 
-    cartBox:{
-        width: '10%',
-        alignItems: 'center',
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-        paddingLeft: 10,
-        paddingRight:5
+    asap: {
+        width: '100%',
+        alignSelf: 'center',
+        borderRadius: 0
     },
 
-    sidebarIcon:{
-        width: 25,
-        height: 25,
-        borderRadius: 25,
+    asapText: {
+        fontSize: 13,
+        fontWeight: "500",
+        fontFamily: 'monospace',
+        letterSpacing: 0.5
     },
 
-    cartIcon:{
+    cartBox: {
+        borderWidth:0,
+        borderColor: '#000',
+        alignSelf: 'center'
+    },
+
+    cartIcon: {
         borderRadius: 25,
-        width: 25,
-        height: 25,
+        width: 32,
+        height: 37,
     },
 });
 
