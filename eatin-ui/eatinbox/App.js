@@ -20,6 +20,7 @@ import SearchScreen from './src/screens/Search/SearchScreen';
 import PastOrderScreen from './src/screens/Orders/Past/PastOrderScreen';
 import Payment from './src/screens/Payment/paymentPage';
 import AddressPage from './src/screens/Address/AddressPage';
+import FoodCartScreen from './src/screens/FoodCart/FoodCartScreen'
 
 
 const rootReducer = combineReducers({
@@ -47,6 +48,7 @@ const rootStack = createStackNavigator(
     IntroductionScreen,
     VenderInfoScreen,
     CartScreen,
+    FoodCartScreen,
     CurrentOrderScreen,
     RegisterScreen,
     FilterScreen,

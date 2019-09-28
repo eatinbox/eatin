@@ -22,7 +22,7 @@ const FilterScreen = () => {
                 </View>
             </ScrollView>
             <View style = { styles.abs }>
-                <ApplyButton />
+                {/* <ApplyButton /> */}
             </View>
         </View>
     )

@@ -16,6 +16,7 @@ class InputText extends React.Component {
                     value={this.props.value}
                     placeholder={this.props.placeholder}
                     autoCorrect={false}
+                    secureTextEntry={this.props.hide}
                 />
             </View>
         );

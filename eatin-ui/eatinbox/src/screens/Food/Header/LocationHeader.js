@@ -4,17 +4,54 @@ TextInput,
 View,
 StyleSheet,
 Image,
+TouchableOpacity
 } from 'react-native';
-import BlackButton from "../../../reusables/BlackButton";
+
+import {connect} from 'react-redux'
+import {withNavigation} from 'react-navigation'
+
+import EmptyCart from '../Modals/EmptyCart'
+
+const images = {
+    1: require('../../../assets/counters/1.png'),
+    2: require('../../../assets/counters/2.png'),
+    3: require('../../../assets/counters/3.png'),
+    4: require('../../../assets/counters/4.png'),
+    5: require('../../../assets/counters/5.png'),
+}
 
 class LocationHeader extends Component {
     state = { 
-        location: '' 
+        location: '',
+        isVisible: false,
     };
 
+    navigateCartScreen = () => {
+        if(this.props.cartList.length) {
+           return this.props.navigation.navigate('FoodCartScreen')
+        }
+
+        this.setState({isVisible: true})
+    }
+
+    onModalClose = () => {
+        this.setState({isVisible: false})
+    }
+
     render() {
+        const counter = this.props.cartList.length ?
+        (
+        <Image
+            source={images[this.props.cartList.length]}
+            style={styles.countImg}
+        />) : null
+
         return (
             <View style={styles.container}>
+                 <EmptyCart
+                    isVisible={this.state.isVisible}
+                    closeModal={this.onModalClose}
+                />
                 <View style={styles.inputBox}>
                     <View style={styles.mapBox}>
                         <Image source={require('../../../assets/mapicon.png')} style={styles.mapIcon}/>
@@ -25,15 +62,17 @@ class LocationHeader extends Component {
                         value={this.state.location}
                         placeholder="Enter your location"
                     />
-                    <BlackButton
-                        buttonContainer={styles.asap}
-                        buttonText={styles.asapText}
-                        text="ASAP"
-                    />
                 </View>
-                <View style = {styles.cartBox}>
-                    <Image source={require('../../../assets/shopping.png')} style={styles.cartIcon}/>
-                </View>
+                <TouchableOpacity 
+                    style={styles.cartCont}
+                    onPress={this.navigateCartScreen}>
+                    {counter}
+                    <Image
+                        source={require('../../../assets/cart.png')}
+                        style={styles.cartIcon}
+                    />    
+                </TouchableOpacity>
+                
             </View>
         )
     }
@@ -44,26 +83,21 @@ const styles = StyleSheet.create({
     container:{
         width: '95%',
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        borderColor: '#000',
-        borderWidth: 0,
+        // borderWidth: 1,
     },
 
     inputBox:{
-        margin: 5,
-        marginLeft: 0,
-        marginRight: 0,
-        width: '75%',
-        height: '80%',
+        marginTop: 10,
+        width: '80%',
         flexDirection: 'row',
         borderWidth: 0,
         alignItems: 'center',
-        backgroundColor: '#f8f8f8'
+        backgroundColor: '#f8f8f8',
     },
 
     inputContainer:{
         width: '80%',
-        borderWidth:0,
+        // borderWidth:1,
         height: 25,
         fontSize: 12,
         letterSpacing: 0.3,
@@ -79,42 +113,45 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         width: 20,
         height: 20,
-        alignSelf: 'center'
-        // marginRight: 4,
     },
 
     mapBox: {
-        width: '15%',
+        width: '10%',
         justifyContent: 'center',
         alignContent: 'center',
         borderColor: '#aa9',
         borderRightWidth: 1,
     },
 
-    asap: {
-        width: '100%',
-        alignSelf: 'center',
-        borderRadius: 0
+    cartCont: {
+        // borderWidth:1,
+        position: 'relative',
+        alignSelf: 'flex-end',
+        marginLeft: 'auto',
     },
 
-    asapText: {
-        fontSize: 13,
-        fontWeight: "500",
-        fontFamily: 'monospace',
-        letterSpacing: 0.5
-    },
-
-    cartBox: {
-        borderWidth:0,
-        borderColor: '#000',
-        alignSelf: 'center'
-    },
-
-    cartIcon: {
+    cartIcon:{
         borderRadius: 25,
-        width: 32,
-        height: 37,
+        width: 25,
+        height: 25,
+        
     },
+
+    countImg:{
+        position:'absolute',
+        right:0,
+        zIndex:1,
+        borderRadius:12,
+        width:12,
+        height:12,
+
+    }
 });
 
-export default LocationHeader;
+const mapStateToProps = ({menuList}) => {
+    return {
+        cartList: menuList.cartList
+    }
+} 
+
+export default withNavigation(connect(mapStateToProps)(LocationHeader));

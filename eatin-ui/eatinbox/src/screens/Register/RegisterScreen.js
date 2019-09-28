@@ -5,13 +5,25 @@ StyleSheet,
 Image,
 Dimensions,
 } from 'react-native';
+import {connect} from 'react-redux'
+
 import ButtonContainer from './ButtonContainer';
 import RegisterCard from './RegisterCard/RegisterCard';
+
+import * as actions from '../../store/actions/userActions'
+
 
 const width = Dimensions.get('window').width
 
 class RegisterScreen extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+
     handlePress = () => {
+        console.log("Button has been pressed")
+        
+        // this.props.dispatch(actions.sendRegisterData(this.props.user))
         this.props.navigation.navigate('MenuScreen')
     }
 
@@ -22,7 +34,7 @@ class RegisterScreen extends React.Component {
                     source={require('../../assets/signup.jpeg')}
                     style={styles.img}
                 />
-                <RegisterCard />
+                <RegisterCard {...this.props}/>
                 <ButtonContainer handlePress={this.handlePress}/>
             </View>
         )
@@ -45,4 +57,10 @@ const styles = StyleSheet.create({
     },
 })
 
-export default RegisterScreen;
+const mapStateToProps = ({register}) => {
+    return {
+        user: register.user,
+    }
+}
+
+export default connect(mapStateToProps)(RegisterScreen);

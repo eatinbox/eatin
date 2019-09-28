@@ -29,7 +29,7 @@ const Vendor = (props) => {
 const styles = StyleSheet.create({
 
     container: {
-        width: '25%',
+        width: '20%',
         alignItems: 'flex-end',
         justifyContent: 'center',
         paddingRight:8,

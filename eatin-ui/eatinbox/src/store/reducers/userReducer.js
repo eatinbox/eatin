@@ -2,9 +2,11 @@ import * as actionType from '../actions/userActions'
 
 const initialState = {
     user:{
-        fullname: '',
+        first_name: '',
+        last_name: '',
         email: '',
         password: '',
+        password2: '',
     },
 }
 
@@ -16,7 +18,7 @@ export default reducer =  (state = initialState, action) => {
             ...state,
             user: {
                 ...state.user,
-                fullname: action.fullname
+                first_name: action.fullname
             }
         }
     
@@ -35,6 +37,15 @@ export default reducer =  (state = initialState, action) => {
             user: {
                 ...state.user,
                 password: action.password
+            }
+        }
+    
+    case actionType.SET_PASSWORD1:
+        return {
+            ...state,
+            user: {
+                ...state.user,
+                password2: action.password
             }
         }
 
