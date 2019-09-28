@@ -4,77 +4,82 @@ import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 import {connect} from 'react-redux'
 import * as actionCreators from '../../../store/actions/menuActions'
 
+import Counter from './Counter'
 
-const Counter = (props) => {
-    sty = {
-        backgroundColor: props.bg,
+class MenuImg extends React.Component {
+    state = {
+        count: 1,
+        plus: '#7dfa7a'
     }
-
-    return (
-        <View style={[styles.counter, sty]}><Text style={styles.symbol}>{props.symbol}</Text></View>
-    )
-} 
-
-
-const MenuImg = (props) => {
-    const [count, setCount] = useState(1);
-    const [plus, setPlus] = useState('#7dfa7a')
-
-    useEffect(() => {
-    }, [count]);
 
     changeCount = (type) => {
         if(type === '-') {
-            if(count === 1)
-                return props.dispatch(actionCreators.removeFromCart(props.pk))
+            if(this.state.count === 1)
+                return this.props.dispatch(actionCreators.removeFromCart(this.props.pk))
 
-            if(count === 3)
-                setPlus('#7dfa7a')
+            if(this.state.count === 3)
+                this.setState({
+                    plus: '#7dfa7a'
+                })
 
-            setCount((prev) => prev - 1)
+            this.setState((prev) => {
+                return {
+                    count: prev.count - 1
+                }
+            })
         }
             
         else{
-            if(count === 2){
-                setPlus('#bababa')
+            if(this.state.count === 2){
+                this.setState({
+                    plus: '#bababa'
+                })
 
-                return setCount((prev) => prev + 1)  
+                return this.setState((prev) => {
+                    return {
+                        count: prev.count + 1
+                    }
+                }) 
             }
 
-            else if(count === 3)
+            else if(this.state.count === 3)
                 return 
 
-            setCount((prev) => prev + 1)  
-        }
-
-        console.log("This is count",count,"And this is id",props.pk)             
+            this.setState((prev) => {
+                return {
+                    count: prev.count + 1
+                }
+            })
+        } 
     }
 
-    return (
+    render() {
+      return (
         <View style={styles.container}>
             <Image
                 source={require('../../../assets/food.jpg')}
                 style={styles.img}
             />
             <View style={styles.counterCont}>
-                <TouchableOpacity onPress={() => changeCount('-')}>
+                <TouchableOpacity onPress={() => this.changeCount('-')}>
                     <Counter
                         symbol='-'
                         bg='#fa7575'
                     />
                 </TouchableOpacity>
-                <Text style={styles.count}>{count}</Text>
-                <TouchableOpacity onPress={changeCount}>
+                <Text style={styles.count}>{this.state.count}</Text>
+                <TouchableOpacity onPress={() => this.changeCount('+')}>
                     <Counter
                         symbol='+'
-                        bg={plus}
+                        bg={this.state.plus}
                     />
                 </TouchableOpacity>
             </View>
         </View>
-    );
+      )
+    }
 }
-
+    
 const styles = StyleSheet.create({
     container:{
         marginTop: 8,
@@ -103,24 +108,11 @@ const styles = StyleSheet.create({
         marginBottom: 8,
     },
 
-    counter:{        
-        width: 20,
-        height: 20,
-        borderRadius: 20,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-
     count: {
         fontWeight: 'bold',
         marginLeft: 16,
         marginRight: 16,
     },
-
-    symbol:{
-        fontWeight: 'bold',
-        color: '#fff',
-    }
 });
 
 export default connect(({menuList}) => {

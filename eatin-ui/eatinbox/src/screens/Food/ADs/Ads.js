@@ -6,17 +6,20 @@ class Ads extends React.Component {
     constructor(props){
         super(props);
 
-        this.data = [<Adimg/>, <Adimg/>, <Adimg/>]
+        this.data = [1,2,3]
     }
 
-    _renderItem = () => (
-        <Adimg/>
+    _renderItem = ({item}) => (
+        <Adimg
+            id={item}
+        />
     )
 
     render() {
         return (
             <View style={[ styles.container]} >
-                <FlatList 
+                <FlatList
+                    keyExtractor={(item) => item.toString()} 
                     contentContainerStyle={styles.flatListContainer}
                     renderItem={this._renderItem}
                     data={this.data}

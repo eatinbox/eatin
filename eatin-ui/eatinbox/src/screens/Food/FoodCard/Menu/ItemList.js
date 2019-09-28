@@ -22,6 +22,7 @@ class ItemList extends Component {
                 <FlatList
                     style={styles.flatlist}
                     contentContainerStyle={styles.listCont}
+                    keyExtractor={(item) => item.item_name}
                     renderItem={this._renderItem}
                     data={this.props.menuItems}
                     numColumns={5}

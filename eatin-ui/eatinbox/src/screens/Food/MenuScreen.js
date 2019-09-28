@@ -6,9 +6,7 @@ Dimensions,
 } from 'react-native';
 
 import LocationHeader from './Header/LocationHeader';
-import BrowseHeader from './Header/BrowseHeader';
 import Foodlist from './Foodlist';
-import EIBHeader from './Header/EIBHeader';
 import MealType from './Header/TypeMeal';
 import Ads from './ADs/Ads';
 
@@ -16,9 +14,7 @@ const width = Dimensions.get('window').width
 
 const FoodScreen = (props) => (
     <View style={styles.container}>
-        {/* <EIBHeader /> */}
         <LocationHeader/>
-        {/* <BrowseHeader/>*/}
         <MealType />  
         <Ads/>
         <Foodlist/>
