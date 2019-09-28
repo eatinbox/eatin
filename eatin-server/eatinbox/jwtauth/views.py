@@ -1,10 +1,12 @@
 from django.shortcuts import render
 import json
-from rest_framework import permissions
+
+from rest_framework import permissions, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.contrib.auth import authenticate, get_user_model
+from django.contrib.auth import authenticate, get_user_model, login
 from rest_framework_jwt.settings import api_settings
+from rest_framework.exceptions import ValidationError
 # Here ListCreate is used just for development purpose to view users.
 # Each time u GET the register url new tokens will be generated
 # Same is the case with retrieve
@@ -22,7 +24,7 @@ jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 class AuthView(APIView):
     permission_classes = [permissions.IsAuthenticated]
     permission_classes = [permissions.AllowAny]
-    #authentication_classes = []
+    # authentication_classes = []
 
     def post(self, request, *args, **kwargs):
         print(request.user)
@@ -47,6 +49,17 @@ class RegisterView(ListCreateAPIView):
 
     def get_serializer_context(self):
         return {'request': self.request}
+
+    def post(self, request, *args, **kwargs):
+        # Overrided this method for understanding purposes only.
+        instance = RegisterSerializer(data=request.data, context=self.get_serializer_context())
+        try:
+            instance.is_valid()
+        except ValidationError:
+            return Response(data=instance.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        instance.save()
+        return Response(data=instance.data, status=status.HTTP_201_CREATED)
 
 # The following view will give us the detailed view.
 # Here token will be generated again.
