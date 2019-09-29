@@ -14,5 +14,5 @@ urlpatterns = [
         path('obtain/', obtain_jwt_token),
 
         # Only for development purpose.
-        # path('register/<int:id>', views.RetrieveView.as_view()),
+        path('register/<int:id>', views.RetrieveView.as_view()),
 ]

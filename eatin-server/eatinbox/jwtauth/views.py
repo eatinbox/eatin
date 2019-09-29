@@ -3,6 +3,7 @@ import json
 import datetime
 from django.utils import timezone
 from rest_framework import permissions
+from .permissions import IsValidUser
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.contrib.auth import authenticate, get_user_model
@@ -11,9 +12,9 @@ from rest_framework_jwt.views import refresh_jwt_token
 # Here ListCreate is used just for development purpose to view users.
 # Each time u GET the register url new tokens will be generated
 # Same is the case with retrieve
-from rest_framework.generics import CreateAPIView
+from rest_framework.generics import CreateAPIView, RetrieveAPIView
 from .utils import jwt_response_payload_handler
-from .serializers import RegisterSerializer
+from .serializers import RegisterSerializer, RegisterDetailSerializer
 
 User = get_user_model()
 exp_delta = api_settings.JWT_EXPIRATION_DELTA   # This delta is for maximum time before which u can refresh the token through previous token.
@@ -38,13 +39,23 @@ class AuthView(APIView):
         data = request.data
         email = data.get('email')
         password = data.get('password')
+        is_user = data.get('is_user')
         user = authenticate(email=email, password=password)
-        print(user)
         if user is not None:
-            payload = jwt_create_payload(user)
-            token = jwt_encode_handler(payload)
-            response = jwt_response_payload_handler(token, user, request=request)
-            return Response(response)
+            flag = False
+
+            try:
+                global flag
+                flag = getattr(user, is_user)
+            except AttributeError:
+                return Response("is_user field not valid")
+
+            if flag is True:
+                print(user)
+                payload = jwt_create_payload(user)
+                token = jwt_encode_handler(payload)
+                response = jwt_response_payload_handler(token, user, request=request)
+                return Response(response)
         else:
             return Response("Invalid Credentials")
 
@@ -63,15 +74,15 @@ class RegisterView(CreateAPIView):
 # Here token will be generated again.
 
 
-# class RetrieveView(RetrieveUpdateDestroyAPIView):
-#     queryset = User.objects.all()
-#     serializer_class = RegisterSerializer
-#     # permission_classes = [permissions.IsAuthenticated]
-#     permission_classes = [permissions.AllowAny]
-#     lookup_field = 'id'
-#
-#     def get_serializer_context(self):
-#         return {'request': self.request}
+class RetrieveView(RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = RegisterDetailSerializer
+    permission_classes = [IsValidUser]
+    # permission_classes = [permissions.AllowAny]
+    lookup_field = 'id'
+
+    # def get_serializer_context(self):
+    #     return {'request': self.request}
 
 
 def refresh_token(request):

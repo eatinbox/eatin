@@ -27,6 +27,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             'last_name',
             'customer',
             'vendor',
+            'partner',
             'token',
         ]
 
@@ -93,3 +94,17 @@ class RegisterSerializer(serializers.ModelSerializer):
                                                 request=None
                                                 )
         return response
+
+
+class RegisterDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = [
+            'id',
+            'email',
+            'first_name',
+            'last_name',
+            'customer',
+            'vendor',
+            'partner',
+        ]

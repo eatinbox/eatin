@@ -65,7 +65,8 @@ class UserManager(BaseUserManager):
                     last_name=None,
                     is_active=True,
                     is_vendor=False,
-                    is_customer=True
+                    is_customer=True,
+                    is_partner=False,
                     ):
         if not email:
             raise ValueError("User must provide Email")
@@ -83,6 +84,7 @@ class UserManager(BaseUserManager):
         user_obj.active = is_active
         user_obj.staff = is_staff
         user_obj.customer = is_customer
+        user_obj.partner = is_partner
         user_obj.admin = is_superuser
         user_obj.save(using=self._db)
         return user_obj
@@ -95,7 +97,8 @@ class UserManager(BaseUserManager):
             password=password,
             is_active=True,
             is_vendor=True,
-            is_customer=False)
+            is_customer=True,
+            is_partner=True)
 
         return user
 
@@ -107,7 +110,8 @@ class UserManager(BaseUserManager):
             last_name=last_name,
             is_active=True,
             is_vendor=True,
-            is_customer=False
+            is_customer=False,
+            is_partner=False,
         )
 
         return user
@@ -120,7 +124,8 @@ class UserManager(BaseUserManager):
             last_name=last_name,
             is_active=True,
             is_vendor=False,
-            is_customer=True
+            is_customer=True,
+            is_partner=False,
         )
 
         return user
@@ -130,6 +135,7 @@ class User(AbstractBaseUser):
     email = models.EmailField(max_length=100, unique=True)
     vendor = models.BooleanField(default=False)
     customer = models.BooleanField(default=True)
+    partner = models.BooleanField(default=False)
     first_name = models.CharField(max_length=255, null=True, blank=True)
     last_name = models.CharField(max_length=255, null=True, blank=True)
     active = models.BooleanField(default=True)
@@ -137,7 +143,7 @@ class User(AbstractBaseUser):
     staff = models.BooleanField(default=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['email']
 
     objects = UserManager()
 
@@ -168,4 +174,8 @@ class User(AbstractBaseUser):
 
     @property
     def is_customer(self):
+        return self.customer
+
+    @property
+    def is_partner(self):
         return self.customer
