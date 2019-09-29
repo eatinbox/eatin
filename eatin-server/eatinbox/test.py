@@ -4,11 +4,11 @@ import requests
 
 AUTH_ENDPOINT = "http://127.0.0.1:8000/auth/obtaintoken/"
 RETRIEVE_ENDPOINT = "http://127.0.0.1:8000/auth/register/14"
-REFRESH_TOKEN = 'http://127.0.0.1:8000/auth/refresh/'
+REFRESH_TOKEN = 'http://127.0.0.1:8000/auth/register/14'
 
 headers ={
     "Content-Type": "application/json",
-    "Authorization": "JWT " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNSwidXNlcm5hbWUiOiJzYXVAZ21haWwuY29tIiwiZXhwIjoxNTY3ODM0MjUyLCJlbWFpbCI6InNhdUBnbWFpbC5jb20ifQ.Ks9tIg5G1j3dDtK6SLcVeF5gQnSzE2CZKhY6cMUVsjQ"
+    "Authorization": "JWT " + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNSwidXNlcm5hbWUiOiJmZkBmLmNvbSIsImlhdCI6MTU2OTc1NzA1NSwiZXhwIjoxNTY5NzU3NTU1LCJvcmlnX2lhdCI6MTU2OTc1NzA1NX0.Md6hYuSFAkOL5qeEtgZCC_r8O0g6lCfAB56hAkq_6SE'
 }
 
 headers1 ={
@@ -20,11 +20,15 @@ data = {
     'password': '1'
 }
 
+data2 = {
+    'is_user': 'is_customer'
+}
+
 #r = requests.post(AUTH_ENDPOINT, data=json.dumps(data), headers=headers)
 #print(r.json())
 
-token = {'token':'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMSwidXNlcm5hbWUiOiJkQGQuY29tIiwiaWF0IjoxNTY5NDA4MzkwLCJleHAiOjE1Njk0MDg1MTAsIm9yaWdfaWF0IjoxNTY5NDA4MTczfQ.wzF9aBeUkZp6mogHmIsccmLclx_Mx4clBtvq0Ppae5I'
+token = {'token':'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMiwidXNlcm5hbWUiOiJxQHEuY29tIiwiaWF0IjoxNTY5NzQ5MzU2LCJleHAiOjE1Njk3NDk2NTYsIm9yaWdfaWF0IjoxNTY5NzQ5MzU2fQ.f7_jkGqHrVBzC2JvmrNzrrLoHlbUwFl_-8flAb8sXC8'
          }
 
-r = requests.post(REFRESH_TOKEN, headers=headers1, data=json.dumps(token))
+r = requests.get(REFRESH_TOKEN, headers=headers, data=json.dumps(data2))
 print(r.json())

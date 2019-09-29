@@ -3,7 +3,7 @@ import json
 import datetime
 from django.utils import timezone
 from rest_framework import permissions
-from .permissions import IsValidUser
+from .permissions import IsValidUser, IsOwnerOrReadOnly
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.contrib.auth import authenticate, get_user_model
@@ -42,10 +42,8 @@ class AuthView(APIView):
         is_user = data.get('is_user')
         user = authenticate(email=email, password=password)
         if user is not None:
-            flag = False
 
             try:
-                global flag
                 flag = getattr(user, is_user)
             except AttributeError:
                 return Response("is_user field not valid")
@@ -78,9 +76,8 @@ class RetrieveView(RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterDetailSerializer
     permission_classes = [IsValidUser]
-    # permission_classes = [permissions.AllowAny]
+    # permission_classes = [IsOwnerOrReadOnly]
     lookup_field = 'id'
-
     # def get_serializer_context(self):
     #     return {'request': self.request}
 

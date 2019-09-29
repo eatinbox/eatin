@@ -1,5 +1,4 @@
 from rest_framework.permissions import BasePermission, SAFE_METHODS
-from rest_framework_jwt.authentication import authenticate
 from django.contrib.auth import get_user_model
 
 
@@ -15,7 +14,8 @@ class IsValidUser(BasePermission):
 
         if is_user is not None:
 
-            user = authenticate(self, request)
+            user = request.user
+            print('dhap')
 
             if user is not None:
                 try:
