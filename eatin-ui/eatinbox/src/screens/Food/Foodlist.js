@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {View, StyleSheet, FlatList } from 'react-native';
 import FoodCard from './FoodCard/FoodCard';
-// import OverlayLoading from '../../reusables/OverlayLoading'; 
 
 import * as actionCreators from '../../store/actions/menuActions'  
 
@@ -20,19 +19,18 @@ class Foodlist extends Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(actionCreators.getMenuList())
+        console.log(this.props.region)
+        if(this.props.region)
+            this.props.dispatch(actionCreators.getMenuList())
     }
 
     componentDidUpdate() {
-        // console.log(this.props.menuList)
+        console.log(this.props.region)
     }
     
     render() {
         return (
             <View style={styles.container}>
-                {/* <OverlayLoading
-                    visible={this.props.visible}
-                /> */}
                 <FlatList
                     // contentContainerStyle={styles.container}
                     keyExtractor={(item) => item.pk.toString()}
@@ -54,10 +52,10 @@ const styles = StyleSheet.create({
 });
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({menuList, locationReducer}) => {
     return {
-        menuList : state.menuList.menuList,
-        visible: state.menuList.overlayVisible,   
+        menuList : menuList.menuList,
+        region: locationReducer.region
     }
 }
 

@@ -1,6 +1,9 @@
 import React from 'react'
-import { View,StyleSheet } from 'react-native';
+import { View,StyleSheet, Dimensions } from 'react-native';
 import SpaceBetweenColumns from '../../reusables/SpaceBetweenColumns';
+import BlackButton from '../../reusables/BlackButton';
+
+const width = Dimensions.get('window').width
 
 import * as fonts from '../../reusables/styles/Fonts'
 
@@ -37,7 +40,11 @@ const Total = (props) => {
                     rightStyle={fonts.lgbold}
                 />
             </View>
-
+            <BlackButton
+                text="Order Now"
+                buttonContainer={styles.buttonContainer}
+                handleOnpress={props.orderNow}
+            />
         </View>
     )
 }
@@ -79,6 +86,15 @@ const styles = StyleSheet.create({
         marginTop: 4,
         marginBottom: 12,
     },
+
+    buttonContainer:{
+        marginTop: 16,
+        marginBottom: 16, 
+        width: width * .92,
+        // borderWidth:1,
+        borderColor:'#e4e',
+    },
+    
 });
 
 export default Total;

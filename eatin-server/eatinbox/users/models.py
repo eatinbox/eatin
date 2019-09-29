@@ -44,8 +44,8 @@ PROBLEMS -> Remove the id of the OrderMenu(primary key default), no need for it.
 
 
 class OrderMenu(models.Model):
-    menu = models.OneToOneField('vendors.menu', on_delete=models.CASCADE)
-    is_customized = models.BooleanField(default=False)
+    menu = models.ForeignKey('vendors.menu', on_delete=models.CASCADE)
+    count = models.IntegerField(default=1)
 
 
 # DESCRIPTION -> Past Orders associated with users and will contain multiple menus

@@ -1,22 +1,16 @@
 import React from 'react'
-import { View, StyleSheet, Dimensions, FlatList} from 'react-native';
+import { View, StyleSheet, Dimensions, FlatList, ScrollView} from 'react-native';
 import {connect} from 'react-redux'
 import Menu from './MenuCard/Menu'
 import Header from './Header';
 import Total from './Total';
-import BlackButton from '../../reusables/BlackButton';
+
+
+import * as actionTypes from '../../store/actions/cartActions'
 
 const width = Dimensions.get('window').width
 
 class FoodCart extends React.Component {
-
-    _renderItem = ({item}) => {
-        return (
-            <Menu
-                item={item}
-            />
-        )
-    }
 
     componentDidUpdate(){
         if(!this.props.cartList.length){
@@ -24,26 +18,34 @@ class FoodCart extends React.Component {
         }
     }
 
+    orderNow = () => {
+        const data = {
+            customer_info: 1,
+            total_credits: 100,
+            ...this.props.postData,
+        }
+        this.props.dispatch(actionTypes.sendCart(data))
+    }
+
     render() {
 
         return (
-            <View style={styles.container}>
+            <ScrollView contentContainerStyle={styles.container}>
                 <Header/>
-                <FlatList
-                    contentContainerStyle={styles.flatListcontainer}
-                    renderItem={this._renderItem}
-                    data={this.props.cartList}
-                    keyExtractor={(item) => item.pk.toString()}
-                    showsVerticalScrollIndicator={true}
-                />
+                {this.props.cartList.map((item) => {
+                    return (
+                        <Menu
+                            key={item.pk}
+                            item={item}
+                        />
+                    )
+                })}
                 <Total
                     items={this.props.cartList}
+                    orderNow={this.orderNow}
                 />
-                <BlackButton
-                    text="Order Now"
-                    buttonContainer={styles.buttonContainer}
-                />
-            </View>
+                
+            </ScrollView>
         );
     }
 }
@@ -52,7 +54,7 @@ const styles = StyleSheet.create({
     container:{
         width,
         // borderWidth:1,
-        flex: 1,
+        // flex: 1,
         alignItems: 'center',
     },
 
@@ -61,21 +63,12 @@ const styles = StyleSheet.create({
         // borderWidth:1,
         alignItems: 'center',
     },
-
-    buttonContainer:{
-        marginTop: 16,
-        marginBottom: 16, 
-        width: width * .92,
-        // borderWidth:1,
-        borderColor:'#e4e',
-    },
-    
 });
 
-const mapStateToProps = ({menuList}) => {
+const mapStateToProps = ({cartReducer}) => {
     return {
-        menuList: menuList.menuList,
-        cartList: menuList.cartList,
+        cartList: cartReducer.cartList,
+        postData: cartReducer.postData
     }
 }
 

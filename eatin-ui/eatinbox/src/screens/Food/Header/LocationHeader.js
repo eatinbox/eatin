@@ -148,9 +148,9 @@ const styles = StyleSheet.create({
     }
 });
 
-const mapStateToProps = ({menuList}) => {
+const mapStateToProps = ({cartReducer}) => {
     return {
-        cartList: menuList.cartList
+        cartList: cartReducer.cartList
     }
 } 
 
