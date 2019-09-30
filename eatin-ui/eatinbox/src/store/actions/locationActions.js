@@ -30,7 +30,7 @@ export const requestLocationPermission = () => async  dispatch => {
 export const getLocation = () => dispatch => {
     Geolocation.getCurrentPosition(
         (position) => {
-            console.log(position);
+            // console.log(position);
             const region = {
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude,

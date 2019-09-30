@@ -22,8 +22,8 @@ export const getMenuList = () => {
                 let response = await axios.get(url)
 
                 if(response){
-                    clearInterval(interval)
                     dispatch(setMenuList(response.data))
+                    clearInterval(interval)
                 }
             }
     

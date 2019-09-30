@@ -8,6 +8,8 @@ import * as actionCreators from '../../store/actions/menuActions'
 class Foodlist extends Component {
     constructor(props){
         super(props);
+
+        this.is_getMenu_dispatched = false
     }
 
     _renderItem = ({item}) => {
@@ -18,26 +20,32 @@ class Foodlist extends Component {
         )
     }
 
-    componentDidMount() {
-        console.log(this.props.region)
-        if(this.props.region)
-            this.props.dispatch(actionCreators.getMenuList())
-    }
-
     componentDidUpdate() {
-        console.log(this.props.region)
+        if(Object.entries(this.props.region).length){            
+            if(!this.is_getMenu_dispatched){
+                this.props.dispatch(actionCreators.getMenuList())
+                this.is_getMenu_dispatched = true
+            }
+        }
     }
     
     render() {
-        return (
-            <View style={styles.container}>
-                <FlatList
+
+        const data = this.props.menuList.length ? (
+            <FlatList
                     // contentContainerStyle={styles.container}
                     keyExtractor={(item) => item.pk.toString()}
                     renderItem={this._renderItem}
                     data={this.props.menuList}
                     showsVerticalScrollIndicator={false}
                 />
+        ) : null
+
+        console.log(this.props.region, this.props.menuList)
+
+        return (
+            <View style={styles.container}>
+                {data}
             </View>
         )
     }
