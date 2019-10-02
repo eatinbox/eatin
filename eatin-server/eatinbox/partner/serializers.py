@@ -36,3 +36,4 @@ class currentOrders(serializers.ModelSerializer):
     
     def get_customerAddress(self,obj):
         return obj.get_customerAddress()
+

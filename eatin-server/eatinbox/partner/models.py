@@ -18,7 +18,7 @@ class Partner(models.Model):
 class partnerOrder(models.Model):
 
     partner         = models.ForeignKey(Partner,on_delete=models.CASCADE)
-    orderDetails    = models.ForeignKey(OrderMenuItem)
+    orderDetails    = models.ForeignKey(OrderMenuItem,on_delete=models.CASCADE)
 
     '''this field will tell us which transactions are currently active and which transactions are in process'''
 
@@ -39,6 +39,7 @@ class partnerOrder(models.Model):
 
 class partnerLocation(models.Model):
 
+    partner         = models.OneToOneField(Partner,on_delete=models.CASCADE)
     currentLatitude = models.IntegerField()
     currentLongitude = models.IntegerField()
 
