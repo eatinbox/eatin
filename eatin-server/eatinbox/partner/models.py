@@ -40,6 +40,10 @@ class partnerOrder(models.Model):
 class partnerLocation(models.Model):
 
     partner         = models.OneToOneField(Partner,on_delete=models.CASCADE)
+    area            = models.CharField(max_length=15)
+    '''When field is 0:-Not doing anything, 1:-On the way to pick up food,2:-Going for delivery '''
+    '''This field can be used if he has food pick up spots and delivery spots in a single path'''
+    currentStatus   = models.IntegerField()
     currentLatitude = models.IntegerField()
     currentLongitude = models.IntegerField()
 
