@@ -10,7 +10,7 @@ import Menu from './Menu/Menu';
 import BlackButton from '../../../reusables/BlackButton';
 import { connect } from 'react-redux'
 
-import * as actionCreators from '../../../store/actions/menuActions'
+import * as actionCreators from '../../../store/actions/cartActions'
 
 class FoodCard extends Component {
     handleOnPress = (item) => {

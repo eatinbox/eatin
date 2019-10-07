@@ -2,81 +2,75 @@ import React ,{useEffect, useState} from 'react'
 import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
 
 import {connect} from 'react-redux'
-import * as actionCreators from '../../../store/actions/menuActions'
+import * as actionCreators from '../../../store/actions/cartActions'
 
 import Counter from './Counter'
 
-class MenuImg extends React.Component {
+class MenuCounter extends React.Component {
     state = {
-        count: 1,
         plus: '#7dfa7a'
     }
 
     changeCount = (type) => {
+        
+        const count = this.props.idCartList.find(item => item.menu == this.props.pk).count
+
         if(type === '-') {
-            if(this.state.count === 1)
+            if(count === 1)
                 return this.props.dispatch(actionCreators.removeFromCart(this.props.pk))
 
-            if(this.state.count === 3)
+            if(count === 3)
                 this.setState({
                     plus: '#7dfa7a'
                 })
 
-            this.setState((prev) => {
-                return {
-                    count: prev.count - 1
-                }
-            })
+            this.props.dispatch(actionCreators.decreaseCount(this.props.pk))
         }
             
         else{
-            if(this.state.count === 2){
+            if(count === 2){
                 this.setState({
                     plus: '#bababa'
                 })
 
-                return this.setState((prev) => {
-                    return {
-                        count: prev.count + 1
-                    }
-                }) 
+                return this.props.dispatch(actionCreators.increaseCount(this.props.pk))
             }
 
-            else if(this.state.count === 3)
+            else if(count === 3)
                 return 
 
-            this.setState((prev) => {
-                return {
-                    count: prev.count + 1
-                }
-            })
+            this.props.dispatch(actionCreators.increaseCount(this.props.pk))
         } 
     }
 
     render() {
-      return (
-        <View style={styles.container}>
-            <Image
-                source={require('../../../assets/food.jpg')}
-                style={styles.img}
-            />
-            <View style={styles.counterCont}>
-                <TouchableOpacity onPress={() => this.changeCount('-')}>
-                    <Counter
-                        symbol='-'
-                        bg='#fa7575'
-                    />
-                </TouchableOpacity>
-                <Text style={styles.count}>{this.state.count}</Text>
-                <TouchableOpacity onPress={() => this.changeCount('+')}>
-                    <Counter
-                        symbol='+'
-                        bg={this.state.plus}
-                    />
-                </TouchableOpacity>
+        console.log(this.props.idCartList)
+
+        return (
+            <View style={styles.container}>
+                <Image
+                    source={require('../../../assets/food.jpg')}
+                    style={styles.img}
+                />
+                <View style={styles.counterCont}>
+                    <TouchableOpacity onPress={() => this.changeCount('-')}>
+                        <Counter
+                            symbol='-'
+                            bg='#fa7575'
+                        />
+                    </TouchableOpacity>
+                    <Text style={styles.count}>
+                    {this.props.idCartList.find(item => item.menu == this.props.pk).count}
+                    </Text>
+                    <TouchableOpacity onPress={() => this.changeCount('+')}>
+                        <Counter
+                            symbol='+'
+                            bg={this.state.plus}
+                        />
+                    </TouchableOpacity>
+                </View>
             </View>
-        </View>
-      )
+        )
     }
 }
     
@@ -115,8 +109,8 @@ const styles = StyleSheet.create({
     },
 });
 
-export default connect(({menuList}) => {
+export default connect(({cartReducer}) => {
     return {
-        cartList: menuList.cartList
+        idCartList: cartReducer.postData.menus,
     }
-})(MenuImg);
+})(MenuCounter);
