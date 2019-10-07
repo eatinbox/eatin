@@ -25,13 +25,13 @@ class OrderMenuSerializer(serializers.ModelSerializer):
 
 # Need To Update This Serializer (change the OrderMenuSerializer to get appropriate data)
 class OrdersSerializer(serializers.ModelSerializer):
-    all_menus = serializers.SerializerMethodField()     # the method_name attribute defaults to get_<field_name>
+    menus = serializers.SerializerMethodField()     # the method_name attribute defaults to get_<field_name>
 
     class Meta:
         model = Orders
-        fields = ['pk', 'order_time', 'total_credits', 'all_menus']
+        fields = ['pk', 'customer_info', 'order_time', 'total_credits', 'menus']
 
-    def get_all_menus(self, obj):
+    def get_menus(self, obj):
         menus = obj.menus.all()
         return OrderMenuSerializer(menus, many=True).data
 

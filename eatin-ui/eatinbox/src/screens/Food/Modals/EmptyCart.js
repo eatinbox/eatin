@@ -27,6 +27,9 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginTop: 'auto',
         marginBottom: 'auto',
+        elevation:3,
+        borderWidth:1,
+        borderColor: '#ddd',
     },
 
     msg:{
