@@ -67,7 +67,7 @@ const rootStack = createStackNavigator(
   },
 
   {
-    initialRouteName: 'SetLocationScreen',
+    initialRouteName: 'MenuScreen',
     defaultNavigationOptions: {
       header: null,
     }

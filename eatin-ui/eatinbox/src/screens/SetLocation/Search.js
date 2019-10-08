@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Image, TextInput, StyleSheet } from 'react-native'
+import { View, Image, TextInput, StyleSheet, Text } from 'react-native'
 
 export class Header extends Component {
     render() {
@@ -10,12 +10,14 @@ export class Header extends Component {
                         <Image source={require('../../assets/mapicon.png')} style={styles.mapIcon}/>
                     </View>
                     <TextInput
+                        autoFocus
                         style={styles.inputContainer}
                         onChangeText={(input) => this.props.handleTextChange(input)}
                         value={this.props.inputValue}
-                        placeholder="Enter your location"
+                        placeholder="ENTER YOUR LOCATION"
                     />
-                </View> 
+                </View>
+                <Text style={{marginTop:16}}>Here we will show recent searches</Text>
             </View>
         )
     }
@@ -24,7 +26,7 @@ export class Header extends Component {
 const styles = StyleSheet.create({
     container:{
         width: '95%',
-        flexDirection: 'row',
+        // flexDirection: 'row',
         // borderWidth: 1,
     },
 

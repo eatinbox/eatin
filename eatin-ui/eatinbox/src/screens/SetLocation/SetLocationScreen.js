@@ -8,7 +8,9 @@ export class SetLocationScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <AutoComplete/>
+                <AutoComplete
+                    navigation={this.props.navigation}
+                />
             </View>
         )
     }

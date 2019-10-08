@@ -21,7 +21,7 @@ class Foodlist extends Component {
     }
 
     componentDidUpdate() {
-        if(Object.entries(this.props.region).length){            
+        if(this.props.region){            
             if(!this.is_getMenu_dispatched){
                 this.props.dispatch(actionCreators.getMenuList())
                 this.is_getMenu_dispatched = true

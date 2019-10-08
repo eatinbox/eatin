@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { View, StyleSheet} from 'react-native'
+import { StyleSheet} from 'react-native'
 import axios from 'axios';
 import {connect} from 'react-redux'
 
-import SearchItem from './SearchItem'
-import Header from './Header';
-// import { key } from '../../../Utils/key'
+import SearchPage from './SearchPage';
+import LocationMap from './LocationMap';
+import * as actionsCreators from '../../store/actions/locationActions' 
 
 const key = 'AIzaSyD3RbiDvZseLuj4MJICPVw5jsjr8LNpbzc'
 
@@ -13,6 +13,7 @@ export class AutoComplete extends Component {
     state = {
         input: '',
         predictions: [],
+        region_selected: false,
     }
 
     handleTextChange = (input) => {
@@ -23,43 +24,62 @@ export class AutoComplete extends Component {
     }
 
     makeQuery = async (input) => {
-        console.log(this.props)
 
         const {data: {predictions}} = await axios.get(
             'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' 
-            + input + '&location=' + this.props.lat + ',' + this.props.long 
+            + input + '&location=' + this.props.region.lat + ',' + this.props.region.long 
             + '&radius=35000' + '&components=country:in&key=' + key)
 
-        this.setState({predictions}, () => console.log(this.state.predictions));
+        this.setState({predictions});
     }
 
     fetchDetails = async (place_id) => {
-        const res = await axios.get(
+        const {data: {result}} = await axios.get(
             'https://maps.googleapis.com/maps/api/place/details/json?place_id=' 
             + place_id.toString() + '&key=' + key)
 
-        console.log(res);
+        const reg = {
+            name: result.name,
+            addr: result.formatted_address,
+            latitude: result.geometry.location.lat,
+            longitude: result.geometry.location.lng,
+        }
+
+        this.props.dispatch(actionsCreators.setLocation(reg))
+    }
+
+    goBack = () => {
+        this.setState({
+            region_selected: false
+        })
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if(prevProps.region !== this.props.region ){
+            this.setState({
+                region_selected: true
+            })
+        }
     }
 
     render() {
+        let view = (<SearchPage
+                        input={this.state.input}
+                        handleTextChange={this.handleTextChange}
+                        fetchDetails={this.fetchDetails}
+                        predictions={this.state.predictions}/>)
+
+        if(this.state.region_selected)
+            view = (<LocationMap 
+                        region={this.props.region} 
+                        goBack={this.goBack}
+                        navigate={() => this.props.navigation.navigate('MenuScreen')}    
+                        />)
+
         return (
-            <View style={styles.container}>
-                <Header
-                    inputValue={this.state.input}
-                    handleTextChange={this.handleTextChange}
-                />
-                {this.state.predictions.map((item) => {
-                    return (
-                        <SearchItem
-                            key={item.id}
-                            {...item}
-                            fetchDetails={this.fetchDetails}
-                        />
-                    )
-                })}
-            </View>
-            
-            
+            <React.Fragment>
+                {view}
+            </React.Fragment>
         )
     }
 }
@@ -70,17 +90,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         // borderWidth:1,
     },
-
-    listCont: {
-        width: '95%',
-        // borderWidth:1,
-    }
 });
 
 const mapStateToProps = ({locationReducer}) => {
     return {
-        lat : locationReducer.region.latitude, 
-        long: locationReducer.region.longitude,  
+        region : locationReducer.region,
     }
 }
 

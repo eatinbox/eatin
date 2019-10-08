@@ -2,15 +2,12 @@ import React, { Component } from 'react'
 import { Text, TouchableOpacity, StyleSheet } from 'react-native'
 
 export class SearchItem extends Component {
-    handlePress = async () => {
-        const response = await this.props.fetchDetails(this.props.place_id);
-
-        console.log(response);
-    }
-
     render() {
         return (
-            <TouchableOpacity style={styles.container} onPress={this.handlePress}>
+            <TouchableOpacity 
+                style={styles.container} 
+                onPress={() => this.props.fetchDetails(this.props.place_id)}
+                >
                 <Text style={styles.mainText}>{this.props.structured_formatting.main_text}</Text>
                 <Text style={styles.searchText}>{this.props.structured_formatting.secondary_text}</Text>
             </TouchableOpacity>
