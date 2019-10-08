@@ -1,7 +1,10 @@
 import * as actionTypes from '../actions/locationActions'
 
 const initialState = {
-    region:{},
+    region:{
+        latitude: 18.448949, 
+        longitude: 73.853657,
+    },
 }
 
 export default (state = initialState, action) => {

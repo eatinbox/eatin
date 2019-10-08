@@ -23,6 +23,7 @@ import PastOrderScreen from './src/screens/Orders/Past/PastOrderScreen';
 import Payment from './src/screens/Payment/paymentPage';
 import AddressPage from './src/screens/Address/AddressPage';
 import FoodCartScreen from './src/screens/FoodCart/FoodCartScreen'
+import SetLocationScreen from './src/screens/SetLocation/SetLocationScreen'
 
 
 const rootReducer = combineReducers({
@@ -61,11 +62,12 @@ const rootStack = createStackNavigator(
     SearchScreen,
     PastOrderScreen,
     Payment,
-    AddressPage
+    AddressPage,
+    SetLocationScreen
   },
 
   {
-    initialRouteName: 'MenuScreen',
+    initialRouteName: 'SetLocationScreen',
     defaultNavigationOptions: {
       header: null,
     }
