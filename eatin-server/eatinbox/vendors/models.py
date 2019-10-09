@@ -28,6 +28,7 @@ class Menu(models.Model):
     menu_name = models.CharField(max_length=100)
     time_stamp = models.DateField(auto_created=True, auto_now_add=True)
     type = models.CharField(max_length=1, choices=MENU_TYPE)
+    rating = models.IntegerField(null=True)
 
 
 '''
