@@ -9,7 +9,7 @@ import {
 import { withNavigation} from 'react-navigation';
 
 
-const Vendor = (props) => {
+const Vendor = (props) => { 
     return (
         <View style={styles.container}>
             <View style={styles.rating}>

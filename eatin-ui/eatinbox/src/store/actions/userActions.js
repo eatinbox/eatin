@@ -47,6 +47,6 @@ export const sendRegisterData = (userData) => async dispatch =>  {
     }
 
     catch(err) {
-        console.log('\n\nThis is the error\n\n', err)
+        console.log(err.response)
     }
 }

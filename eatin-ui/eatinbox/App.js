@@ -7,6 +7,8 @@ import {createAppContainer, createStackNavigator} from 'react-navigation'
 
 import menuListReducer from './src/store/reducers/menuList';   
 import userReducer from './src/store/reducers/userReducer'
+import cartReducer from './src/store/reducers/cartReducer'
+import locationReducer from './src/store/reducers/locationReducer'
 
 import IntroductionScreen from './src/screens/Introduction/IntroductionScreen'
 import VenderInfoScreen from './src/screens/VenderInfo/VenderInfoScreen';
@@ -21,11 +23,13 @@ import PastOrderScreen from './src/screens/Orders/Past/PastOrderScreen';
 import Payment from './src/screens/Payment/paymentPage';
 import AddressPage from './src/screens/Address/AddressPage';
 import FoodCartScreen from './src/screens/FoodCart/FoodCartScreen'
-
+import Profile from './src/screens/Profile/ProfilePage';
 
 const rootReducer = combineReducers({
   register : userReducer,
   menuList: menuListReducer,
+  cartReducer,
+  locationReducer
 })
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
@@ -57,11 +61,12 @@ const rootStack = createStackNavigator(
     SearchScreen,
     PastOrderScreen,
     Payment,
-    AddressPage
+    AddressPage,
+    Profile
   },
 
   {
-    initialRouteName: 'MenuScreen',
+    initialRouteName: 'Profile',
     defaultNavigationOptions: {
       header: null,
     }
