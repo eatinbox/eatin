@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {View, StyleSheet, FlatList } from 'react-native';
+import {
+View, 
+StyleSheet, 
+FlatList,
+ActivityIndicator,
+} from 'react-native';
 import FoodCard from './FoodCard/FoodCard';
 
 import * as actionCreators from '../../store/actions/menuActions'  
@@ -21,7 +26,7 @@ class Foodlist extends Component {
     }
 
     componentDidUpdate() {
-        if(Object.entries(this.props.region).length){            
+        if(this.props.region){            
             if(!this.is_getMenu_dispatched){
                 this.props.dispatch(actionCreators.getMenuList())
                 this.is_getMenu_dispatched = true
@@ -39,7 +44,7 @@ class Foodlist extends Component {
                     data={this.props.menuList}
                     showsVerticalScrollIndicator={false}
                 />
-        ) : null
+        ) : <ActivityIndicator size="large" color="#4d4d4d" />
 
         console.log(this.props.region, this.props.menuList)
 
@@ -55,6 +60,7 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         width:'94%',
+        justifyContent: 'center',
         // borderWidth:1,
     }
 });

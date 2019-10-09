@@ -9,6 +9,7 @@ import menuListReducer from './src/store/reducers/menuList';
 import userReducer from './src/store/reducers/userReducer'
 import cartReducer from './src/store/reducers/cartReducer'
 import locationReducer from './src/store/reducers/locationReducer'
+import orderReducer from './src/store/reducers/orderReducer';
 
 import IntroductionScreen from './src/screens/Introduction/IntroductionScreen'
 import VenderInfoScreen from './src/screens/VenderInfo/VenderInfoScreen';
@@ -23,13 +24,16 @@ import PastOrderScreen from './src/screens/Orders/Past/PastOrderScreen';
 import Payment from './src/screens/Payment/paymentPage';
 import AddressPage from './src/screens/Address/AddressPage';
 import FoodCartScreen from './src/screens/FoodCart/FoodCartScreen'
+import SetLocationScreen from './src/screens/SetLocation/SetLocationScreen'
 import Profile from './src/screens/Profile/ProfilePage';
 
 const rootReducer = combineReducers({
   register : userReducer,
   menuList: menuListReducer,
   cartReducer,
-  locationReducer
+  locationReducer,
+  orderReducer,
+  
 })
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
@@ -62,11 +66,12 @@ const rootStack = createStackNavigator(
     PastOrderScreen,
     Payment,
     AddressPage,
-    Profile
+    SetLocationScreen,
+    Profile,
   },
 
   {
-    initialRouteName: 'Profile',
+    initialRouteName: 'MenuScreen',
     defaultNavigationOptions: {
       header: null,
     }
