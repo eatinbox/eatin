@@ -9,6 +9,7 @@ import menuListReducer from './src/store/reducers/menuList';
 import userReducer from './src/store/reducers/userReducer'
 import cartReducer from './src/store/reducers/cartReducer'
 import locationReducer from './src/store/reducers/locationReducer'
+import orderReducer from './src/store/reducers/orderReducer';
 
 import IntroductionScreen from './src/screens/Introduction/IntroductionScreen'
 import VenderInfoScreen from './src/screens/VenderInfo/VenderInfoScreen';
@@ -30,7 +31,9 @@ const rootReducer = combineReducers({
   register : userReducer,
   menuList: menuListReducer,
   cartReducer,
-  locationReducer
+  locationReducer,
+  orderReducer,
+  
 })
 
 const store = createStore(rootReducer, applyMiddleware(thunk))

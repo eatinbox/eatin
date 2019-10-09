@@ -3,11 +3,13 @@ import {
 View,
 StyleSheet,
 Image,
+Text,
 } from 'react-native';
+import  {withNavigation} from 'react-navigation'
 
 import TypeButton from './TypeButton';
 
-export default class MealType extends Component {
+class MealType extends Component {
     state = {
         toggle: [true, false],
     }
@@ -38,6 +40,12 @@ export default class MealType extends Component {
                     text="FULL MEAL"
                     k={1}
                />
+               {/* Temp Navigation */}
+               <Text 
+                    style={styles.pastOrderText} 
+                    onPress={() => this.props.navigation.navigate('PastOrderScreen')}>
+                PAST ORDERS
+               </Text>
                <View style={styles.imgCont}>
                     <Image
                         source={require('../../../assets/filter.png')}
@@ -70,4 +78,18 @@ const styles = StyleSheet.create({
         width: 24,
         height: 24,
     },
+    
+    pastOrderText :{
+        marginLeft: 4,
+        padding: 4,
+        paddingLeft: 6,
+        paddingRight: 6,
+        paddingBottom: 6,
+        fontSize: 10.5,
+        fontWeight: 'bold',
+        // letterSpacing: 0.2,
+        color: '#000',
+    },
 })
+
+export default withNavigation(MealType);
