@@ -53,7 +53,7 @@ class FoodCart extends React.Component {
 const styles = StyleSheet.create({
     container:{
         width,
-        borderWidth:1,
+        // borderWidth:1,
         // flex: 1,
         alignItems: 'center',
     },

@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         marginTop: 20,
-        borderWidth: 1,
+        // borderWidth: 1,
         alignItems: 'center',
         paddingLeft: 16,
         paddingRight: 16,

@@ -25,7 +25,7 @@ import Payment from './src/screens/Payment/paymentPage';
 import AddressPage from './src/screens/Address/AddressPage';
 import FoodCartScreen from './src/screens/FoodCart/FoodCartScreen'
 import SetLocationScreen from './src/screens/SetLocation/SetLocationScreen'
-
+import Profile from './src/screens/Profile/ProfilePage';
 
 const rootReducer = combineReducers({
   register : userReducer,
@@ -66,7 +66,8 @@ const rootStack = createStackNavigator(
     PastOrderScreen,
     Payment,
     AddressPage,
-    SetLocationScreen
+    SetLocationScreen,
+    Profile,
   },
 
   {
