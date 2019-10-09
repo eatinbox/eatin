@@ -1,6 +1,8 @@
 from users.models import (Customer)
 from rest_framework import serializers
 from base.models import Person
+from vendors.serializers import MenuSerializer
+from vendors.models import Menu
 from .models import Orders, OrderMenu
 
 
@@ -18,9 +20,14 @@ class CustomerSerializer(serializers.ModelSerializer):
 
 # change the fields and populate data with ids
 class OrderMenuSerializer(serializers.ModelSerializer):
+    menu = serializers.SerializerMethodField()
+
     class Meta:
         model = OrderMenu
-        fields = '__all__'
+        fields = ['menu', 'count']
+
+    def get_menu(self, obj):
+        return MenuSerializer(obj.menu).data
 
 
 # Need To Update This Serializer (change the OrderMenuSerializer to get appropriate data)

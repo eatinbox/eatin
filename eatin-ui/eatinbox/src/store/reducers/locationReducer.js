@@ -1,7 +1,7 @@
 import * as actionTypes from '../actions/locationActions'
 
 const initialState = {
-    region:{},
+    region: null,
 }
 
 export default (state = initialState, action) => {

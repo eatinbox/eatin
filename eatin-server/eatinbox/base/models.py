@@ -52,8 +52,8 @@ class Person(models.Model):
     def getPersonName(self):
         return self.user.first_name
 
-    def getFullName(self):
-        return str(self.user.first_name) + " " + str(self.user.last_name)
+    # def getFullName(self):
+    #     return str(self.user.first_name) + " " + str(self.user.last_name)
 
 
 class UserManager(BaseUserManager):
@@ -62,30 +62,40 @@ class UserManager(BaseUserManager):
                     is_superuser=False,
                     is_staff=False,
                     first_name=None,
-                    last_name=None,
+                    # last_name=None,
                     is_active=True,
                     is_vendor=False,
-                    is_customer=True,
+                    is_customer=False,
                     is_partner=False,
+                    is_user=None,
                     ):
         if not email:
             raise ValueError("User must provide Email")
         if not password:
             raise ValueError("User must provide a password")
+        if not is_user:
+            raise ValueError("is_user is required")
 
         user_obj = self.model(
             email=self.normalize_email(email),
             first_name=first_name,
-            last_name=last_name,
+            # last_name=last_name,
         )
 
         user_obj.set_password(password)
-        user_obj.vendor = is_vendor
+        user_obj.admin = is_superuser
         user_obj.active = is_active
         user_obj.staff = is_staff
         user_obj.customer = is_customer
+        user_obj.vendor = is_vendor
         user_obj.partner = is_partner
-        user_obj.admin = is_superuser
+
+        '''logic for making appropriate flag true'''
+        setattr(user_obj,
+                is_user,
+                True
+                )
+
         user_obj.save(using=self._db)
         return user_obj
 
@@ -102,33 +112,33 @@ class UserManager(BaseUserManager):
 
         return user
 
-    def create_vendor(self, email, password=None, first_name=None, last_name=None):
-        user = self.create_user(
-            email,
-            password=password,
-            first_name=first_name,
-            last_name=last_name,
-            is_active=True,
-            is_vendor=True,
-            is_customer=False,
-            is_partner=False,
-        )
-
-        return user
-
-    def create_customer(self, email, password=None, first_name=None, last_name=None):
-        user = self.create(
-            email,
-            password=password,
-            first_name=first_name,
-            last_name=last_name,
-            is_active=True,
-            is_vendor=False,
-            is_customer=True,
-            is_partner=False,
-        )
-
-        return user
+    # def create_vendor(self, email, password=None, first_name=None, last_name=None):
+    #     user = self.create_user(
+    #         email,
+    #         password=password,
+    #         first_name=first_name,
+    #         # last_name=last_name,
+    #         is_active=True,
+    #         is_vendor=True,
+    #         is_customer=False,
+    #         is_partner=False,
+    #     )
+    #
+    #     return user
+    #
+    # def create_customer(self, email, password=None, first_name=None, last_name=None):
+    #     user = self.create(
+    #         email,
+    #         password=password,
+    #         first_name=first_name,
+    #         last_name=last_name,
+    #         is_active=True,
+    #         is_vendor=False,
+    #         is_customer=True,
+    #         is_partner=False,
+    #     )
+    #
+    #     return user
 
 
 class User(AbstractBaseUser):
@@ -137,7 +147,7 @@ class User(AbstractBaseUser):
     customer = models.BooleanField(default=True)
     partner = models.BooleanField(default=False)
     first_name = models.CharField(max_length=255, null=True, blank=True)
-    last_name = models.CharField(max_length=255, null=True, blank=True)
+    # last_name = models.CharField(max_length=255, null=True, blank=True)
     active = models.BooleanField(default=True)
     admin = models.BooleanField(default=True)
     staff = models.BooleanField(default=True)
@@ -178,4 +188,4 @@ class User(AbstractBaseUser):
 
     @property
     def is_partner(self):
-        return self.customer
+        return self.partner

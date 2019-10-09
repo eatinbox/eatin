@@ -25,44 +25,53 @@ const Header = () => {
 const styles= StyleSheet.create({
     container: {
         marginTop: 2,
+        paddingTop: 8,
         width: '100%',
-        height: 40,
-        // borderColor: '#000',
-        elevation: 5,
-        borderBottomWidth: 0,
+        // borderWidth:1,
+        // borderBottomWidth:1,
+        backgroundColor: '#fff',
+        borderColor: '#ddd',
+        elevation: 3,
         flexDirection: 'row',
         justifyContent: 'center'
     },
 
     block: {
         width: '50%',
-        // borderColor: '#000',
         // borderWidth: 1,
-        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#2D2D2D'
+
     },
 
     block1: {
         width: '50%',
-        // borderColor: '#000',
         // borderWidth: 1,
-        flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
     },
 
     textStyle: {
-        fontSize: 18,
+        fontSize: 10.5,
         fontWeight: 'bold',
-        color: '#fff'
+        letterSpacing: 0.3,
+        color: '#000',
+        padding:4,
+        paddingBottom:8,
+        paddingLeft:8,
+        paddingRight: 8,
+        borderBottomWidth: 2.5,
     },
 
     textStyle1: {
-        fontSize: 18,
+        fontSize: 10.5 ,
         fontWeight: 'bold',
-        color: '#000'
+        letterSpacing: 0.3,
+        color: 'rgba(0,0,0,0.4)',
+        padding:4,
+        paddingBottom:8,
+        paddingLeft:8,
+        paddingRight: 8,
     }
 })
 

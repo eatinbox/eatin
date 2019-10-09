@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { 
 TextInput,
+Text,
 View,
 StyleSheet,
 Image,
@@ -39,6 +40,12 @@ class LocationHeader extends Component {
     }
 
     render() {
+        let name = null;
+
+        if(this.props.region){
+            name = this.props.region.name.toUpperCase();
+        }
+    
         const counter = this.props.cartList.length ?
         (
         <Image
@@ -56,12 +63,14 @@ class LocationHeader extends Component {
                     <View style={styles.mapBox}>
                         <Image source={require('../../../assets/mapicon.png')} style={styles.mapIcon}/>
                     </View>
-                    <TextInput
-                        style={styles.inputContainer}
-                        onChangeText={(location) => this.setState({location})}
-                        value={this.state.location}
-                        placeholder="Enter your location"
-                    />
+                    <View style={styles.curLoc}>
+                        <Text 
+                            style={styles.curLocText} 
+                            onPress={() => this.props.navigation.navigate('SetLocationScreen')}
+                        >
+                            {name}
+                        </Text>
+                    </View>
                 </View>
                 <TouchableOpacity 
                     style={styles.cartCont}
@@ -102,11 +111,29 @@ const styles = StyleSheet.create({
         fontSize: 12,
         letterSpacing: 0.3,
         fontWeight: 'bold',
+        textAlign: 'center',
         textAlignVertical: 'center',
         padding: 0,
         paddingLeft: 8,
         borderColor: "gray",
         marginLeft: 10
+    },
+
+    curLoc:{
+        width: '80%',
+        // borderWidth:1,
+        height: 25,
+        justifyContent: 'center',
+    },
+
+    curLocText:{
+        fontSize: 12,
+        letterSpacing: 0.3,
+        fontWeight: 'bold',
+        textAlignVertical: 'center',
+        padding: 0,
+        paddingLeft: 8,
+        borderColor: "gray",
     },
 
     mapIcon: {
@@ -148,9 +175,10 @@ const styles = StyleSheet.create({
     }
 });
 
-const mapStateToProps = ({cartReducer}) => {
+const mapStateToProps = ({cartReducer, locationReducer}) => {
     return {
-        cartList: cartReducer.cartList
+        cartList: cartReducer.cartList,
+        region: locationReducer.region
     }
 } 
 
