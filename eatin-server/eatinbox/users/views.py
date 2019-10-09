@@ -6,8 +6,8 @@ from rest_framework import status
 from rest_framework import generics
 from rest_framework.views import APIView
 from base.models import Person
-from partner.models import partnerLocation
-from partner.serializers import partnerInfo
+from partner.models import PartnerLocation
+from partner.serializers import PartnerInfo
 from math import sin, cos, sqrt, atan2, radians
 import googlemaps
 from .models import Orders

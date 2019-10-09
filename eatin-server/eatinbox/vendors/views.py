@@ -21,8 +21,8 @@ class VendorListApiView(ListCreateAPIView):
     queryset = Vendor.objects.all()
     serializer_class = VendorSerializer
     filter_backends = [SearchFilter, OrderingFilter]
-    search_fields = ['']
-    ordering_fields = ['rating']
+    search_fields = ['get_vendor_name()', 'categories']
+    ordering_fields = ['rating']  # delivery_time will be added later.
 
 
 

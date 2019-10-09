@@ -4,5 +4,5 @@ from . import models
 # Register your models here.
 
 admin.site.register(models.Partner)
-admin.site.register(models.partnerLocation)
-admin.site.register(models.partnerOrder)
+admin.site.register(models.PartnerLocation)
+admin.site.register(models.PartnerOrder)
