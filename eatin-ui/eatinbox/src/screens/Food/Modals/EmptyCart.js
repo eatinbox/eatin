@@ -11,7 +11,7 @@ const EmptyCart = (props) => {
             onRequestClose={props.closeModal}
         >
             <View style={styles.container}>
-                <Text style={styles.msg}>Cart is empty</Text>
+                <Text style={styles.msg}>{props.msg}</Text>
             </View>
         </Modal>
     )

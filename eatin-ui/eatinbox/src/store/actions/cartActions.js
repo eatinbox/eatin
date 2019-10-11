@@ -1,5 +1,6 @@
 import axios from 'axios'
 import * as urls from '../../../apiUrl'
+import { axiosPostConfig } from '../../reusables/Functions/AxiosConfig'
 
 export const ADD_TO_CART = 'ADD_TO_CART'
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
@@ -40,11 +41,7 @@ export const sendCart = (data) => async dispatch => {
     const url = urls.address + 'users/pastorders/'
 
     try{
-        const response = await axios.post(
-            url, 
-            data, 
-            {headers: { 'content-type': 'application/json'}}
-        )
+        const response = await axios(axiosPostConfig(url, data))
 
         console.log(response)
     }

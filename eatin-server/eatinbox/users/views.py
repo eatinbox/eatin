@@ -1,13 +1,13 @@
 from rest_framework.response import Response
 from rest_framework import permissions, status
 from rest_framework.exceptions import ValidationError
-from .serializers import OrderMenuSerializer
 from rest_framework import status
 from rest_framework import generics
 from rest_framework.views import APIView
 from base.models import Person
 from partner.models import partnerLocation
 from partner.serializers import partnerInfo
+from jwtauth.permissions import IsValidUser
 from math import sin, cos, sqrt, atan2, radians
 import googlemaps
 from .models import Orders
@@ -20,15 +20,14 @@ class UserListApiView(generics.ListAPIView):
 
 
 class PastOrdersListApiView(generics.ListCreateAPIView):
-    permission_classes = [permissions.AllowAny]
-    authentication_classes = []
+    permission_classes = [IsValidUser]
+    # authentication_classes = []
     queryset = Orders.objects.all()
     serializer_class = OrdersSerializer
 
     def post(self, request, *args, **kwargs):
         # Since many to many field present so we need to override the default behaviour
         # since the instance needs to be created before adding
-        print(request.data)
         instance = OrdersSerializer(data=request.data, context={'request': self.request})
         try:
             # Pops the many to many field data present in request.data magically

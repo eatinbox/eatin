@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { 
-TextInput,
 Text,
 View,
 StyleSheet,
@@ -12,6 +11,8 @@ import {connect} from 'react-redux'
 import {withNavigation} from 'react-navigation'
 
 import EmptyCart from '../Modals/EmptyCart'
+import is_anon from '../../../reusables/Functions/anonWrapper'
+
 
 const images = {
     1: require('../../../assets/counters/1.png'),
@@ -28,9 +29,8 @@ class LocationHeader extends Component {
     };
 
     navigateCartScreen = () => {
-        if(this.props.cartList.length) {
+        if(this.props.cartList.length)
            return this.props.navigation.navigate('FoodCartScreen')
-        }
 
         this.setState({isVisible: true})
     }
@@ -58,6 +58,7 @@ class LocationHeader extends Component {
                  <EmptyCart
                     isVisible={this.state.isVisible}
                     closeModal={this.onModalClose}
+                    msg="CART IS EMPTY"
                 />
                 <View style={styles.inputBox}>
                     <View style={styles.mapBox}>
@@ -74,7 +75,7 @@ class LocationHeader extends Component {
                 </View>
                 <TouchableOpacity 
                     style={styles.cartCont}
-                    onPress={this.navigateCartScreen}>
+                    onPress={() => is_anon(this.navigateCartScreen)}>
                     {counter}
                     <Image
                         source={require('../../../assets/cart.png')}
@@ -175,10 +176,11 @@ const styles = StyleSheet.create({
     }
 });
 
-const mapStateToProps = ({cartReducer, locationReducer}) => {
+const mapStateToProps = ({cartReducer, locationReducer, userReducer}) => {
     return {
         cartList: cartReducer.cartList,
-        region: locationReducer.region
+        region: locationReducer.region,
+        user: userReducer.session_user,
     }
 } 
 

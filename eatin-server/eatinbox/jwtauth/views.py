@@ -71,17 +71,24 @@ class RegisterView(CreateAPIView):
     permission_classes = [permissions.AllowAny]
 
     def get_serializer_context(self):
-        return {'request': self.request}
+        return {
+            'request': self.request
+        }
 
     def post(self, request, *args, **kwargs):
         # Overrided this method for understanding purposes only.
+        print(request.data)
         instance = RegisterSerializer(data=request.data, context=self.get_serializer_context())
         try:
             instance.is_valid()
         except ValidationError:
             return Response(data=instance.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        instance.save()
+        try:
+            instance.save()
+        except:
+            return Response(data=instance.errors, status=status.HTTP_400_BAD_REQUEST)
+
         return Response(data=instance.data, status=status.HTTP_201_CREATED)
 
 # The following view will give us the detailed view.

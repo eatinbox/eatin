@@ -1,15 +1,9 @@
 import React, {Component} from 'react';
 import { StatusBar } from 'react-native';
 import {Provider} from 'react-redux';
-import {createStore, applyMiddleware, combineReducers} from 'redux'
-import thunk from 'redux-thunk';
 import {createAppContainer, createStackNavigator} from 'react-navigation'
 
-import menuListReducer from './src/store/reducers/menuList';   
-import userReducer from './src/store/reducers/userReducer'
-import cartReducer from './src/store/reducers/cartReducer'
-import locationReducer from './src/store/reducers/locationReducer'
-import orderReducer from './src/store/reducers/orderReducer';
+import store from './src/store/store'
 
 import IntroductionScreen from './src/screens/Introduction/IntroductionScreen'
 import VenderInfoScreen from './src/screens/VenderInfo/VenderInfoScreen';
@@ -27,16 +21,7 @@ import FoodCartScreen from './src/screens/FoodCart/FoodCartScreen'
 import SetLocationScreen from './src/screens/SetLocation/SetLocationScreen'
 import Profile from './src/screens/Profile/ProfilePage';
 
-const rootReducer = combineReducers({
-  register : userReducer,
-  menuList: menuListReducer,
-  cartReducer,
-  locationReducer,
-  orderReducer,
-  
-})
 
-const store = createStore(rootReducer, applyMiddleware(thunk))
 
 
 export default class App extends Component {

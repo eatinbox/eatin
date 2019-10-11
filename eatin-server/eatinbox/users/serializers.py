@@ -20,13 +20,14 @@ class CustomerSerializer(serializers.ModelSerializer):
 
 # change the fields and populate data with ids
 class OrderMenuSerializer(serializers.ModelSerializer):
-    menu = serializers.SerializerMethodField()
+    # This field is required to poulate the id and store id as well for listRetrive view to work
+    menu_ob = serializers.SerializerMethodField()
 
     class Meta:
         model = OrderMenu
-        fields = ['menu', 'count']
+        fields = ['menu', 'count', 'menu_ob']
 
-    def get_menu(self, obj):
+    def get_menu_ob(self, obj):
         return MenuSerializer(obj.menu).data
 
 

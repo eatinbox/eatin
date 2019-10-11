@@ -8,8 +8,10 @@ User = get_user_model()
 class IsValidUser(BasePermission):
 
     def has_permission(self, request, view):
-
-        data = request.data
+        if request.method == 'POST':
+            data = request.data
+        else:
+            data = getattr(request, request.method)
         is_user = data.get('is_user')
 
         if is_user is not None:

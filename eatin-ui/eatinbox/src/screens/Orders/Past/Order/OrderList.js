@@ -49,8 +49,8 @@ const styles = StyleSheet.create({
     }
 })
 
-export default connect(({ orderReducer }) => {
+export default connect(({ orderReducer}) => {
     return {
-        pastOrdersList: orderReducer.pastOrdersList
+        pastOrdersList: orderReducer.pastOrdersList,
     }
 })(OrderList);
