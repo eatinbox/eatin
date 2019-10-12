@@ -1,13 +1,11 @@
 from rest_framework.response import Response
-from rest_framework import permissions, status
 from rest_framework.exceptions import ValidationError
-from rest_framework import status
-from rest_framework import generics
+from rest_framework import status, generics
 from rest_framework.views import APIView
 from base.models import Person
-from partner.models import partnerLocation
-from partner.serializers import partnerInfo
 from jwtauth.permissions import IsValidUser
+from partner.models import PartnerLocation
+from partner.serializers import PartnerInfo
 from math import sin, cos, sqrt, atan2, radians
 import googlemaps
 from .models import Orders
@@ -66,10 +64,10 @@ class assignPartner(APIView):
         v_longitude = request.GET.get('longitude')
         v_latitude = request.GET.get('latitude')
         v_area = request.GET.get('area')
-        partner_list = partnerLocation.objects.filter(area=v_area)
+        partner_list = PartnerLocation.objects.filter(area=v_area)
 
         shortestDistance = 0
-        assignedPartner = partnerLocation.objects.get(pk=1)
+        assignedPartner = PartnerLocation.objects.get(pk=1)
 
         for partner_location in partner_list:
             p_longitude = partner_location.longitude
@@ -95,7 +93,7 @@ class assignPartner(APIView):
                 assignedPartner = partner_location
 
         partnerDetails = assignedPartner.Partner
-        partner_Details = partnerInfo(partnerDetails)
+        partner_Details = PartnerInfo(partnerDetails)
 
         return Response(partner_Details.data)
 
@@ -114,10 +112,10 @@ class assignPartnernew(APIView):
         v_longitude = request.GET.get('longitude')
         v_latitude = request.GET.get('latitude')
         v_area = request.GET.get('area')
-        partner_list = partnerLocation.objects.filter(area=v_area)
+        partner_list = PartnerLocation.objects.filter(area=v_area)
 
         shortestDistance = 0
-        assignedPartner = partnerLocation.objects.get(pk=1)
+        assignedPartner = PartnerLocation.objects.get(pk=1)
 
         for partner_location in partner_list:
             p_longitude = partner_location.longitude
@@ -137,7 +135,7 @@ class assignPartnernew(APIView):
                 assignedPartner = partner_location
 
         partnerDetails = assignedPartner.Partner
-        partner_Details = partnerInfo(partnerDetails)
+        partner_Details = PartnerInfo(partnerDetails)
 
         return Response(partner_Details.data)
 
@@ -154,7 +152,7 @@ class assignPartner_radius(APIView):
         v_longitude = request.GET.get('longitude')
         v_latitude = request.GET.get('latitude')
 
-        partner_list = partnerLocation.objects.raw(''' SELECT
+        partner_list = PartnerLocation.objects.raw(''' SELECT
         partner, (
         6371 * acos (
          cos ( radians(%s) )
@@ -192,7 +190,7 @@ class assignPartner_radius(APIView):
 
         if assignedPartner:
             partnerDetails = assignedPartner.Partner
-            partner_Details = partnerInfo(partnerDetails)
+            partner_Details = PartnerInfo(partnerDetails)
 
             return Response(partner_Details.data)
 

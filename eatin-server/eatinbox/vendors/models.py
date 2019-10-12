@@ -11,6 +11,7 @@ class Vendor(models.Model):
     person_info = models.OneToOneField(Person, on_delete=models.CASCADE)
     description = models.TextField(null=True)
     rating = models.IntegerField(null=True)
+    categories = models.TextField(null=True)
 
     def get_vendor_name(self):
         return self.person_info.getPersonName()
@@ -28,6 +29,7 @@ class Menu(models.Model):
     menu_name = models.CharField(max_length=100)
     time_stamp = models.DateField(auto_created=True, auto_now_add=True)
     type = models.CharField(max_length=1, choices=MENU_TYPE)
+    rating = models.IntegerField(null=True)
 
 
 '''

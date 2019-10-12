@@ -25,7 +25,7 @@ FUTURE CHANGES -> have to handle general items case
 
 class Item(models.Model):
     item_name = models.CharField(max_length=50)
-    vendor = models.ManyToManyField("vendors.vendor")  # ? Uncessary complexity??
+    vendor = models.ManyToManyField("vendors.vendor")  # ?? unnecessary complexity??
 
 
 ''' 

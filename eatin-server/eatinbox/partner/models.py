@@ -4,9 +4,11 @@ from base.models import Person
 from users.models import OrderMenuItem,Orders
 
 # Create your models here.
+
+
 class Partner(models.Model):
 
-    objects = models.Manager();
+    objects = models.Manager()
 
     person_info = models.OneToOneField(Person, on_delete=models.CASCADE)
     rating = models.IntegerField(null=True)
@@ -15,7 +17,7 @@ class Partner(models.Model):
         return self.person_info.getPersonName()
 
 
-class partnerOrder(models.Model):
+class PartnerOrder(models.Model):
 
     partner         = models.ForeignKey(Partner,on_delete=models.CASCADE)
     orderDetails    = models.ForeignKey(OrderMenuItem,on_delete=models.CASCADE)
@@ -37,20 +39,22 @@ class partnerOrder(models.Model):
         return self.orderDetails.current_order.customer_info.person_info.Address_set.all()
     
 
-class partnerLocation(models.Model):
+class PartnerLocation(models.Model):
 
     partner         = models.OneToOneField(Partner,on_delete=models.CASCADE)
     area            = models.CharField(max_length=15)
+
     '''When field is 0:-Not doing anything, 1:-On the way to pick up food,2:-Going for delivery '''
     '''This field can be used if he has food pick up spots and delivery spots in a single path'''
+
     currentStatus   = models.IntegerField()
     currentLatitude = models.IntegerField()
     currentLongitude = models.IntegerField()
 
     def get_partner_latLng(self):
 
-        '''Phone Gps will continoulsy send its lat lng and we will update in currentlatitude and current longitude 
-           while calling directions api we will send userLatLng and partnerLatLng '''
+        # Phone Gps will continoulsy send its lat lng and we will update in current_latitude and current longitude
+        # while calling directions api we will send userLatLng and partnerLatLng
 
-        Latlng = {'Latitude':self.currentLatitude,'Longitude':self.currentLongitude}
-        return Latlng
+        lat_lng = {'Latitude': self.currentLatitude, 'Longitude': self.currentLongitude}
+        return lat_lng
