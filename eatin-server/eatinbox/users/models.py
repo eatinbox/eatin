@@ -32,6 +32,9 @@ class Customer(models.Model):
     def getCustomerName(self):
         return self.person_info.getPersonName()
 
+    def get_coords(self):
+        return self.person_info.getCoords()
+
 
 '''
 DESCRIPTION -> This is the menu associated with orders of the customer and is in relation with vendor menu 
@@ -65,12 +68,15 @@ class Orders(models.Model):
     def __str__(self):
         return "Order No:- {}".format(self.pk)
 
+    def get_customer_coords(self):
+        return self.customer_info.get_coords()
 
-'''
+
+"""
 DESCRIPTION -> Related to base Item class so we can fetch name of that base Item, The only difference with MenuItem
 (check MenuItem in vendor models) is that its quantity will be  different which will be customizable by customer hence
 we need other model which is  related to OrderMenu
-'''
+"""
 
 
 class OrderMenuItem(models.Model):

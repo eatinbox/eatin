@@ -40,8 +40,8 @@ FUTURE CHANGES -> Should Convert Person model into single User model
 
 class Person(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    latitude = models.DecimalField(max_digits=8, decimal_places=6, null=True)
-    longitude = models.DecimalField(max_digits=8, decimal_places=6, null=True)
+    latitude = models.DecimalField(max_digits=8, decimal_places=6, null=True, default=18.4785419)
+    longitude = models.DecimalField(max_digits=8, decimal_places=6, null=True, default=73.8169103)
     contact = models.CharField(max_length=10, null=True, blank=True)
 
     objects = models.Manager()
@@ -52,8 +52,11 @@ class Person(models.Model):
     def getPersonName(self):
         return self.user.first_name
 
-    # def getFullName(self):
-    #     return str(self.user.first_name) + " " + str(self.user.last_name)
+    def getCoords(self):
+        return {
+            'latitude': self.latitude,
+            'longitude': self.longitude,
+        }
 
 
 class UserManager(BaseUserManager):
@@ -62,7 +65,6 @@ class UserManager(BaseUserManager):
                     is_superuser=False,
                     is_staff=False,
                     first_name=None,
-                    # last_name=None,
                     is_active=True,
                     is_vendor=False,
                     is_customer=False,
@@ -108,7 +110,8 @@ class UserManager(BaseUserManager):
             is_active=True,
             is_vendor=True,
             is_customer=True,
-            is_partner=True)
+            is_partner=True,
+            is_user="admin")
 
         return user
 
@@ -147,7 +150,6 @@ class User(AbstractBaseUser):
     customer = models.BooleanField(default=True)
     partner = models.BooleanField(default=False)
     first_name = models.CharField(max_length=255, null=True, blank=True)
-    # last_name = models.CharField(max_length=255, null=True, blank=True)
     active = models.BooleanField(default=True)
     admin = models.BooleanField(default=True)
     staff = models.BooleanField(default=True)

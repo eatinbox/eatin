@@ -16,6 +16,9 @@ class Vendor(models.Model):
     def get_vendor_name(self):
         return self.person_info.getPersonName()
 
+    def get_coords(self):
+        return self.person_info.getCoords()
+
 
 # DESCRIPTION -> Menu for a particular time added by the vendor
 class Menu(models.Model):

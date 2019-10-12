@@ -102,10 +102,11 @@ class RegisterSerializer(serializers.ModelSerializer):
         person.save()
 
         is_user = self.initial_data['is_user']
-        if is_user is 'customer':
+
+        if is_user == 'customer':
             customer = Customer(person_info=person)
             customer.save()
-        elif is_user is 'vendor':
+        elif is_user == 'vendor':
             vendor = Vendor(person_info=person)
             vendor.save()
         else:
