@@ -30,6 +30,8 @@ export class AutoComplete extends Component {
             + input + '&location=' + this.props.region.lat + ',' + this.props.region.long 
             + '&radius=35000' + '&components=country:in&key=' + key)
 
+        console.log(predictions)
+
         this.setState({predictions});
     }
 

@@ -26,7 +26,7 @@ class Foodlist extends Component {
     }
 
     componentDidUpdate() {
-        if(this.props.region){            
+        if(this.props.region){     
             if(!this.is_getMenu_dispatched){
                 this.props.dispatch(actionCreators.getMenuList())
                 this.is_getMenu_dispatched = true
@@ -46,7 +46,7 @@ class Foodlist extends Component {
                 />
         ) : <ActivityIndicator size="large" color="#4d4d4d" />
 
-        console.log(this.props.region, this.props.menuList)
+        // console.log(this.props.region, this.props.menuList)
 
         return (
             <View style={styles.container}>

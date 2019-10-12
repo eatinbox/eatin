@@ -3,11 +3,13 @@ import * as actionType from '../actions/userActions'
 const initialState = {
     user:{
         first_name: '',
-        last_name: '',
         email: '',
         password: '',
-        password2: '',
     },
+
+    status: null,
+    msg: null,
+    session_user: null,
 }
 
 export default reducer =  (state = initialState, action) => {
@@ -39,14 +41,27 @@ export default reducer =  (state = initialState, action) => {
                 password: action.password
             }
         }
-    
-    case actionType.SET_PASSWORD1:
+
+    case actionType.SUCCESS:
         return {
             ...state,
-            user: {
-                ...state.user,
-                password2: action.password
+            status: true,
+            session_user:{
+                ...action.data
             }
+        }
+
+    case actionType.ERROR:
+        return {
+            ...state,
+            status: false,
+        }
+
+    case actionType.SET_SESSION_USER:
+        // console.log("session user", action.user)
+        return {
+            ...state,
+            session_user: action.user,
         }
 
     default:

@@ -43,7 +43,12 @@ class MealType extends Component {
                {/* Temp Navigation */}
                <Text 
                     style={styles.pastOrderText} 
-                    onPress={() => this.props.navigation.navigate('PastOrderScreen')}>
+                    onPress={() => {
+                        if(this.props.user === "Anon")
+                            return this.props.navigation.navigate('RegisterScreen')
+                            
+                        this.props.navigation.navigate('PastOrderScreen')}
+                    }>
                 PAST ORDERS
                </Text>
                <View style={styles.imgCont}>

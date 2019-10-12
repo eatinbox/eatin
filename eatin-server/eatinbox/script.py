@@ -1,34 +1,28 @@
-import os, platform
+import os
+import sys
+import platform
 import shutil
 
-str1 = 'base/migrations/'
-str2 = 'users/migrations/'
-str3 = 'vendors/migrations/'
+if sys.argv[1] == 'yeet':
+    apps = ["base", "users", "vendors", "partner"]
 
-apps = ["base", "users", "vendors"]
+    for i in apps:
+        if os.path.exists(i + '/migrations/'):
+            shutil.rmtree(i + '/migrations/')
 
+    if os.path.exists("db.sqlite3"):
+        os.remove("db.sqlite3")
 
-if os.path.exists(str1):
-    shutil.rmtree('base/migrations/')
+    os.system("mysql -u root -psaumitra98 eatinbox < freshData.sql")
 
-if os.path.exists(str2):
-    shutil.rmtree('users/migrations/')
-
-if os.path.exists(str3):
-    shutil.rmtree('vendors/migrations/')
-
-if os.path.exists("db.sqlite3"):
-    os.remove("db.sqlite3")
+cmd1 = " manage.py makemigrations base users vendors partner"
+cmd2 = " manage.py migrate"
+cmd3 = " addData.py"
 
 python = "python"
 
-cmd1 = " manage.py makemigrations base users vendors"
-cmd2 = " manage.py migrate"
-cmd3 = ' manage.py shell < tempfile.txt'
-
 if platform.system() == "Linux":
     python = "python3"
-    cmd3 = ' manage.py shell < tempfile.txt'
 
 os.system(python + cmd1)
 os.system(python + cmd2)

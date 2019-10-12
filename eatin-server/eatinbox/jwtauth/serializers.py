@@ -22,9 +22,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             'id',
             'email',
             'password',
-            # 'password2',
             'first_name',
-            # 'last_name',
             'customer',
             'vendor',
             'partner',
@@ -47,7 +45,7 @@ class RegisterSerializer(serializers.ModelSerializer):
                                                 user=user,
                                                 request=None
                                                 )
-        return response
+        return response['token']
 
     # def validate(self, data):
     #     p1 = data.get('password')
@@ -96,26 +94,20 @@ class RegisterSerializer(serializers.ModelSerializer):
     #     return user
 
     def create(self, validated_data):
-        try:
-            user_data = validated_data.pop('user_data')
-            person_data = validated_data.pop('person_data')
-            t_user_data = validated_data.pop('t_user_data')
-        except KeyError:
-            print("user_data/person_data is empty or not valid")
-            raise KeyError("Provide valid data")
-
-        user = User.objects.create_user(**user_data)
+        user = User.objects.create_user(**self.initial_data)
         user.save()
 
-        person = Person(user=user, **person_data)
+        # person = Person(user=user, **person_data)
+        person = Person(user=user)
         person.save()
 
-        is_user = user_data['is_user']
-        if is_user is 'customer':
-            customer = Customer(person_info=person, **t_user_data)
+        is_user = self.initial_data['is_user']
+
+        if is_user == 'customer':
+            customer = Customer(person_info=person)
             customer.save()
-        elif is_user is 'vendor':
-            vendor = Vendor(person_info=person, **t_user_data)
+        elif is_user == 'vendor':
+            vendor = Vendor(person_info=person)
             vendor.save()
         else:
             '''Here goes Partner'''

@@ -1,41 +1,43 @@
 import React from 'react'
-import { 
-View,
-StyleSheet,
-Image,
-Dimensions,
+import {
+    View,
+    StyleSheet,
+    Image,
+    Dimensions,
+    ToastAndroid,
 } from 'react-native';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 import ButtonContainer from './ButtonContainer';
 import RegisterCard from './RegisterCard/RegisterCard';
 
 import * as actions from '../../store/actions/userActions'
 
-
 const width = Dimensions.get('window').width
 
 class RegisterScreen extends React.Component {
-    constructor(props) {
-        super(props)
+    handlePress = () => {
+        this.props.dispatch(actions.sendRegisterData(this.props.user))
     }
 
-    handlePress = () => {
-        console.log("Button has been pressed")
-        
-        // this.props.dispatch(actions.sendRegisterData(this.props.user))
-        this.props.navigation.navigate('MenuScreen')
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.status) {
+            ToastAndroid.show('Register Successful', ToastAndroid.SHORT);
+            return this.props.navigation.navigate('MenuScreen')
+        }
     }
+
 
     render() {
+
         return (
             <View style={styles.container}>
                 <Image
                     source={require('../../assets/signup.jpeg')}
                     style={styles.img}
                 />
-                <RegisterCard {...this.props}/>
-                <ButtonContainer handlePress={this.handlePress}/>
+                <RegisterCard {...this.props} />
+                <ButtonContainer handlePress={this.handlePress} />
             </View>
         )
     }
@@ -43,7 +45,7 @@ class RegisterScreen extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex:1,
+        flex: 1,
         width,
         borderWidth: 0,
         borderColor: 'blue',
@@ -51,15 +53,15 @@ const styles = StyleSheet.create({
         position: 'relative',
     },
 
-    img:{
+    img: {
         width,
         height: '84%',
     },
 })
 
-const mapStateToProps = ({register}) => {
+const mapStateToProps = ({ userReducer }) => {
     return {
-        user: register.user,
+        ...userReducer
     }
 }
 

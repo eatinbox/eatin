@@ -1,15 +1,12 @@
-from rest_framework.response import Response
-from rest_framework import permissions, status
+import googlemaps
+from rest_framework import status, generics
 from rest_framework.exceptions import ValidationError
-from .serializers import OrderMenuSerializer
-from rest_framework import status
-from rest_framework import generics
-from rest_framework.views import APIView
+from rest_framework.response import Response
+
 from base.models import Person
+from jwtauth.permissions import IsValidUser
 from partner.models import PartnerLocation
 from partner.serializers import PartnerInfo
-from math import sin, cos, sqrt, atan2, radians
-import googlemaps
 from .models import Orders
 from .serializers import UserSerializer, OrdersSerializer, OrderMenuSerializer
 
@@ -20,15 +17,14 @@ class UserListApiView(generics.ListAPIView):
 
 
 class PastOrdersListApiView(generics.ListCreateAPIView):
-    permission_classes = [permissions.AllowAny]
-    authentication_classes = []
+    permission_classes = [IsValidUser]
+    # authentication_classes = []
     queryset = Orders.objects.all()
     serializer_class = OrdersSerializer
 
     def post(self, request, *args, **kwargs):
         # Since many to many field present so we need to override the default behaviour
         # since the instance needs to be created before adding
-        print(request.data)
         instance = OrdersSerializer(data=request.data, context={'request': self.request})
         try:
             # Pops the many to many field data present in request.data magically
@@ -50,153 +46,67 @@ class PastOrdersListApiView(generics.ListCreateAPIView):
         ob.menus.add(*menu_instances)  # spread all the list objects in add method
         ob.save()
 
+        # print(ob)
+
+        assign_partner(ob)
+
         response = OrdersSerializer(ob).data
 
         return Response(data=response, status=status.HTTP_201_CREATED)
 
 
-class assignPartner(APIView):
-    permission_classes = []
-    authentication_classes = []
+# Filters within a radius of 7km
+def assign_partner(order):
+    # Get just the first vendor cordinates from orderMenus as of now
+    v_latitude = order.menus.all()[0].menu.vendor.get_coords()['latitude']
+    v_longitude = order.menus.all()[0].menu.vendor.get_coords()['longitude']
 
-    ''' Assuming LAtLng of Vendor will be in the request'''
-    '''Filters entire data and calculates closest'''
+    # print(v_latitude, v_longitude)
 
-    def get(self, request):
+    filtered_partners = []
+    sorted_partners = []
 
-        v_longitude = request.GET.get('longitude')
-        v_latitude = request.GET.get('latitude')
-        v_area = request.GET.get('area')
-        partner_list = partnerLocation.objects.filter(area=v_area)
+    partner_list = PartnerLocation.objects.raw(""" SELECT  * , 
+    (
+        6371 * 
+        acos(cos( radians( %s ) ) * 
+        cos( radians( latitude ) ) * 
+        cos( radians( longitude ) - 
+        radians( %s ) ) + 
+        sin( radians( %s ) ) * 
+        sin( radians( latitude ) ) ) 
+    )   AS distance 
+    
+    FROM partner_partnerlocation 
+    HAVING distance < 8
+    ORDER BY distance; """, [v_latitude, v_longitude, v_latitude])
 
-        shortestDistance = 0
-        assignedPartner = partnerLocation.objects.get(pk=1)
+    # partner_list = PartnerLocation.objects.raw("SELECT * from partner_partnerlocation")
 
-        for partner_location in partner_list:
-            p_longitude = partner_location.longitude
-            p_latitude = partner_location.latitude
+    for partner_location in partner_list:
+        p_longitude = partner_location.longitude
+        p_latitude = partner_location.latitude
 
-            R = 6373.0
+        source = str(v_latitude) + ',' + str(v_longitude)
+        destination = str(p_latitude) + ',' + str(p_longitude)
 
-            lat1 = radians(v_latitude)
-            lon1 = radians(v_longitude)
-            lat2 = radians(p_latitude)
-            lon2 = radians(p_longitude)
+        gmaps = googlemaps.Client(key='AIzaSyCg0693hHjd0Pl9qMR8euPqK6N5DG_9FA8')
+        result = gmaps.directions(source, destination, mode="transit", departure_time="now")
 
-            dlon = lon2 - lon1
-            dlat = lat2 - lat1
+        if len(result) == 0:
+            continue
 
-            a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
-            c = 2 * atan2(sqrt(a), sqrt(1 - a))
+        distance_dict = result[0]['legs'][0]['distance']
+        duration_dict = result[0]['legs'][0]['duration']
+        polyline = result[0]['overview_polyline']
 
-            distance = R * c
+        distance = int(distance_dict['value'])
 
-            if distance < shortestDistance:
-                shortestDistance = distance
-                assignedPartner = partner_location
+        filtered_partners.append({
+            'id': partner_location.partner,
+            'distance': distance,
+        })
 
-        partnerDetails = assignedPartner.Partner
-        partner_Details = partnerInfo(partnerDetails)
+        sorted_partners = sorted(filtered_partners, key=lambda k: k['distance'])
 
-        return Response(partner_Details.data)
-
-
-'''Filters with area'''
-
-
-class assignPartnernew(APIView):
-    permission_classes = []
-    authentication_classes = []
-
-    ''' Assuming LAtLng of Vendor will be in the request'''
-
-    def get(self, request):
-
-        v_longitude = request.GET.get('longitude')
-        v_latitude = request.GET.get('latitude')
-        v_area = request.GET.get('area')
-        partner_list = partnerLocation.objects.filter(area=v_area)
-
-        shortestDistance = 0
-        assignedPartner = partnerLocation.objects.get(pk=1)
-
-        for partner_location in partner_list:
-            p_longitude = partner_location.longitude
-            p_latitude = partner_location.latitude
-
-            source = v_longitude + v_latitude
-            destination = p_longitude + p_latitude
-
-            gmaps = googlemaps.Client(key='AIzaSyCg0693hHjd0Pl9qMR8euPqK6N5DG_9FA8')
-            result = gmaps.directions(source, destination, mode="transit", departure_time="now")
-
-            distance_parsed = result[0]['legs'][0]['distance']['text']
-            distance = int(distance_parsed)
-
-            if distance < shortestDistance:
-                shortestDistance = distance
-                assignedPartner = partner_location
-
-        partnerDetails = assignedPartner.Partner
-        partner_Details = partnerInfo(partnerDetails)
-
-        return Response(partner_Details.data)
-
-
-'''Filters within a radius of 10km'''
-
-
-class assignPartner_radius(APIView):
-    permission_classes = []
-    authentication_classes = []
-
-    def get(self, request, format=None):
-
-        v_longitude = request.GET.get('longitude')
-        v_latitude = request.GET.get('latitude')
-
-        partner_list = partnerLocation.objects.raw(''' SELECT
-        partner, (
-        6371 * acos (
-         cos ( radians(%s) )
-        * cos( radians( currentLatitude ) )
-        * cos( radians( currentLongitude ) - radians(%s) )
-        + sin ( radians(78.3232) )
-        * sin( radians( %s ) )
-        )
-        ) AS distance
-        FROM partner_partnerLocation
-        HAVING distance < 10
-        ORDER BY distance;
-        
-        ''', [v_latitude, v_longitude, v_latitude])
-
-        shortestDistance = 0
-        assignedPartner = None
-
-        for partner_location in partner_list:
-            p_longitude = partner_location.longitude
-            p_latitude = partner_location.latitude
-
-            source = v_longitude + v_latitude
-            destination = p_longitude + p_latitude
-
-            gmaps = googlemaps.Client(key='AIzaSyCg0693hHjd0Pl9qMR8euPqK6N5DG_9FA8')
-            result = gmaps.directions(source, destination, mode="transit", departure_time="now")
-
-            distance_parsed = result[0]['legs'][0]['distance']['text']
-            distance = int(distance_parsed)
-
-            if distance < shortestDistance and partner_location.currentStatus == 0:
-                shortestDistance = distance
-                assignedPartner = partner_location
-
-        if assignedPartner:
-            partnerDetails = assignedPartner.Partner
-            partner_Details = partnerInfo(partnerDetails)
-
-            return Response(partner_Details.data)
-
-        else:
-            content = {'Details': 'Partner not Found'}
-            return Response(content, status=status.HTTP_404_NOT_FOUND)
+    print("Sorted", sorted_partners)

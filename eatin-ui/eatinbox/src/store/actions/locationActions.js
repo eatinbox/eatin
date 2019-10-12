@@ -28,13 +28,13 @@ export const requestLocationPermission = () => async  dispatch => {
   }
 
 export const getLocation = () => dispatch => {
-    Geolocation.getCurrentPosition(
-        (position) => {
+    Geolocation.getCurrentPosition((position) => {
             const region = {
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude,
                 name: 'Current Location'
             }
+            
             dispatch(setLocation(region))
             // postLocation(region)
         },

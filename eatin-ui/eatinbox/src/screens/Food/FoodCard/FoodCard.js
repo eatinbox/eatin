@@ -9,11 +9,15 @@ import Dish from './Dish';
 import Menu from './Menu/Menu';
 import BlackButton from '../../../reusables/BlackButton';
 import { connect } from 'react-redux'
+import {withNavigation} from 'react-navigation'
 
 import * as actionCreators from '../../../store/actions/cartActions'
 
 class FoodCard extends Component {
     handleOnPress = (item) => {
+        if(this.props.user === "Anon")
+            return this.props.navigation.navigate('RegisterScreen')
+
         this.props.dispatch(actionCreators.addToCart(item))
     }
 
@@ -88,4 +92,8 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect()(FoodCard);
+export default withNavigation(connect(({userReducer}) => {
+    return {
+        user: userReducer.session_user,
+    }
+})(FoodCard));

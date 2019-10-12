@@ -44,7 +44,7 @@ class MenuCounter extends React.Component {
     }
 
     render() {
-        console.log(this.props.idCartList)
+        // console.log(this.props.idCartList)
 
         return (
             <View style={styles.container}>

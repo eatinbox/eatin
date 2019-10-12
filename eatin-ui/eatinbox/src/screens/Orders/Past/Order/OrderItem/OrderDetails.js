@@ -16,12 +16,12 @@ const Details = ({item}) => {
             <MenuImages/>
             <View style= { styles.detailsContainer }>
                 {item.menus.map((_menu) => {
-                    const {menu} = _menu
+                    const {menu_ob} = _menu
                     return (
                         <MenuTitles
-                            key={menu.pk}
-                            menuName={menu.menu_name}
-                            vendorName={menu.vendor.vendor_name}
+                            key={menu_ob.pk}
+                            menuName={menu_ob.menu_name}
+                            vendorName={menu_ob.vendor.vendor_name}
                         />
                     ) 
                 })}

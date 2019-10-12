@@ -12,16 +12,6 @@ import * as actionTypes from '../../../store/actions/userActions'
 import BlackButton from '../../../reusables/BlackButton'
 
 class RegisterCard extends React.Component {
-    // constructor(params) {
-    //     super(params)
-    //     console.log(params)
-    // }
-
-    // static getDerivedStateFromProps(props, state) {
-    //     console.log(props)
-    //     return state
-    // }
-
     render(){
         const {dispatch, user} = this.props 
         
@@ -44,15 +34,9 @@ class RegisterCard extends React.Component {
                             value={user.email}
                         />
                         <InputText
-                            placeholder="Password1"
+                            placeholder="Password"
                             onChange={(password) => dispatch(actionTypes.setPassword(password))}
                             value={user.password}
-                            hide={true}
-                        />
-                        <InputText
-                            placeholder="Password2"
-                            onChange={(password) => dispatch(actionTypes.setPassword1(password))}
-                            value={user.password2}
                             hide={true}
                         />
                 </View>
