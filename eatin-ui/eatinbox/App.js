@@ -19,6 +19,7 @@ import Payment from './src/screens/Payment/paymentPage';
 import AddressPage from './src/screens/Address/AddressPage';
 import FoodCartScreen from './src/screens/FoodCart/FoodCartScreen'
 import SetLocationScreen from './src/screens/SetLocation/SetLocationScreen'
+import TrackPartnerScreen from './src/screens/TrackPartner/TrackPartnerScreen'
 import Profile from './src/screens/Profile/ProfilePage';
 
 
@@ -52,6 +53,7 @@ const rootStack = createStackNavigator(
     Payment,
     AddressPage,
     SetLocationScreen,
+    TrackPartnerScreen,
     Profile,
   },
 

@@ -12,11 +12,14 @@ const width = Dimensions.get('window').width
 
 class FoodCart extends React.Component {
 
-    componentDidUpdate(){
+    componentDidUpdate(prevProps, prevState) {
         if(!this.props.cartList.length){
             this.props.navigation.navigate('MenuScreen')
-        }
+        }        
+
+        console.log(this.props)
     }
+    
 
     orderNow = () => {
         const data = {
@@ -25,6 +28,7 @@ class FoodCart extends React.Component {
             ...this.props.postData,
         }
         this.props.dispatch(actionTypes.sendCart(data))
+        this.props.navigation.navigate('TrackPartnerScreen')
     }
 
     render() {

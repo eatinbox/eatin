@@ -17,7 +17,7 @@ class IsValidUser(BasePermission):
         if is_user is not None:
 
             user = request.user
-            print('dhap')
+            # print('dhap')
 
             if user is not None:
                 try:
