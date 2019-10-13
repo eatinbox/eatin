@@ -7,6 +7,7 @@ export const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
 export const INCREASE_COUNT = 'INCREASE_COUNT'
 export const DECREASE_COUNT = 'DECREASE_COUNT'
 export const SEND_CART = 'SEND_CART'
+export const SET_CURRENT_ORDER = 'SET_CURRENT_ORDER'
 
 export const addToCart = (item) => {
     return {
@@ -37,17 +38,27 @@ export const decreaseCount = (pk) => {
     }
 }
 
-export const sendCart = (data) => async dispatch => {
+export const setCurrentOrder = (data) => {
+    return {
+        type: SET_CURRENT_ORDER,
+        currentOrder: data
+    }
+}
+
+export const sendCart = (data, user) => async dispatch => {
     const url = urls.address + 'users/pastorders/'
+    // dispatch(setCurrentOrder(null))
 
     try{
-        const response = await axios(axiosPostConfig(url, data))
-
-        console.log(response)
+        const response = await axios(axiosPostConfig(url, data, user))
+        if(response){
+            // console.log(response.data)
+            dispatch(setCurrentOrder(response.data))
+        }
     }
 
     catch(err){
-        console.log(err.response)
+        console.log(err)
     }
         
 }

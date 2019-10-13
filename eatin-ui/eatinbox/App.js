@@ -8,7 +8,6 @@ import store from './src/store/store'
 import IntroductionScreen from './src/screens/Introduction/IntroductionScreen'
 import VenderInfoScreen from './src/screens/VenderInfo/VenderInfoScreen';
 import MenuScreen from './src/screens/Food/MenuScreen';
-import CartScreen from './src/screens/Cart/CartScreen';
 import CurrentOrderScreen from './src/screens/Orders/Current/CurrentOrderScreen';
 import FilterScreen from './src/screens/Filter/FilterScreen';
 import RegisterScreen from './src/screens/Register/RegisterScreen';
@@ -16,20 +15,24 @@ import LoginScreen from './src/screens/Login/LoginScreen';
 import SearchScreen from './src/screens/Search/SearchScreen';
 import PastOrderScreen from './src/screens/Orders/Past/PastOrderScreen';
 import Payment from './src/screens/Payment/paymentPage';
-import AddressPage from './src/screens/Address/AddressPage';
+import AddressScreen from './src/screens/Address/AddressScreen';
 import FoodCartScreen from './src/screens/FoodCart/FoodCartScreen'
 import SetLocationScreen from './src/screens/SetLocation/SetLocationScreen'
+import TrackPartnerScreen from './src/screens/TrackPartner/TrackPartnerScreen'
+import AddAdressScreen from './src/screens/AddAdress/AddAdressScreen';
 import Profile from './src/screens/Profile/ProfilePage';
-
-
-
+import Global from './src/contexts/Global';
 
 export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
         <StatusBar backgroundColor="black" barStyle="light-content" />
-        <AppContainer/>
+        <Global
+           {...this.props}
+        >
+          <AppContainer/>
+        </Global>
       </Provider>
     );
   }
@@ -40,7 +43,6 @@ const rootStack = createStackNavigator(
   {
     IntroductionScreen,
     VenderInfoScreen,
-    CartScreen,
     FoodCartScreen,
     CurrentOrderScreen,
     RegisterScreen,
@@ -50,8 +52,10 @@ const rootStack = createStackNavigator(
     SearchScreen,
     PastOrderScreen,
     Payment,
-    AddressPage,
+    AddressScreen,
     SetLocationScreen,
+    TrackPartnerScreen,
+    AddAdressScreen,
     Profile,
   },
 

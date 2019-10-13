@@ -1,13 +1,13 @@
-import React from 'react'
-import { View,StyleSheet, Dimensions } from 'react-native';
+import React, {useContext} from 'react'
+import { View, StyleSheet } from 'react-native';
+
 import SpaceBetweenColumns from '../../reusables/SpaceBetweenColumns';
 import BlackButton from '../../reusables/BlackButton';
-
-const width = Dimensions.get('window').width
-
-import * as fonts from '../../reusables/styles/Fonts'
+import SelectPayment from './SelectPayment';
+import { GlobalContext } from '../../contexts/globalContext';
 
 const Total = (props) => {
+    const { fonts } = useContext(GlobalContext)
     return (
         <View style={styles.container}>
             <View style={styles.colCont}>
@@ -40,9 +40,17 @@ const Total = (props) => {
                     rightStyle={fonts.lgbold}
                 />
             </View>
-            <BlackButton
-                text="Order Now"
+            <SelectPayment/>
+            {/* <BlackButton
+                text="SELECT YOUR ADDRESS"
                 buttonContainer={styles.buttonContainer}
+                buttonText={styles.buttonText}
+                handleOnpress={props.orderNow}
+            /> */}
+            <BlackButton
+                text="ORDER NOW"
+                buttonContainer={styles.buttonContainer1}
+                buttonText={styles.buttonText}
                 handleOnpress={props.orderNow}
             />
         </View>
@@ -52,7 +60,7 @@ const Total = (props) => {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        marginTop: 20,
+        marginTop: 'auto',
         // borderWidth: 1,
         alignItems: 'center',
         paddingLeft: 16,
@@ -74,6 +82,7 @@ const styles = StyleSheet.create({
         width: '100%',
         // borderWidth:1,
         borderBottomWidth: 1,
+        borderColor: '#ddd',
         paddingBottom: 4,
     },
 
@@ -87,13 +96,28 @@ const styles = StyleSheet.create({
         marginBottom: 12,
     },
 
-    buttonContainer:{
+    buttonContainer1:{
         marginTop: 16,
-        marginBottom: 16, 
-        width: width * .92,
+        marginBottom: 60, 
+        width: '92%',
         // borderWidth:1,
         borderColor:'#e4e',
     },
+
+    buttonContainer:{
+        paddingTop:4,
+        paddingBottom:4,
+        marginTop: 16,
+        width: '92%',
+        // borderWidth:1,
+        borderColor:'#e4e',
+    },
+
+    buttonText:{
+        fontSize: 10,
+        fontWeight: 'bold',
+        color: '#fff',
+    }
     
 });
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text, Image } from "react-native";
 
-const Header = () => {
+const Header = (props) => {
     return (
         <View style={styles.container}>
             <Image source= {require ('../../../assets/work.png')} style={styles.imageStyle}/>
@@ -15,28 +15,25 @@ const Header = () => {
 const styles = StyleSheet.create ({
     container: {
         width: 100,
-        height: 30,
-        paddingRight: 10,
+        paddingBottom: 4,
         borderBottomWidth: 1,
         borderColor: 'cyan',
-        justifyContent: 'center',
-        alignItems: 'flex-start',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        marginTop:8,
+        // borderWidth:1,
     },
 
     imageStyle: {
-        height: 28,
-        width: 28
+        height: 20,
+        width: 20
     },
 
     textStyle: {
-        width: 55,
         paddingLeft: 10,
-        alignSelf: 'center',
-        fontFamily: 'monospace',
-        fontSize: 18,
+        fontSize: 13,
+        fontWeight:'bold',
         letterSpacing: 0.2,
-        fontWeight: 'bold'
+        color: 'rgba(0,0,0,0.7)',
     }
 })
 

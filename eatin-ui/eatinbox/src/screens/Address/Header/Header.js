@@ -1,37 +1,31 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
-    View, 
-    StyleSheet,
-    Text
+StyleSheet,
+Text
 } from 'react-native';
 
+import { GlobalContext } from '../../../contexts/globalContext';
+
 const Header = () => {
+    const {fonts} = useContext(GlobalContext)
+
     return (
-        <View style={styles.container}>
-            <Text style={styles.textStyle}>
-                    DELIVERY ADDRESS
-            </Text>
-        </View>
+        <Text style={[styles.container, fonts.heading]}>
+            DELIVERY ADDRESS
+        </Text>
     )
 }
 
 const styles = StyleSheet.create ({
     container: {
-        marginTop: 5,
+        padding: 8,
         width: '95%',
-        height: 40,
-        // borderColor: '#000',
         // borderWidth: 1,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignItems: 'center',
+        textAlign: 'center'
+        
     },
-
-    textStyle: {
-        alignSelf: 'center',
-        fontSize: 20,
-        // letterSpacing: 0.1,
-        fontFamily: 'monospace',
-        color: '#000'
-    }
 })
 
 export default Header;

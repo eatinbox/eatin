@@ -40,8 +40,8 @@ FUTURE CHANGES -> Should Convert Person model into single User model
 
 class Person(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    latitude = models.DecimalField(max_digits=8, decimal_places=6, null=True, default=18.4785419)
-    longitude = models.DecimalField(max_digits=8, decimal_places=6, null=True, default=73.8169103)
+    latitude = models.DecimalField(max_digits=8, decimal_places=6, null=True, default=18.453626)
+    longitude = models.DecimalField(max_digits=8, decimal_places=6, null=True, default=73.8508222)
     contact = models.CharField(max_length=10, null=True, blank=True)
 
     objects = models.Manager()

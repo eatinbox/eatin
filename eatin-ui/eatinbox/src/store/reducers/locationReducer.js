@@ -2,6 +2,7 @@ import * as actionTypes from '../actions/locationActions'
 
 const initialState = {
     region: null,
+    partner_marker: null,
 }
 
 export default (state = initialState, action) => {

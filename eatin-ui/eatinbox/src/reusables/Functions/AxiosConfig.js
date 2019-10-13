@@ -1,7 +1,7 @@
-import store from '../../store/store'
+// import store from '../../store/store'
 
-export const axiosGetConfig = (url, params) => {
-    const user = store.getState().userReducer.session_user
+export const axiosGetConfig = (url, user, params) => {
+    // const user = store.getState().userReducer.session_user
 
     return {
         method: 'get',

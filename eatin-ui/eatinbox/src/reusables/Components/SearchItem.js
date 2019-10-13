@@ -21,10 +21,12 @@ export class SearchItem extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        width: '97%',
+        width: '98%',
         padding:4,
-        margin:4,
+        paddingLeft: 8,
+        marginTop:8,
         borderBottomWidth: 1,
+        borderColor: '#ddd',
         justifyContent: 'center',
         // borderWidth:1,
     },

@@ -37,7 +37,7 @@ User.objects.create_superuser(email="saumitra@gmail.com", password="1")
 r = requests.get(PLACES3)
 res = r.json()['results']
 
-for i in range(10):
+for i in range(len(res)):
     latitude = res[i]['geometry']['location']['lat']
     longitude = res[i]['geometry']['location']['lng']
 
