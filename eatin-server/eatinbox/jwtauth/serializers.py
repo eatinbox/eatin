@@ -15,6 +15,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(style={'input_type': 'password'}, write_only=True)
     # password2 = serializers.CharField(style={'input_type': 'password'}, write_only=True)
     token = serializers.SerializerMethodField(read_only=True)
+    person = serializers.SerializerMethodField()
 
     class Meta:
         model = User
@@ -27,6 +28,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             'vendor',
             'partner',
             'token',
+            'person',
         ]
 
     def validate_email(self, value):
@@ -47,51 +49,8 @@ class RegisterSerializer(serializers.ModelSerializer):
                                                 )
         return response['token']
 
-    # def validate(self, data):
-    #     p1 = data.get('password')
-    #     p2 = data.get('password2')
-    #     if p1 != p2:
-    #         raise serializers.ValidationError("Passwords didn't match")
-    #     return data
-
-    # def create(self, validated_data):
-    #     if validated_data.get('vendor'):
-    #         user = User.objects.create_vendor(email=validated_data.get('email'),
-    #                                           password=validated_data.get('password'),
-    #                                           first_name=validated_data.get('first_name'),
-    #                                           last_name=validated_data.get('last_name'),
-    #                                           )
-    #         user.save()
-    #         person = Person(user=user,
-    #                         latitude=validated_data.get('latitude'),
-    #                         longitude=validated_data.get('longitude'),
-    #                         contact=validated_data.get('contact'),
-    #                         )
-    #         person.save()
-    #         vendor = Vendor(person_info=person,
-    #                         description=validated_data.get('description'),
-    #                         rating=validated_data.get('rating'),
-    #                         )
-    #         vendor.save()
-    #
-    #     else:
-    #         user = User.objects.create_user(email=validated_data.get('email'),
-    #                                         password=validated_data.get('password'),
-    #                                         first_name=validated_data.get('first_name'),
-    #                                         last_name=validated_data.get('last_name'),
-    #                                         )
-    #         user.save()
-    #         person = Person(user=user,
-    #                         latitude=validated_data.get('latitude'),
-    #                         longitude=validated_data.get('longitude'),
-    #                         contact=validated_data.get('contact'),
-    #                         )
-    #         person.save()
-    #         customer = Customer(person_info=person,
-    #                             )
-    #         customer.save()
-    #
-    #     return user
+    def get_person(self, ob):
+        return Person.objects.get(user=ob.id).pk
 
     def create(self, validated_data):
         user = User.objects.create_user(**self.initial_data)
