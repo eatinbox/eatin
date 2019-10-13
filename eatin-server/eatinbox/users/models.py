@@ -15,9 +15,13 @@ class Address(models.Model):
 
     # Multiple address associated with Persons hence foreignKey
     person_info = models.ForeignKey(Person, on_delete=models.CASCADE)
+
     type = models.CharField(max_length=1, choices=ADDRESS_TYPE)
-    flat_no = models.IntegerField(null=True)
-    address = models.CharField(max_length=100)
+    latitude = models.DecimalField(decimal_places=6, max_digits=8, null=True, default=18.453626)
+    longitude = models.DecimalField(decimal_places=6, max_digits=8, null=True, default=73.8508222)
+    # flat_no = models.IntegerField(null=True)
+    name = models.CharField(max_length=100, blank=True, null=True)
+    address = models.CharField(max_length=1000)
 
     class Meta:
         verbose_name_plural = "Address"

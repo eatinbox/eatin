@@ -1,5 +1,5 @@
 import googlemaps
-from rest_framework import status, generics
+from rest_framework import status, generics, permissions
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 
@@ -7,20 +7,48 @@ from base.models import Person
 from jwtauth.permissions import IsValidUser
 from partner.models import PartnerLocation, PartnerOrder
 from partner.serializers import currentOrderSerializer
-from .models import Orders
-from .serializers import UserSerializer, OrdersSerializer, OrderMenuSerializer
+from .models import Orders, Address, Customer
+from .serializers import UserSerializer, OrdersSerializer, OrderMenuSerializer, AddressSerializer
 
 
-class UserListApiView(generics.ListAPIView):
+class UpdatePersonInfo(generics.RetrieveUpdateAPIView):
     queryset = Person.objects.all()
     serializer_class = UserSerializer
+
+
+class AddressApiView(generics.ListCreateAPIView):
+    serializer_class = AddressSerializer
+    permission_classes = [permissions.AllowAny]
+
+    def get_queryset(self):
+        person = Person.objects.get(user=self.request.user)
+        return Address.objects.filter(person_info=person)
+
+    def post(self, request, *args, **kwargs):
+        ins = AddressSerializer(data=request.data)
+        try:
+            ins.is_valid()
+        except ValidationError:
+            print(ins.errors)
+            return Response(data=ins.errors, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            ins.save()
+            return Response(data=AddressSerializer(self.get_queryset(), many=True).data, status=status.HTTP_201_CREATED)
+        except:
+            print(ins.errors)
+            return Response(data=ins.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class PastOrdersListApiView(generics.ListCreateAPIView):
     permission_classes = [IsValidUser]
     # authentication_classes = []
-    queryset = Orders.objects.all()
     serializer_class = OrdersSerializer
+
+    def get_queryset(self):
+        person = Person.objects.get(user=self.request.user)
+        customer = Customer.objects.get(person_info=person)
+        return Orders.objects.filter(customer_info=customer)
+        # return Orders.objects.all()
 
     def post(self, request, *args, **kwargs):
         # Since many to many field present so we need to override the default behaviour
@@ -88,7 +116,7 @@ def assign_partner(order):
 
         source = str(p_latitude) + ',' + str(p_longitude)
 
-        result = gmaps.directions(source, destination, mode="transit", departure_time="now")
+        result = gmaps.directions(source, destination, mode="driving", departure_time="now")
 
         if len(result) == 0:
             continue
@@ -109,7 +137,7 @@ def assign_partner(order):
         sorted_partners = sorted(filtered_partners, key=lambda k: k['distance'])
 
     cust_destination = str(order.get_customer_coords()['latitude']) + ',' + str(order.get_customer_coords()['longitude'])
-    res = gmaps.directions(destination, cust_destination, mode="transit", departure_time="now")
+    res = gmaps.directions(destination, cust_destination, mode="driving", departure_time="now")
 
     polyline = res[0]['overview_polyline']['points']
     polypath = decode_polyline(polyline)
