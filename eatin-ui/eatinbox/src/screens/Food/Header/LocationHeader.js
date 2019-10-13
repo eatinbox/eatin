@@ -13,7 +13,6 @@ import {withNavigation} from 'react-navigation'
 import EmptyCart from '../Modals/EmptyCart'
 import is_anon from '../../../reusables/Functions/anonWrapper'
 
-
 const images = {
     1: require('../../../assets/counters/1.png'),
     2: require('../../../assets/counters/2.png'),
@@ -29,6 +28,9 @@ class LocationHeader extends Component {
     };
 
     navigateCartScreen = () => {
+        if(!this.props.addresses)
+            return this.props.navigation.navigate('AddAdressScreen')
+        
         if(this.props.cartList.length)
            return this.props.navigation.navigate('FoodCartScreen')
 
@@ -40,6 +42,8 @@ class LocationHeader extends Component {
     }
 
     render() {
+        // console.log(this.props.addresses)
+
         let name = null;
 
         if(this.props.region){
@@ -181,6 +185,7 @@ const mapStateToProps = ({cartReducer, locationReducer, userReducer}) => {
         cartList: cartReducer.cartList,
         region: locationReducer.region,
         user: userReducer.session_user,
+        addresses: userReducer.addresses
     }
 } 
 

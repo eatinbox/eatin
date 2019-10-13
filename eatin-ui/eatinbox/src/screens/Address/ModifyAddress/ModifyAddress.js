@@ -1,62 +1,41 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
-    View,
-    StyleSheet,
-    TouchableOpacity,
-    Text
+View,
+StyleSheet,
+TouchableOpacity,
+Text
 } from 'react-native';
+import { GlobalContext } from '../../../contexts/globalContext';
 
 const ModifyAddress = () => {
+    const {fonts} = useContext(GlobalContext)
+
     return (
         <View style={styles.container}>
             <TouchableOpacity>
-                <View style={styles.buttonContainer}>
-                    <Text style={styles.textStyle}>
-                        EDIT
-                    </Text>
-                </View>
+                <Text style={[styles.textCont, fonts.actionBluemd1]}>EDIT</Text>
             </TouchableOpacity>
             <TouchableOpacity>
-                <View style={styles.buttonContainer1}>
-                    <Text style={styles.textStyle}>
-                        DELETE
-                    </Text>
-                </View>
+                <Text style={[styles.textCont, fonts.actionBluemd1]}>DELETE</Text>
             </TouchableOpacity>
         </View>
     )
 }
 
-const styles = StyleSheet.create ({
+const styles = StyleSheet.create({
     container: {
-        height: 30,
         width: '95%',
         flexDirection: 'row',
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-end',
+        // borderWidth:1,
+        padding:4,
     },
-
-    buttonContainer: {
-        height: 28,
-        width: 70,
-        // borderWidth: 1,
-        // borderColor: '#000',
-        marginRight: 10,
-        justifyContent: 'center'
-    },
-
-    buttonContainer1: {
-        height: 28,
-        width: 70,
-        // borderWidth: 1,
-        // borderColor: '#000',
-        justifyContent: 'center'
-    },
-
-    textStyle: {
-        fontFamily: 'monospace',
-        fontSize: 15,
-        color: '#000',
-        alignSelf: 'center'
+    
+    textCont: {
+        // borderWidth:1,
+        margin:4,
+        marginLeft: 12,
+        marginRight: 12,
     }
 })
 

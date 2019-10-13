@@ -9,7 +9,7 @@ import * as actionsCreators from '../../store/actions/locationActions'
 
 const key = 'AIzaSyD3RbiDvZseLuj4MJICPVw5jsjr8LNpbzc'
 
-export class AutoComplete extends Component {
+class AutoComplete extends Component {
     state = {
         input: '',
         predictions: [],
@@ -25,12 +25,14 @@ export class AutoComplete extends Component {
 
     makeQuery = async (input) => {
 
+        // console.log(this.props.region)
+
         const {data: {predictions}} = await axios.get(
             'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' 
             + input + '&location=' + this.props.region.lat + ',' + this.props.region.long 
             + '&radius=35000' + '&components=country:in&key=' + key)
 
-        console.log(predictions)
+        // console.log(predictions)
 
         this.setState({predictions});
     }

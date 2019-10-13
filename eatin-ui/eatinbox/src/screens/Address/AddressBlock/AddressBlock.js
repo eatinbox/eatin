@@ -1,22 +1,26 @@
 import React from 'react';
 import {
-    View, 
-    StyleSheet, 
-    Text,
-    Image
+View, 
+StyleSheet,
+TouchableOpacity, 
 } from 'react-native';
 
 import Header from './Header';
 import Address from './Address';
 import ModifyAddress from '../ModifyAddress/ModifyAddress';
 
-const AddressBlock = () => {
+const AddressBlock = (props) => {
     return (
-        <View style={styles.container}>
-            <Header/>
-            <Address/>
+        <TouchableOpacity 
+            style={styles.container}
+            onPress={() => props.navigation.navigate('FoodCartScreen', {
+                index: props.index
+            })}
+        >
+            <Header {...props}/>
+            <Address {...props}/>
             <ModifyAddress/>
-        </View>
+        </TouchableOpacity>
     )
 }
 
@@ -24,11 +28,11 @@ const styles = StyleSheet.create ({
     container: {
         paddingLeft: 10,
         width: '95%',
-        height: 100,
+        // height: 100,
         marginTop: 8,
+        backgroundColor: '#fff',
         elevation: 1,
         borderWidth: 0,
-        // borderColor: '#000'
     }
 })
 

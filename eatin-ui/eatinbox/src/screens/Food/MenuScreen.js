@@ -12,7 +12,6 @@ import MealType from './Header/TypeMeal';
 import Ads from './ADs/Ads';
 
 import * as locationActionCreators from '../../store/actions/locationActions'
-import Global from '../../contexts/Global';
 
 const width = Dimensions.get('window').width
 
@@ -28,18 +27,14 @@ class FoodScreen extends React.Component {
 
     render() {
         return (
-            <Global
-                {...this.props}
-            >
-                <View style={styles.container}>
-                    <LocationHeader />
-                    <MealType
-                        user={this.props.user}
-                    />
-                    <Ads />
-                    <Foodlist />
-                </View>
-            </Global>
+            <View style={styles.container}>
+                <LocationHeader />
+                <MealType
+                    user={this.props.user}
+                />
+                <Ads />
+                <Foodlist />
+            </View>
         );
     };
 }

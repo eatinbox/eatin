@@ -7,6 +7,7 @@ const initialState = {
         password: '',
     },
 
+    addresses: null,
     status: null,
     msg: null,
     session_user: null,
@@ -62,6 +63,12 @@ export default reducer =  (state = initialState, action) => {
         return {
             ...state,
             session_user: action.user,
+        }
+
+    case actionType.SET_ADDRESSES:
+        return {
+            ...state,
+            addresses: [...action.addresses],
         }
 
     default:

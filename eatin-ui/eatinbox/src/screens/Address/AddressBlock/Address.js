@@ -1,16 +1,18 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { 
     View,
     StyleSheet,
     Text } 
     from "react-native";
+import { GlobalContext } from '../../../contexts/globalContext';
 
-const Address = () => {
+const Address = (props) => {
+    const {fonts} = useContext(GlobalContext)
+
     return(
         <View style={styles.container}>
-            <Text style={styles.textStyle}>
-                Flat no.3 Reliance Fresh, Chandrabhaga
-                Nagar, Dhankawadi, Pune - 411043
+            <Text style={fonts.mdbold}>
+                {props.address}
             </Text>
         </View>
     )
@@ -18,10 +20,9 @@ const Address = () => {
 
 const styles = StyleSheet.create ({
     container :{
-        // borderColor: '#000',
         // borderWidth: 1,
-        height: 40,
         width: '85%',
+        marginTop: 4,
         padding: 2
     },
 

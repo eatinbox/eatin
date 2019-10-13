@@ -5,10 +5,12 @@ import { ActivityIndicator, View, Dimensions, StyleSheet } from 'react-native';
 
 import * as userActions from '../store/actions/userActions'
 import * as globalActions from '../store/actions/globalActions'
+import * as fonts from '../reusables/styles/Fonts'
 
 const width = Dimensions.get("window").width
 
 class Global extends Component {
+
     componentDidMount = () => {
         // this.props.dispatch(userActions.removeValue())
         this.props.dispatch(userActions.getStoredUser())
@@ -23,7 +25,10 @@ class Global extends Component {
 
         const ren = (user) ? (
             <GlobalContext.Provider
-                value={this.props.user}>
+               value={{
+                   user,
+                   fonts, 
+               }}>
                 {this.props.children}
             </GlobalContext.Provider> 
         ) : 

@@ -45,12 +45,12 @@ export const setCurrentOrder = (data) => {
     }
 }
 
-export const sendCart = (data) => async dispatch => {
+export const sendCart = (data, user) => async dispatch => {
     const url = urls.address + 'users/pastorders/'
     // dispatch(setCurrentOrder(null))
 
     try{
-        const response = await axios(axiosPostConfig(url, data))
+        const response = await axios(axiosPostConfig(url, data, user))
         if(response){
             // console.log(response.data)
             dispatch(setCurrentOrder(response.data))

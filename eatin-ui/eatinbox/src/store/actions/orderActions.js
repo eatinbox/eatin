@@ -16,7 +16,7 @@ export const getPastOrders = (user) => dispatch => {
 
     interval = setInterval(async () => {
         try {
-            let response = await axios(axiosGetConfig(url))
+            let response = await axios(axiosGetConfig(url, user))
             
             console.log(response)
 

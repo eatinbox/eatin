@@ -4,11 +4,14 @@ import { connect } from 'react-redux';
 
 import OrderDetails from '../Order/OrderItem/OrderDetails'
 import * as actionCreators from '../../../../store/actions/orderActions'
+import { GlobalContext } from '../../../../contexts/globalContext'
 
 class OrderList extends Component {
+    static contextType = GlobalContext
 
     componentDidMount = () => {
-        this.props.dispatch(actionCreators.getPastOrders())
+        console.log(this.context)
+        this.props.dispatch(actionCreators.getPastOrders(this.context.user))
     };
 
     _renderItem = ({ item }) => {
