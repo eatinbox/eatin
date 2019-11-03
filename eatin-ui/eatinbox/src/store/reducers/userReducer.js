@@ -48,7 +48,9 @@ export default reducer =  (state = initialState, action) => {
             ...state,
             status: true,
             session_user:{
-                ...action.data
+                ...state.session_user,
+                ...action.data,
+                isAnon: false,
             }
         }
 
@@ -62,7 +64,21 @@ export default reducer =  (state = initialState, action) => {
         // console.log("session user", action.user)
         return {
             ...state,
-            session_user: action.user,
+            session_user: {
+                ...state.session_user,
+                ...action.user,
+            }
+        }
+
+    case actionType.SET_SESSION_USER_REGION:
+        return {
+            ...state,
+            session_user: {
+                ...state.session_user,
+                region: {
+                    ...action.region
+                }
+            }
         }
 
     case actionType.SET_ADDRESSES:

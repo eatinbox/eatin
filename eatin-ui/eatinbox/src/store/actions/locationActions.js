@@ -1,13 +1,15 @@
-export const SET_LOCATION = 'SET_LOCATION'
 import Geolocation from 'react-native-geolocation-service'
 import {PermissionsAndroid, BackHandler} from 'react-native'
 
 import * as urls from '../../../apiUrl'
+import {setSessionUserRegion} from '../actions/userActions'
 
-export const setLocation = (region) => ({
-    type: SET_LOCATION,
-    region,
-})
+export const SET_LOCATION = 'SET_LOCATION'
+
+// export const setLocation = (region) => ({
+//     type: SET_LOCATION,
+//     region,
+// })
 
 export const requestLocationPermission = () => async  dispatch => {
     try {
@@ -35,7 +37,9 @@ export const getLocation = () => dispatch => {
                 name: 'Current Location'
             }
             
-            dispatch(setLocation(region))
+            
+            //dispatch(setLocation(region))
+            dispatch(setSessionUserRegion(region))
             // postLocation(region)
         },
         (error) => {

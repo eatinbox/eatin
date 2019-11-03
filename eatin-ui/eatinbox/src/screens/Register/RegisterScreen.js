@@ -20,10 +20,18 @@ class RegisterScreen extends React.Component {
         this.props.dispatch(actions.sendRegisterData(this.props.user))
     }
 
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if(this.props != nextProps)
+            return true;
+    
+        return false
+    }
+
     componentDidUpdate(prevProps, prevState) {
-        if (this.props.status) {
+        console.log("When the hrll is this called")
+        if (this.props.status !== prevProps.status) {
             ToastAndroid.show('Register Successful', ToastAndroid.SHORT);
-            return this.props.navigation.navigate('MenuScreen')
+            return this.props.navigation.navigate('AddAdressScreen')
         }
     }
 

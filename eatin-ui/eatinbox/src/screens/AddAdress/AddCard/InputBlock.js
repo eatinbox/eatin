@@ -2,18 +2,21 @@ import React from 'react';
 import { Text, View, StyleSheet, TextInput} from 'react-native';
 
 const InputBlock = (props) => {
+    const change = props.change ? (<Text style={styles.changeText}>CHANGE</Text>) : null
     return (
         <View style={styles.container}>
             <Text style={styles.locText}>{props.title}</Text>
             <View style={styles.editCont}>
                 <TextInput
                     autoFocus={props.autoFocus}
+                    editable={props.editable}
                     style={styles.inputContainer}
                     onChangeText={(value) => props.handleTextChange(value)}
                     value={props.value}
                     placeholder={props.placeholder}
+                    multiline={props.multiline}
                 />
-                <Text style={styles.changeText}>CHANGE</Text>
+                {change}    
             </View>
         </View>
     )

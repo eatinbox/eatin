@@ -40,17 +40,20 @@ class AddressApiView(generics.ListCreateAPIView):
 
 
 class PastOrdersListApiView(generics.ListCreateAPIView):
-    permission_classes = [IsValidUser]
+    # permission_classes = [IsValidUser]
+    permission_classes = [permissions.AllowAny]
     # authentication_classes = []
     serializer_class = OrdersSerializer
 
     def get_queryset(self):
+        # Filter works correctly fix from frontend
         person = Person.objects.get(user=self.request.user)
         customer = Customer.objects.get(person_info=person)
-        return Orders.objects.filter(customer_info=customer)
-        # return Orders.objects.all()
+        # return Orders.objects.filter(customer_info=customer)
+        return Orders.objects.all()
 
     def post(self, request, *args, **kwargs):
+        # print(request.data)
         # Since many to many field present so we need to override the default behaviour
         # since the instance needs to be created before adding
         instance = OrdersSerializer(data=request.data, context={'request': self.request})

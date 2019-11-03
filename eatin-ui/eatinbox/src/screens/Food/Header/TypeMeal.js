@@ -44,7 +44,7 @@ class MealType extends Component {
                <Text 
                     style={styles.pastOrderText} 
                     onPress={() => {
-                        if(this.props.user === "Anon")
+                        if(this.props.user.isAnon)
                             return this.props.navigation.navigate('RegisterScreen')
                             
                         this.props.navigation.navigate('PastOrderScreen')}

@@ -22,6 +22,7 @@ class Address(models.Model):
     # flat_no = models.IntegerField(null=True)
     name = models.CharField(max_length=100, blank=True, null=True)
     address = models.CharField(max_length=1000)
+    details = models.CharField(max_length=1000)
 
     class Meta:
         verbose_name_plural = "Address"

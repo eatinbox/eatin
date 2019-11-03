@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, ActivityIndicator} from 'react-native';
+import { StyleSheet, View, ActivityIndicator, TouchableOpacity} from 'react-native';
 import Map from './Map';
 import {connect} from 'react-redux'
 
@@ -35,6 +35,11 @@ class MapComponent extends Component {
         return (
             <View style={styles.container}>
                 {content}
+                <TouchableOpacity
+					style={styles.back}
+					onPress={() => this.props.nav.navigate('MenuScreen')}>
+
+				</TouchableOpacity>
             </View>
         )
     }   
@@ -42,16 +47,27 @@ class MapComponent extends Component {
 
 const styles = StyleSheet.create({
     container: {
+        position: 'relative',
         width: '100%',
         height: '100%',
-        justifyContent: 'center',
         alignItems: 'center',
-    }
+    },
+    back: {
+        position: 'absolute',
+        top: 20,
+        left: 20,
+		width: 25,
+		height: 25,
+		borderRadius: 25,
+		backgroundColor: '#000',
+		marginLeft: 8,
+		marginTop: 8,
+	},
 });
 
-export default connect(({orderReducer, locationReducer}) => {
+export default connect(({orderReducer, userReducer}) => {
     return {
         currentOrder: orderReducer.currentOrder,
-        region: locationReducer.region,
+        region: userReducer.session_user.region,
     }
 })(MapComponent);

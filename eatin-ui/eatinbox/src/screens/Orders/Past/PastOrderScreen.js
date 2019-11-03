@@ -14,7 +14,7 @@ const width= Dimensions.get('window').width;
 const PastOrderScreen = (props) => {
     return (
         <View style={styles.container}>
-            <Header />
+            <Header nav={props.navigation}/>
             <OrderList/>
         </View>
     )

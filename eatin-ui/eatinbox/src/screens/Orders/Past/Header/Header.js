@@ -4,8 +4,9 @@ import {
     StyleSheet,
     Text
 } from 'react-native';
+import {connect} from 'react-redux'
 
-const Header = () => {
+const Header = (props) => {
     return (
         <View style= { styles.container }>
            <View style= { styles.block }>
@@ -14,7 +15,12 @@ const Header = () => {
                 </Text>
            </View>
            <View style= { styles.block1 }>
-                <Text style= { styles.textStyle1}>
+                <Text onPress={
+                    () => {
+                        if(props.currentOrder)
+                            props.nav.navigate('TrackPartnerScreen')
+                    }} 
+                    style= { styles.textStyle1}>
                     CURRENT
                 </Text>
            </View>
@@ -75,4 +81,8 @@ const styles= StyleSheet.create({
     }
 })
 
-export default Header;
+export default connect(({ orderReducer}) => {
+    return {
+        currentOrder: orderReducer.currentOrder,
+    }
+})(Header);

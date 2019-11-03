@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { StyleSheet} from 'react-native'
 import axios from 'axios';
 import {connect} from 'react-redux'
-
+import AsyncStorage from '@react-native-community/async-storage';
 import SearchPage from './SearchPage';
 import LocationMap from './LocationMap';
-import * as actionsCreators from '../../store/actions/locationActions' 
+import * as actionsCreators from '../../store/actions/userActions' 
 
 const key = 'AIzaSyD3RbiDvZseLuj4MJICPVw5jsjr8LNpbzc'
 
@@ -16,9 +16,13 @@ class AutoComplete extends Component {
         region_selected: false,
     }
 
+    componentDidMount() {
+        console.log("Holla huppa", this.props)
+    }
+
     handleTextChange = (input) => {
         this.setState({input}, () => {
-            let inputs = this.state.input.split(" ").join("+");
+            let inputs = this.state.input.replace(" ", "+")
             this.makeQuery(inputs);
         })
     }
@@ -29,7 +33,7 @@ class AutoComplete extends Component {
 
         const {data: {predictions}} = await axios.get(
             'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' 
-            + input + '&location=' + this.props.region.lat + ',' + this.props.region.long 
+            + input + '&location=' + this.props.region.latitude + ',' + this.props.region.longitude 
             + '&radius=35000' + '&components=country:in&key=' + key)
 
         // console.log(predictions)
@@ -42,14 +46,21 @@ class AutoComplete extends Component {
             'https://maps.googleapis.com/maps/api/place/details/json?place_id=' 
             + place_id.toString() + '&key=' + key)
 
-        const reg = {
+        const reg =  {
             name: result.name,
-            addr: result.formatted_address,
             latitude: result.geometry.location.lat,
-            longitude: result.geometry.location.lng,
+            longitude: result.geometry.location.lng,   
         }
 
-        this.props.dispatch(actionsCreators.setLocation(reg))
+        const session_user = {
+            ...this.props.user,
+            region : {...reg}
+        }
+
+        this.props.dispatch(actionsCreators.setSessionUserRegion(reg))
+        await AsyncStorage.mergeItem('@session_user', JSON.stringify(session_user))
+
+        
     }
 
     goBack = () => {
@@ -96,9 +107,10 @@ const styles = StyleSheet.create({
     },
 });
 
-const mapStateToProps = ({locationReducer}) => {
+const mapStateToProps = ({userReducer}) => {
     return {
-        region : locationReducer.region,
+        user: userReducer.session_user,
+        region: userReducer.session_user.region
     }
 }
 

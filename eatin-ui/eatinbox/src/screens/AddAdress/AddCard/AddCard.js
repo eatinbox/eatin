@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native'
 import axios from 'axios';
 import { connect } from 'react-redux'
+import globalContext from '../../../contexts/globalContext'
+import {withNavigation} from 'react-navigation'
 
 import InputBlock from './InputBlock'
 import SearchItem from '../../../reusables/Components/SearchItem'
@@ -10,16 +12,26 @@ import * as actionsCreators from '../../../store/actions/userActions'
 const key = 'AIzaSyD3RbiDvZseLuj4MJICPVw5jsjr8LNpbzc'
 
 class AddCard extends Component {
+    static contextType = globalContext
+
     state = {
-        input: '',
-        completeInput: '',
         predictions: [],
         region_selected: false,
+        searchMode: true,
+        editable: true,
+        result: {
+            name: '',
+            address: '',
+            details: '',
+            latitude: null,
+            longitude: null,
+            type: '1'
+        }
     }
 
-    handleTextChange = (input) => {
-        this.setState({ input }, () => {
-            let inputs = this.state.input.split(" ").join("+");
+    handleTextChange = (name) => {
+        this.setState({ result: {name} }, () => {
+            let inputs = this.state.result.name.split(" ").join("+");
             this.makeQuery(inputs);
         })
     }
@@ -30,7 +42,7 @@ class AddCard extends Component {
 
         const { data: { predictions } } = await axios.get(
             'https://maps.googleapis.com/maps/api/place/autocomplete/json?input='
-            + input + '&location=' + this.props.region.lat + ',' + this.props.region.long
+            + input + '&location=' + this.props.region.latitude + ',' + this.props.region.longitude
             + '&radius=35000' + '&components=country:in&key=' + key)
 
         // console.log(predictions)
@@ -43,18 +55,24 @@ class AddCard extends Component {
             'https://maps.googleapis.com/maps/api/place/details/json?place_id='
             + place_id.toString() + '&key=' + key)
 
-        const reg = {
-            person_info: this.props.user.person,
-            name: result.name,
-            address: result.formatted_address,
-            latitude: Math.round(result.geometry.location.lat * 1000000) / 1000000,
-            longitude: Math.round(result.geometry.location.lng * 1000000) / 1000000,
-            type: "1",
-        }
+        this.setState({
+            result: {
+                ...this.state.result,
+                person_info: this.props.user.person,
+                name: result.name,
+                address: result.formatted_address,
+                latitude: Math.round(result.geometry.location.lat * 1000000) / 1000000,
+                longitude: Math.round(result.geometry.location.lng * 1000000) / 1000000,
+                type: "1",
+            },
+            editable: false,
+            searchMode: false,
+        })
+    }
 
-        console.log(reg)
-
-        this.props.dispatch(actionsCreators.addAddress(reg, this.props.user))
+    saveAddress = () => {
+        this.props.dispatch(actionsCreators.addAddress(this.state.result, this.props.user, true))
+        this.props.navigation.navigate('MenuScreen')
     }
 
     goBack = () => {
@@ -72,35 +90,54 @@ class AddCard extends Component {
     }
 
     render() {
+        const resultBox = this.state.searchMode ? (
+            <View style={styles.resultsCont}> 
+                {this.state.predictions.map((item) => {
+                    return (
+                        <SearchItem
+                            key={item.id}
+                            {...item}
+                            fetchDetails={this.fetchDetails}
+                            mainText={styles.mainText}
+                            searchText={styles.searchText}
+                        />
+                    )
+                })}   
+            </View>) : null
+
         return (
             <View style={styles.container}>
                 <InputBlock
                     autoFocus={true}
                     title="YOUR LOCATION"
                     handleTextChange={this.handleTextChange}
-                    value={this.state.input}
+                    value={this.state.result.name}
                     placehold="Enter place"
+                    editable={this.state.editable}
+                    change
                 />
                 <InputBlock
                     title="COMPLETE ADDRESS"
-                    value="Maza bayankar motha lavda"
-                    value={this.state.completeInput}
-                    placeholder="House no. /Flat no./ Floor/ Building"
+                    value={this.state.result.address}
+                    placeholder="Address"
+                    editable={this.state.editable}
+                    multiline={true}
                 />
-                <View style={styles.resultsCont}>
-                    {this.state.predictions.map((item) => {
-                        return (
-                            <SearchItem
-                                key={item.id}
-                                {...item}
-                                fetchDetails={this.fetchDetails}
-                                mainText={styles.mainText}
-                                searchText={styles.searchText}
-                            />
-                        )
-                    })}
-                </View>
-                <TouchableOpacity style={styles.saveButt}>
+                <InputBlock
+                    // autoFocus={true}
+                    title="ADDTIONAL DETAILS"
+                    value={this.state.additionDetails}
+                    handleTextChange={(details) => this.setState({result: {
+                        ...this.state.result,
+                        details
+                    }})}
+                    placeholder="House no. /Flat no./ Floor/ Building"
+                    multiline={true}
+                    editable={true}
+
+                />
+                {resultBox}
+                <TouchableOpacity style={styles.saveButt} onPress={this.saveAddress}>
                     <Text style={styles.saveText}>SAVE</Text>
                 </TouchableOpacity>
             </View>
@@ -155,11 +192,12 @@ const styles = StyleSheet.create({
     }
 });
 
-const mapStateToProps = ({ locationReducer, userReducer }) => {
+const mapStateToProps = ({userReducer, globalReducer }) => {
     return {
-        region: locationReducer.region,
+        region: userReducer.session_user.region,
         user: userReducer.session_user,
+        nav: globalReducer._navigate,
     }
 }
 
-export default connect(mapStateToProps)(AddCard)
+export default withNavigation(connect(mapStateToProps)(AddCard));

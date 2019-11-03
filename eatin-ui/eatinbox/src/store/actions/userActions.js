@@ -11,6 +11,7 @@ export const SUCCESS = 'SUCCESS'
 export const ERROR = 'ERROR'
 export const SET_SESSION_USER = 'SET_SESSION_USER'
 export const SET_ADDRESSES = 'SET_ADDRESSES'
+export const SET_SESSION_USER_REGION = 'SET_SESSION_USER_REGION'
 
 const domain = urls.address
 
@@ -63,7 +64,14 @@ export const setAddresses = (addresses) => {
         type: SET_ADDRESSES,
         addresses
     }
-} 
+}
+
+export const setSessionUserRegion = (region) => {
+    return {
+        type: SET_SESSION_USER_REGION,
+        region,
+    }
+}
 
 export const sendRegisterData = (userData) => async dispatch => {
     const url = domain + 'auth/register/'
@@ -94,7 +102,7 @@ export const sendRegisterData = (userData) => async dispatch => {
     }
 }
 
-export const addAddress = (reg, user) => async dispatch => {
+export const addAddress = (reg, user, def) => async dispatch => {
     const url = domain + 'users/address/'
 
     try {
@@ -107,6 +115,25 @@ export const addAddress = (reg, user) => async dispatch => {
         })
 
         // console.log(response)
+
+        if(response.status == 201) {
+            try {
+                dispatch(setAddresses(response.data))
+                if(def){
+                    // If added for the first time at the time of registration then change the 
+                    // session user location as well
+                    const session_user = {
+                        ...user,
+                        region : {...reg}
+                    }
+                    dispatch(setSessionUserRegion(reg))
+                    await AsyncStorage.mergeItem('@session_user', JSON.stringify(session_user))
+                }
+            } catch (e) {
+                // saving error
+                console.log(e)
+            }
+        }
     }
 
     catch (e) {
@@ -144,15 +171,13 @@ export const getStoredUser = () => async dispatch => {
         const value = await AsyncStorage.getItem('@session_user')
         if (value !== null) {
             const ob = JSON.parse(value)
-            console.log("User is ", ob)
+            // console.log("User is ", ob)
             dispatch(setSessionUser(ob))
             dispatch(getAddresses(ob))
-            // console.log(ob)
         }
         else{
-            console.log("User is anon")
-            const ob = "Anon"
-            dispatch(setSessionUser(ob))
+            // console.log("User is anon")
+            dispatch(setSessionUser({isAnon: true}))
         }
 
     } catch (e) {

@@ -16,6 +16,11 @@ export const mdbold = {
     fontSize: 11,
 }
 
+export const mdGray = {
+    color: 'rgba(0,0,0, 0.4)',
+    fontSize: 11,
+}
+
 export const smbold = {
     color: 'rgba(0,0,0, 0.75)',
     fontWeight: 'bold',

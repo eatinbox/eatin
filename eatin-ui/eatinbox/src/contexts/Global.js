@@ -21,7 +21,7 @@ class Global extends Component {
     render() {
         const user = this.props.user
 
-        // console.log(user)
+        console.log(user)
 
         const ren = (user) ? (
             <GlobalContext.Provider

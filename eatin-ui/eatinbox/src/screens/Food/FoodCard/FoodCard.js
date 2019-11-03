@@ -15,7 +15,7 @@ import * as actionCreators from '../../../store/actions/cartActions'
 
 class FoodCard extends Component {
     handleOnPress = (item) => {
-        if(this.props.user === "Anon")
+        if(this.props.user.isAnon)
             return this.props.navigation.navigate('RegisterScreen')
 
         this.props.dispatch(actionCreators.addToCart(item))

@@ -25,7 +25,21 @@ class Foodlist extends Component {
         )
     }
 
+    componentDidMount() {
+        if(this.props.region){
+            this.props.dispatch(actionCreators.getMenuList())
+        }
+    }
+
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if(this.props != nextProps)
+            return true;
+
+        return false
+    }
+
     componentDidUpdate() {
+        // console.log("This is is_getMenu_dispatvhed", this.is_getMenu_dispatched)
         if(this.props.region){     
             if(!this.is_getMenu_dispatched){
                 this.props.dispatch(actionCreators.getMenuList())
@@ -66,10 +80,11 @@ const styles = StyleSheet.create({
 });
 
 
-const mapStateToProps = ({menuList, locationReducer}) => {
+const mapStateToProps = ({menuList, userReducer}) => {
     return {
         menuList : menuList.menuList,
-        region: locationReducer.region
+        user: userReducer.session_user,
+        region: userReducer.session_user.region
     }
 }
 

@@ -22,7 +22,7 @@ export default LocationMap = (props) => {
 							longitude: props.region.longitude,
 						}}
 						title={props.region.name}
-						description={props.region.addr}
+						// description={props.region.addr}
 					/>
 				</MapView>
 				<TouchableOpacity

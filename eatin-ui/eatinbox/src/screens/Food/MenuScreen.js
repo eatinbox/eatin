@@ -49,9 +49,9 @@ const styles = StyleSheet.create({
     },
 })
 
-export default connect(({ locationReducer, userReducer }) => {
+export default connect(({userReducer }) => {
     return {
-        region: locationReducer.region,
+        region: userReducer.session_user.region,
         user: userReducer.session_user,
     }
 })(FoodScreen);

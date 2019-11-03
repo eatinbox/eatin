@@ -180,10 +180,10 @@ const styles = StyleSheet.create({
     }
 });
 
-const mapStateToProps = ({cartReducer, locationReducer, userReducer}) => {
+const mapStateToProps = ({cartReducer, userReducer}) => {
     return {
         cartList: cartReducer.cartList,
-        region: locationReducer.region,
+        region: userReducer.session_user.region,
         user: userReducer.session_user,
         addresses: userReducer.addresses
     }

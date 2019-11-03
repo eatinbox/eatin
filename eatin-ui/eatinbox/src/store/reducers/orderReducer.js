@@ -15,12 +15,13 @@ export default (state = initialState, action) => {
             pastOrdersList: [...action.orderList]
         }
 
-    case actionTypesCart.SET_CURRENT_ORDER:
-        console.log(action)
+    case actionTypesOrder.SET_CURRENT_ORDER:
+        // console.log(action)
         return {
             ...state,
             currentOrder: {
-                ...action.currentOrder
+                ...action.currentOrder,
+                active: true,
             }
         }
     

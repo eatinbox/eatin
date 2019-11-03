@@ -16,13 +16,14 @@ export const getMenuList = () => {
     const url = domain + 'vendors/menulist/'
 
     return dispatch => {
-        interval = setInterval(async () => {
+        const interval = setInterval(async () => {
 
             try {
                 let response = await axios.get(url)
 
                 if(response){
                     dispatch(setMenuList(response.data))
+                    console.log("Interbal not cleared")
                     clearInterval(interval)
                 }
             }
