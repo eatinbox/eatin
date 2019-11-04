@@ -18,7 +18,7 @@ const DeliveryBoy = (props) => {
         <View style={styles.container}>
             <View style={styles.partnerCont}>
                 <ImageDetails container={styles.detailCont}/>
-                <RatingStar container={styles.ratinCont}/>
+                <RatingStar ratingCont={styles.ratinCont}/>
             </View>
             <SpaceBetweenColumns
                 left="Expected Delivery Time"
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     },
 
     ratinCont: {
-        height: 20,
+        // height: 20,
         alignSelf: 'flex-end',
     },
 

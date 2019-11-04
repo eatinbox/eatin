@@ -1,24 +1,22 @@
 import React from 'react';
 import {
-    View,
-    Text,
-    StyleSheet,
-    Image,
-    Dimensions
+View,
+ScrollView,
+StyleSheet,
+Dimensions
 } from 'react-native';
 import Photo from './Photo/ProfilePhoto';
-import Name from './Name/name';
+import Name from './Name/Name';
 import Settings from './Settings/settings';
 import OptionsPanel from './Options/OptionsPanel';
 import Show from './Show/Show';
 import Card from './DetailCard/Card';
 
 const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
 
 const Profile = () => {
     return (
-        <View style={ styles.container }>
+        <ScrollView contentContainerStyle={ styles.container }>
             <Photo/>
             <Name/>
             <Settings/>
@@ -27,18 +25,18 @@ const Profile = () => {
             <Card/>
             <Card/>
             <Card/>
-        </View>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create ({
     container: {
         width: width,
-        height: height,
         borderWidth: 1,
         flexDirection: 'column',
         justifyContent: 'flex-start',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingBottom: 24,
     }
 })
 

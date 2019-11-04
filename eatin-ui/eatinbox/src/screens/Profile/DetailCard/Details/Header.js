@@ -17,18 +17,18 @@ const DetailsHeader = () => {
 
 const styles = StyleSheet.create ({
     container :{
-        height: 28,
+        // marginTop: 12,
         width: '80%',
-        borderBottomWidth: 2,
-        borderColor: '#3366FF',
+        borderBottomWidth: 1,
+        borderColor: '#2699fb',
         justifyContent: 'center',
     },
 
     textStyle: {
         padding: 2,
-        fontSize: 11,
-        fontWeight: '500',
-        color: '#000'
+        fontSize: 8.5,
+        fontWeight: 'bold',
+        color: 'rgba(0,0,0, 0.75)'
     }
 })
 

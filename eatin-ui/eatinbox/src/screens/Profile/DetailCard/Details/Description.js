@@ -8,56 +8,38 @@ import {
 const Description = () => {
     return (
         <View style={styles.container}>
-            <View style={styles.headerStyle}>
-                <Text style={styles.headerTextStyle}>
-                    PAV BHAJI
-                </Text>
-            </View>
-            <View style={styles.descStyle}>
-                <Text style={styles.descTextStyle}>
+            <Text style={styles.headerTextStyle}>
+                PAV BHAJI
+            </Text>
+            <Text style={styles.descTextStyle}>
                 Lorem ipsum, or lipsum as it is sometimes known, is
                 dummy text used in laying out print, graphic or web designs.
-                Lorem ipsum, or lipsum as it is sometimes known, is
-                </Text>
-            </View>
+                Lorem ipsum, or lipsum as it is sometimes 
+            </Text>
+
         </View>
     );
 };
 
-const styles = StyleSheet.create ({
-    container : {
+const styles = StyleSheet.create({
+    container: {
+        marginTop: 6,
         width: '100%',
-        height: 100,
         // borderWidth: 1
-    },
-
-    headerStyle: {
-        height: 25,
-        width: '100%',
-        // borderWidth: 1,
-        justifyContent: 'center',
     },
 
     headerTextStyle: {
         padding: 2,
-        fontWeight: '500',
-        fontSize: 12,
-        color: '#000'
-    },
-
-    descStyle: {
-        width: '100%',
-        height: 75,
-        // borderWidth: 1
+        fontSize: 9,
+        fontWeight: 'bold',
+        color: 'rgba(0,0,0, 0.75)'
     },
 
     descTextStyle: {
-        fontSize: 9,
-        color: '#000',
+        fontSize: 8,
+        color: 'rgba(0,0,0, 0.5)',
         padding: 2,
-        fontWeight: '300',
-        paddingLeft: 3
     }
 })
- 
- export default Description;
+
+export default Description;

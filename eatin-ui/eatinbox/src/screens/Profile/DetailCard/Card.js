@@ -23,9 +23,9 @@ const styles = StyleSheet.create ({
     container: {
         marginTop: 10,
         width: '90%',
-        height: 130,
         borderWidth: 0,
-        elevation: 1,
+        elevation: 2,
+        backgroundColor: '#fff',
         flexDirection: 'row',
         justifyContent: 'center',
         alignContent: 'center'

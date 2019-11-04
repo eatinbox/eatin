@@ -1,3 +1,0 @@
-fonts,
-flatlist animation
-change flatcard to add detail text as well

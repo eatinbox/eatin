@@ -28,9 +28,6 @@ class LocationHeader extends Component {
     };
 
     navigateCartScreen = () => {
-        if(!this.props.addresses)
-            return this.props.navigation.navigate('AddAdressScreen')
-        
         if(this.props.cartList.length)
            return this.props.navigation.navigate('FoodCartScreen')
 

@@ -5,78 +5,69 @@ import {
     Image,
     Text
 } from 'react-native';
+import RatingStar from '../../../../reusables/Components/RatingStar';
 
 const VenderImage = () => {
     return (
-        <View style={ styles.container }>
-            <Image source = {require('../../../../assets/profile.jpeg')} style={styles.profileImage}/>
-            <View style={styles.rating}>
-                <Image source={require('../../../../assets/star.png')} style={styles.starImg}/>
-                <Text style={styles.textRating}>
-                    4.5
-                </Text>
+        <View style={styles.container}>
+            <View style={{ position: 'relative' }}>
+                <Image
+                    source={require('../../../../assets/profile.jpeg')}
+                    style={styles.profileImage} />
+                <RatingStar
+                    ratingCont={styles.ratingCont}
+                    textRating={styles.textRating}
+                    starImg={styles.starImg}
+                />
             </View>
-            <View style={styles.nameStyle}>
-                <Text style={styles.nameTextStyle}>
-                    HOMELY
-                </Text>
-            </View>
+            <Text style={styles.nameTextStyle}>
+                HOMELY
+            </Text>
         </View>
     )
 }
 
-const styles = StyleSheet.create ({
-    container : {
-        alignSelf: 'flex-start',
+const styles = StyleSheet.create({
+    container: {
         width: '30%',
-        height: 130,
         // borderWidth: 1,
         flexDirection: 'column',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 
     profileImage: {
-        width: 50,
-        height: 50,
-        borderRadius: 50,
+        position: 'relative',
+        width: 45,
+        height: 45,
+        borderRadius: 45,
         marginTop: 4,
-        alignSelf: 'center'
+        alignSelf: 'center',
+        // borderWidth: 1,
     },
 
-    textRating: {
-        color: '#fff',
-        fontSize: 12,
-        marginRight: 4,
+    ratingCont: {
+        position: 'absolute',
+        bottom: -8,
+        alignSelf: 'center',
+        paddingRight: 6,
     },
 
     starImg: {
-        width: 20,
-        height: 20,
+        width: 12,
+        height: 12,
     },
 
-    rating: {
-        backgroundColor: '#000',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 10,
-        width: 50,
-        alignSelf: 'center'
+    textRating: {
+        fontSize: 6.5,
+        color: '#fff',
     },
 
-    nameStyle: {
-        marginTop: 3,
-        width: 100,
-        height: 20,
-        // borderWidth: 1,
-        alignSelf: 'center'
-    },
-
-    nameTextStyle:{
-        alignSelf : 'center',
-        fontSize: 12,
-        fontWeight: '600',
-        color: '#000',
+    nameTextStyle: {
+        marginTop: 12,
+        fontSize: 11,
+        fontWeight: 'bold',
+        color: 'rgba(0,0,0, 0.75)',
         letterSpacing: 0.2
     }
 })

@@ -1,10 +1,10 @@
 import React from 'react';
 import {
-    View,
-    Text,
-    StyleSheet,
-    Image,
-    Dimensions
+View,
+Text,
+StyleSheet,
+Image,
+Dimensions
 } from 'react-native';
 import Header from './Header/header';
 import MoreCardsView from './MoreCards/MoreCardsView';

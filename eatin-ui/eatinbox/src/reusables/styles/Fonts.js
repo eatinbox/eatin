@@ -55,3 +55,9 @@ export const heading = {
     color: 'rgba(0,0,0, 0.75)',
     fontWeight: 'bold',
 }
+
+export const heading1 = {
+    fontSize: 20,
+    color: 'rgba(0,0,0, 0.75)',
+    fontWeight: 'bold',
+}

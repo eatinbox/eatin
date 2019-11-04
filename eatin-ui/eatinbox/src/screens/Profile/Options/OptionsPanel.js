@@ -1,31 +1,39 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
-    View,
-    StyleSheet,
-    Text,
-    TouchableOpacity
+View,
+StyleSheet,
 } from 'react-native';
 
-const OptionsPanel = () => {
+import SelectHighlight from '../../../hocs/SelectHighlight'
+import UnderlineSelect from '../../../reusables/Components/UnderlineSelect'
+
+const options = [
+    {name: 'FAVORITES'}, 
+    {name: 'PAYMENTS'}, 
+    {name: 'PROMOTIONS'},
+]
+
+const OptionsPanel = (props) => {
+    console.log("This prop selects index of the\
+    selected option from the option array", props.selected)
+
     return (
-        <View style={ styles.container }>
-            
+        <View style={styles.container}>
+            {props.renderComponents(UnderlineSelect)}
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container : {
-        elevation: 2,
         marginTop: 25,
-        width: '95%',
-        height: 40,
-        borderWidth: 0,
         flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        alignContent: 'center'
+        width: '95%',
+        // borderWidth: 1,
+        borderBottomWidth: 0.5,
+        borderColor: '#ddd',
+        backgroundColor: '#fff',
     }
 })
 
-export default OptionsPanel;
+export default SelectHighlight(OptionsPanel, options, 0);

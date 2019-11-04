@@ -14,13 +14,13 @@ import RegisterScreen from './src/screens/Register/RegisterScreen';
 import LoginScreen from './src/screens/Login/LoginScreen';
 import SearchScreen from './src/screens/Search/SearchScreen';
 import PastOrderScreen from './src/screens/Orders/Past/PastOrderScreen';
-import Payment from './src/screens/Payment/paymentPage';
 import AddressScreen from './src/screens/Address/AddressScreen';
 import FoodCartScreen from './src/screens/FoodCart/FoodCartScreen'
 import SetLocationScreen from './src/screens/SetLocation/SetLocationScreen'
 import TrackPartnerScreen from './src/screens/TrackPartner/TrackPartnerScreen'
 import AddAdressScreen from './src/screens/AddAdress/AddAdressScreen';
-import Profile from './src/screens/Profile/ProfilePage';
+import ProfileScreen from './src/screens/Profile/ProfilePage';
+import Payment from './src/screens/Payment/paymentPage';
 import Global from './src/contexts/Global';
 
 export default class App extends Component {
@@ -51,12 +51,12 @@ const rootStack = createStackNavigator(
     MenuScreen,
     SearchScreen,
     PastOrderScreen,
-    Payment,
     AddressScreen,
     SetLocationScreen,
     TrackPartnerScreen,
     AddAdressScreen,
-    Profile,
+    ProfileScreen,
+    Payment,
   },
 
   {
