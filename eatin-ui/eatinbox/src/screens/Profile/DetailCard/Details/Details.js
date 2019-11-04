@@ -18,8 +18,8 @@ const Details = () => {
 
 const styles = StyleSheet.create ({
     container: {
+        padding: 4,
         width: '40%',
-        height: 130,
         // borderWidth: 1,
         flexDirection: 'column',
         justifyContent: 'flex-start',

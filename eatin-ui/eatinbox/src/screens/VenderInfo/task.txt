@@ -1,4 +1,0 @@
-quotes svg,
-back button,
-fonts,
-virtualized list,

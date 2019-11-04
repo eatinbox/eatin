@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {
-View,
-StyleSheet,
-Image,
-Text,
+    View,
+    StyleSheet,
+    Image,
+    Text,
 } from 'react-native';
-import  {withNavigation} from 'react-navigation'
+import { withNavigation } from 'react-navigation'
 
 import TypeButton from './TypeButton';
 
@@ -28,35 +28,42 @@ class MealType extends Component {
 
         return (
             <View style={styles.container}>
-               <TypeButton
+                <TypeButton
                     selected={this.state.toggle[0]}
                     handlePress={this.handlePress}
                     text="HALF MEAL"
                     k={0}
-               />
-               <TypeButton
+                />
+                <TypeButton
                     selected={this.state.toggle[1]}
                     handlePress={this.handlePress}
                     text="FULL MEAL"
                     k={1}
-               />
-               {/* Temp Navigation */}
-               <Text 
-                    style={styles.pastOrderText} 
+                />
+                {/* Temp Navigation */}
+                <Text
+                    style={styles.pastOrderText}
                     onPress={() => {
-                        if(this.props.user.isAnon)
+                        if (this.props.user.isAnon)
                             return this.props.navigation.navigate('RegisterScreen')
-                            
-                        this.props.navigation.navigate('PastOrderScreen')}
+
+                        this.props.navigation.navigate('PastOrderScreen')
+                    }
                     }>
-                PAST ORDERS
-               </Text>
-               <View style={styles.imgCont}>
-                    <Image
-                        source={require('../../../assets/filter.png')}
-                        style={styles.filterImg}
-                    />
-               </View>
+                    PAST ORDERS
+                </Text>
+
+                <Text
+                    style={styles.pastOrderText}
+                    onPress={() => {
+                        if (this.props.user.isAnon)
+                            return this.props.navigation.navigate('RegisterScreen')
+
+                        this.props.navigation.navigate('ProfileScreen')
+                    }
+                    }>
+                    PROFILE
+                </Text>
             </View>
         );
     }
@@ -71,20 +78,7 @@ const styles = StyleSheet.create({
         // justifyContent: 'center',
     },
 
-    imgCont: {
-        marginLeft: 'auto',
-        marginRight: 10,
-        borderWidth:0,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-
-    filterImg: {
-        width: 24,
-        height: 24,
-    },
-    
-    pastOrderText :{
+    pastOrderText: {
         marginLeft: 4,
         padding: 4,
         paddingLeft: 6,
@@ -94,6 +88,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         // letterSpacing: 0.2,
         color: '#000',
+        backgroundColor: '#ededed'
     },
 })
 

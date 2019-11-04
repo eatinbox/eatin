@@ -5,10 +5,12 @@ import {
     Image
 } from 'react-native';
 
-const FoodImage = () => {
+const FoodImage = (props) => {
     return (
         <View style={styles.container}>
-            <Image source = {require('../../../../assets/salad.jpg')} style={styles.imageStyle}/>
+            <Image 
+                source={require('../../../../assets/salad.jpg')} 
+                style={styles.imageStyle}/>
         </View>
     )
 }
@@ -16,16 +18,16 @@ const FoodImage = () => {
 const styles = StyleSheet.create ({
     container: {
         width: '30%',
-        height: 130,
         // borderWidth: 1,
+        alignItems: 'center',
         justifyContent: 'center',
     },
 
     imageStyle: {
-        width: 100,
-        height: 100,
-        borderRadius: 5,
-        alignSelf: 'center'
+        width: 75,
+        height: undefined,
+        aspectRatio: 1,
+        borderRadius: 4,
     }
 })
 

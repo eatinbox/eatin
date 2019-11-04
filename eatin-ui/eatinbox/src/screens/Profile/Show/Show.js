@@ -8,20 +8,23 @@ import ModalDropdown from 'react-native-modal-dropdown';
 
 export default class Show extends Component{
     state = {
-        favoritesOptions : ["Restaurant", "Vender", "Dish"]
+        favoritesOptions : ["RESTAURANT", "VENDER", "DISH"]
     }
 
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.textStyle}>
-                    SHOW :
-                </Text>
+                <Text style={styles.textStyle}>SHOW :  </Text>
                 <ModalDropdown 
-                options = {this.state.favoritesOptions}
-                style={styles.dropDown}
-                defaultValue = {"favorite"}
-                textStyle = {{fontSize : 16, alignSelf: 'center', fontWeight: '500'}}
+                    options={this.state.favoritesOptions}
+                    style={styles.dropButton}
+                    dropdownStyle={styles.dropDownList}
+                    defaultValue={this.state.favoritesOptions[0].toUpperCase()}
+                    defaultIndex={0}
+                    textStyle={styles.textHighStyle}
+                    showsVerticalScrollIndicator={false}
+                    dropdownTextStyle={styles.textStyle}
+                    dropdownTextHighlightStyle={styles.textHighStyle}
                 />
             </View>
         )
@@ -31,27 +34,34 @@ export default class Show extends Component{
 const styles = StyleSheet.create ({
     container : {
         marginTop: 10,
-        width: '95%',
+        width: '90%',
         height: 30,
         // borderWidth: 1,
-        backgroundColor: '#E8E8E8',
+        backgroundColor: '#eee',
         flexDirection: 'row',
-        justifyContent: 'flex-start'
+        alignItems: 'center',
+        paddingLeft: 12,
     },
 
     textStyle: {
-        paddingLeft: 5,
-        fontWeight: '400',
-        color: '#000',
-        fontSize: 13,
-        alignSelf: 'center'
+        fontSize : 10,
+        fontWeight: 'bold',
+        color: 'rgba(0,0,0, 0.5)',
     },
 
-    dropDown: {
-        marginLeft: 7,
-        // borderWidth: 1,
-        width: 100,
-        height: 26,
-        alignSelf: 'center',
-    }
+    textHighStyle: {
+        fontSize : 10,
+        fontWeight: 'bold',
+        color: 'rgba(0,0,0, 0.75)',
+    },
+
+    dropButton: {
+        marginLeft: 6,
+    },
+
+    dropDownList: {
+        marginTop: 10,
+        width: 150,
+        height: 'auto'
+    },
 })

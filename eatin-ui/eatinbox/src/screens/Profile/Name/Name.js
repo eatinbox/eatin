@@ -1,8 +1,8 @@
 import React from 'react';
 import {
-    View,
-    StyleSheet,
-    Text
+View,
+StyleSheet,
+Text
 } from 'react-native';
 
 const Name = () => {
@@ -24,9 +24,9 @@ const styles = StyleSheet.create ({
     },
 
     textStyle: {
-        fontWeight: '200',
+        fontWeight: 'bold',
         fontSize: 20,
-        color: '#2D2D2D',
+        color: 'rgba(0,0,0, 0.75)',
         alignSelf: 'center',
         letterSpacing: 0.2
     }
