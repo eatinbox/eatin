@@ -13,7 +13,7 @@ if sys.argv[1] == 'yeet':
     if os.path.exists("db.sqlite3"):
         os.remove("db.sqlite3")
 
-    os.system("mysql -u root -psaumitra98 eatinbox < freshData.sql")
+    os.system("mysql -u eatinbox -h eatinbox.mysql.pythonanywhere-services.com -pembrace98 'eatinbox$eatinbox' < freshDataPythonanywhere.sql")
 
 cmd1 = " manage.py makemigrations base users vendors partner"
 cmd2 = " manage.py migrate"

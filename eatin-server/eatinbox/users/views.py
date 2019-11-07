@@ -46,9 +46,9 @@ class PastOrdersListApiView(generics.ListCreateAPIView):
     serializer_class = OrdersSerializer
 
     def get_queryset(self):
-        # Filter works correctly fix from frontend
-        person = Person.objects.get(user=self.request.user)
-        customer = Customer.objects.get(person_info=person)
+        # Filter works correctly, fix from frontend
+        # person = Person.objects.get(user=self.request.user)
+        # customer = Customer.objects.get(person_info=person)
         # return Orders.objects.filter(customer_info=customer)
         return Orders.objects.all()
 
@@ -93,18 +93,18 @@ def assign_partner(order):
     sorted_partners = []
     duration_dict = {}
 
-    partner_list = PartnerLocation.objects.raw(""" SELECT  * , 
+    partner_list = PartnerLocation.objects.raw(""" SELECT  * ,
     (
-        6371 * 
-        acos(cos( radians( %s ) ) * 
-        cos( radians( latitude ) ) * 
-        cos( radians( longitude ) - 
-        radians( %s ) ) + 
-        sin( radians( %s ) ) * 
-        sin( radians( latitude ) ) ) 
-    )   AS distance 
-    
-    FROM partner_partnerlocation 
+        6371 *
+        acos(cos( radians( %s ) ) *
+        cos( radians( latitude ) ) *
+        cos( radians( longitude ) -
+        radians( %s ) ) +
+        sin( radians( %s ) ) *
+        sin( radians( latitude ) ) )
+    )   AS distance
+
+    FROM partner_partnerlocation
     HAVING distance < 8
     ORDER BY distance; """, [v_latitude, v_longitude, v_latitude])
 
