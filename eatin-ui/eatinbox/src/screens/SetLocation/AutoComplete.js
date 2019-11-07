@@ -17,7 +17,7 @@ class AutoComplete extends Component {
     }
 
     componentDidMount() {
-        console.log("Holla huppa", this.props)
+        // console.log("Holla huppa", this.props)
     }
 
     handleTextChange = (input) => {

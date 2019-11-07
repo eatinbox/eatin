@@ -21,7 +21,9 @@ import TrackPartnerScreen from './src/screens/TrackPartner/TrackPartnerScreen'
 import AddAdressScreen from './src/screens/AddAdress/AddAdressScreen';
 import ProfileScreen from './src/screens/Profile/ProfilePage';
 import Payment from './src/screens/Payment/paymentPage';
+
 import Global from './src/contexts/Global';
+import NavigationService from './src/Utils/NavigatorService'
 
 export default class App extends Component {
   render() {
@@ -31,7 +33,11 @@ export default class App extends Component {
         <Global
            {...this.props}
         >
-          <AppContainer/>
+          <AppContainer
+            ref={navigatorRef => {
+            NavigationService.setTopLevelNavigator(navigatorRef);
+          }}
+          />
         </Global>
       </Provider>
     );

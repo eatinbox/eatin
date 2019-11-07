@@ -1,10 +1,10 @@
 import React from 'react'
 import {
-    View,
-    StyleSheet,
-    Image,
-    Dimensions,
-    ToastAndroid,
+View,
+StyleSheet,
+Image,
+Dimensions,
+ToastAndroid,
 } from 'react-native';
 import { connect } from 'react-redux'
 
@@ -21,7 +21,7 @@ class RegisterScreen extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        if(this.props != nextProps)
+        if(this.props !== nextProps)
             return true;
     
         return false

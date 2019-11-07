@@ -1,11 +1,11 @@
 import store from '../../store/store'
+import NavigatorService from '../../Utils/NavigatorService'
 
 const is_anon = (func) => {
     const user = store.getState().userReducer.session_user
-    const nav = store.getState().globalReducer._navigate
 
     if(user.isAnon){
-       return nav.navigate('RegisterScreen')
+       return NavigatorService.navigate('RegisterScreen')
     }
 
     return func();

@@ -14,8 +14,8 @@ const options = [
 ]
 
 const OptionsPanel = (props) => {
-    console.log("This prop selects index of the\
-    selected option from the option array", props.selected)
+    //console.log("This prop selects index of the\
+    //selected option from the option array", props.selected)
 
     return (
         <View style={styles.container}>

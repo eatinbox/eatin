@@ -4,7 +4,6 @@ import { GlobalContext } from './globalContext'
 import { ActivityIndicator, View, Dimensions, StyleSheet } from 'react-native';
 
 import * as userActions from '../store/actions/userActions'
-import * as globalActions from '../store/actions/globalActions'
 import * as fonts from '../reusables/styles/Fonts'
 
 const width = Dimensions.get("window").width
@@ -14,14 +13,13 @@ class Global extends Component {
     componentDidMount = () => {
         // this.props.dispatch(userActions.removeValue())
         this.props.dispatch(userActions.getStoredUser())
-        this.props.dispatch(globalActions.setNavigation(this.props.navigation))
     };
 
 
     render() {
         const user = this.props.user
 
-        console.log(user)
+        // console.log(user)
 
         const ren = (user) ? (
             <GlobalContext.Provider
