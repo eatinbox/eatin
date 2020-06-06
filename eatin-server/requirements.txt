@@ -16,7 +16,7 @@ pytz==2019.2
 requests==2.22.0
 sqlparse==0.3.0
 urllib3==1.25.6
-drf-jwt==1.13.2
+drf-jwt==1.15.1
 get==2019.4.13
 pipenv==2018.11.26
 post==2019.4.13
